@@ -89,23 +89,7 @@ contract szNounsAuctionHouse is NounsAuctionHouse {
         return DEFAULT_FALL_SPRING_DURATION;
     }
 
-    function _createAuction() internal override {
-        try nouns.mint() returns (uint256 nounId) {
-            uint256 startTime = block.timestamp;
-            uint256 endTime = startTime + getDuration(getSzn());
-
-            auction = Auction({
-                nounId: nounId,
-                amount: 0,
-                startTime: startTime,
-                endTime: endTime,
-                bidder: payable(0),
-                settled: false
-            });
-
-            emit AuctionCreated(nounId, startTime, endTime);
-        } catch Error(string memory) {
-            _pause();
-        }
+    function getDuration() public view override returns (uint256) {
+        return getDuration(getSzn());
     }
 }

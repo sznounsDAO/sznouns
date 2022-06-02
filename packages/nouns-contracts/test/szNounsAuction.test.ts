@@ -303,7 +303,8 @@ describe('szNounsAuctionHouse', () => {
       expect(createdEvent?.args?.nounId).to.equal(nounId.add(1));
       expect(createdEvent?.args?.startTime).to.equal(timestamp);
       expect(createdEvent?.args?.endTime).to.equal(
-        timestamp + (await nounsAuctionHouse.getDuration(await nounsAuctionHouse.getSzn())).toNumber(),
+        timestamp +
+          (await nounsAuctionHouse.getDuration(await nounsAuctionHouse.getSzn())).toNumber(),
       );
     });
 
@@ -347,7 +348,8 @@ describe('szNounsAuctionHouse', () => {
       expect(createdEvent?.args?.nounId).to.equal(nounId.add(1));
       expect(createdEvent?.args?.startTime).to.equal(timestamp);
       expect(createdEvent?.args?.endTime).to.equal(
-        timestamp + (await nounsAuctionHouse.getDuration(await nounsAuctionHouse.getSzn())).toNumber(),
+        timestamp +
+          (await nounsAuctionHouse.getDuration(await nounsAuctionHouse.getSzn())).toNumber(),
       );
     });
 
