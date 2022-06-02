@@ -188,6 +188,10 @@ contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, Reentranc
         emit AuctionMinBidIncrementPercentageUpdated(_minBidIncrementPercentage);
     }
 
+    function getDuration() public view virtual returns (uint256) {
+        return duration;
+    }
+
     /**
      * @notice Create an auction.
      * @dev Store the auction details in the `auction` state variable and emit an AuctionCreated event.
@@ -197,7 +201,7 @@ contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, Reentranc
     function _createAuction() internal {
         try nouns.mint() returns (uint256 nounId) {
             uint256 startTime = block.timestamp;
-            uint256 endTime = startTime + duration;
+            uint256 endTime = startTime + getDuration();
 
             auction = Auction({
                 nounId: nounId,
