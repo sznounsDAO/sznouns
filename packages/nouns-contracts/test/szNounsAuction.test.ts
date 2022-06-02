@@ -100,7 +100,7 @@ describe('szNounsAuctionHouse', () => {
 
     it('should change returned duration of the new auction depending on the szn and values set by governance', async () => {
       const assertDuration = async (szn: number, expected: number) => {
-        const actual = await nounsAuctionHouse.getDuration(szn);
+        const actual = await nounsAuctionHouse.getSznDuration(szn);
         expect(actual.toNumber()).to.equal(expected);
       };
 
@@ -303,7 +303,7 @@ describe('szNounsAuctionHouse', () => {
       expect(createdEvent?.args?.nounId).to.equal(nounId.add(1));
       expect(createdEvent?.args?.startTime).to.equal(timestamp);
       expect(createdEvent?.args?.endTime).to.equal(
-        timestamp + (await nounsAuctionHouse.getDuration(await nounsAuctionHouse.getSzn())).toNumber(),
+        timestamp + (await nounsAuctionHouse.getDuration()).toNumber(),
       );
     });
 
@@ -347,7 +347,7 @@ describe('szNounsAuctionHouse', () => {
       expect(createdEvent?.args?.nounId).to.equal(nounId.add(1));
       expect(createdEvent?.args?.startTime).to.equal(timestamp);
       expect(createdEvent?.args?.endTime).to.equal(
-        timestamp + (await nounsAuctionHouse.getDuration(await nounsAuctionHouse.getSzn())).toNumber(),
+        timestamp + (await nounsAuctionHouse.getDuration()).toNumber(),
       );
     });
 
