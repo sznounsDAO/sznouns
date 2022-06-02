@@ -66,7 +66,7 @@ contract szNounsAuctionHouse is NounsAuctionHouse {
         return SZN.WINTER;
     }
 
-    function getDuration(SZN szn) public view returns (uint256) {
+    function getSznDuration(SZN szn) public view returns (uint256) {
         uint256 duration = durations[uint256(szn)];
         if (duration != 0) {
             return duration;
@@ -90,6 +90,6 @@ contract szNounsAuctionHouse is NounsAuctionHouse {
     }
 
     function getDuration() public view override returns (uint256) {
-        return getDuration(getSzn());
+        return getSznDuration(getSzn());
     }
 }
