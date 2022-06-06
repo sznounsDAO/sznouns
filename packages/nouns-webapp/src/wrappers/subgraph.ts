@@ -50,8 +50,6 @@ export const seedsQuery = (first = 1_000) => gql`
     accessory
     head
     glasses
-    left
-    right
   }
 }
 `;
@@ -103,8 +101,6 @@ export const auctionQuery = (auctionId: number) => gql`
 		  accessory
 		  head
 		  glasses
-		  left
-		  right
 		}
 		owner {
 		  id
@@ -148,8 +144,6 @@ export const nounQuery = (id: string) => gql`
 		accessory
 		head
 		glasses
-		left
-		right
 	}
 	  owner {
 		id

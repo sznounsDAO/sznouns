@@ -53,12 +53,6 @@ contract NounsSeeder is INounsSeeder {
             glasses: uint48(
                 uint48(pseudorandomness >> 192) % glassesCount
             ),
-            left: uint48(
-                0
-            ),
-            right: uint48(
-                0
-            )
         });
     }
 }

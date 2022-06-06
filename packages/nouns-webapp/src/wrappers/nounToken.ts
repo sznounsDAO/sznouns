@@ -18,8 +18,6 @@ export interface INounSeed {
   body: number;
   glasses: number;
   head: number;
-  left: number;
-  right: number;
 }
 
 const abi = new utils.Interface(NounsTokenABI);
@@ -52,8 +50,6 @@ const seedArrayToObject = (seeds: (INounSeed & { id: string })[]) => {
       accessory: Number(seed.accessory),
       head: Number(seed.head),
       glasses: Number(seed.glasses),
-      left: Number(seed.left),
-      right: Number(seed.right),
     };
     return acc;
   }, {});
@@ -66,7 +62,6 @@ const useNounSeeds = () => {
     skip: !!cachedSeeds,
   });
 
-  console.log('seedsquery: ', data, 'or cached: ', cachedSeeds, 'or cache: ', cache);
   useEffect(() => {
     if (!cachedSeeds && data?.seeds?.length) {
       localStorage.setItem(seedCacheKey, JSON.stringify(seedArrayToObject(data.seeds)));
@@ -80,7 +75,6 @@ export const useNounSeed = (nounId: EthersBN) => {
   const seeds = useNounSeeds();
   const seed = seeds?.[nounId.toString()];
   // prettier-ignore
-  console.log("seed in useNounSeed: ", seed)
   const request = seed
     ? false
     : {
@@ -91,7 +85,6 @@ export const useNounSeed = (nounId: EthersBN) => {
       };
   const response = useContractCall<INounSeed>(request);
   if (response) {
-    console.log('response: ', response);
     const seedCache = localStorage.getItem(seedCacheKey);
     if (seedCache) {
       const updatedSeedCache = JSON.stringify({
@@ -102,8 +95,6 @@ export const useNounSeed = (nounId: EthersBN) => {
           body: response.body,
           glasses: response.glasses,
           head: response.head,
-          left: response.left,
-          right: response.right,
         },
       });
       localStorage.setItem(seedCacheKey, updatedSeedCache);

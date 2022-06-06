@@ -18,8 +18,6 @@ export function handleNounCreated(event: NounCreated): void {
   seed.accessory = event.params.seed.accessory;
   seed.head = event.params.seed.head;
   seed.glasses = event.params.seed.glasses;
-  seed.left = event.params.seed.left;
-  seed.right = event.params.seed.right;
   seed.save();
 
   let noun = Noun.load(nounId);

@@ -44,10 +44,6 @@ interface INounsDescriptor {
 
     function glasses(uint256 index) external view returns (bytes memory);
 
-    function lefts(uint256 index) external view returns (bytes memory);
-
-    function rights(uint256 index) external view returns (bytes memory);
-
     function backgroundCount() external view returns (uint256);
 
     function bodyCount() external view returns (uint256);
@@ -57,10 +53,6 @@ interface INounsDescriptor {
     function headCount() external view returns (uint256);
 
     function glassesCount() external view returns (uint256);
-
-    function leftCount() external view returns (uint256);
-
-    function rightCount() external view returns (uint256);
 
     function addManyColorsToPalette(uint8 paletteIndex, string[] calldata newColors) external;
 
@@ -74,10 +66,6 @@ interface INounsDescriptor {
 
     function addManyGlasses(bytes[] calldata glasses) external;
 
-    function addManyLefts(bytes[] calldata lefts) external;
-
-    function addManyRights(bytes[] calldata rights) external;
-
     function addColorToPalette(uint8 paletteIndex, string calldata color) external;
 
     function addBackground(string calldata background) external;
@@ -89,10 +77,6 @@ interface INounsDescriptor {
     function addHead(bytes calldata head) external;
 
     function addGlasses(bytes calldata glasses) external;
-
-    function addLeft(bytes calldata lefts) external;
-
-    function addRight(bytes calldata rights) external;
 
     function lockParts() external;
 
