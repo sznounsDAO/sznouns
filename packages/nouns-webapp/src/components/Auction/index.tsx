@@ -24,6 +24,7 @@ interface AuctionProps {
 const Auction: React.FC<AuctionProps> = props => {
   const { auction: currentAuction } = props;
 
+  console.log('current auction: ', currentAuction);
   const history = useHistory();
   const dispatch = useAppDispatch();
   let stateBgColor = useAppSelector(state => state.application.stateBackgroundColor);

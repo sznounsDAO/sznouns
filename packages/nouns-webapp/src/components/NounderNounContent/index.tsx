@@ -12,7 +12,6 @@ import bidBtnClasses from '../BidHistoryBtn/BidHistoryBtn.module.css';
 import auctionActivityClasses from '../AuctionActivity/AuctionActivity.module.css';
 import CurrentBid, { BID_N_A } from '../CurrentBid';
 import Winner from '../Winner';
-import { Trans } from '@lingui/macro';
 
 import { useAppSelector } from '../../hooks';
 
@@ -75,17 +74,14 @@ const NounderNounContent: React.FC<{
                 ` ${nounContentClasses.bidRow}`
               }
             >
-              <Trans>All Noun auction proceeds are sent to the</Trans>{' '}
+              All Noun auction proceeds are sent to the{' '}
               <Link to="/vote" className={nounContentClasses.link}>
-                <Trans>Nouns DAO</Trans>
+                Nouns DAO
               </Link>
-              .{' '}
-              <Trans>
-                For this reason, we, the project's founders (‘Nounders’) have chosen to compensate
-                ourselves with Nouns. Every 10th Noun for the first 5 years of the project will be
-                sent to our multisig (5/10), where it will be vested and distributed to individual
-                Nounders.
-              </Trans>
+              . For this reason, we, the project's founders (‘Nounders’) have chosen to compensate
+              ourselves with Nouns. Every 10th Noun for the first 5 years of the project will be
+              sent to our multisig (5/10), where it will be vested and distributed to individual
+              Nounders.
             </li>
           </ul>
           <div
@@ -97,7 +93,7 @@ const NounderNounContent: React.FC<{
               to="/nounders"
               className={isCool ? bidBtnClasses.bidHistoryCool : bidBtnClasses.bidHistoryWarm}
             >
-              <Trans>Learn more</Trans> →
+              Learn more →
             </Link>
           </div>
         </Col>

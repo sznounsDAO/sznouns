@@ -4,7 +4,6 @@ import TruncatedAmount from '../TruncatedAmount';
 import { Row, Col } from 'react-bootstrap';
 import { useAppSelector } from '../../hooks';
 import clsx from 'clsx';
-import { Trans } from '@lingui/macro';
 
 /**
  * Passible to CurrentBid as `currentBid` prop to indicate that
@@ -20,7 +19,7 @@ type BidNa = typeof BID_N_A;
 const CurrentBid: React.FC<{ currentBid: BigNumber | BidNa; auctionEnded: boolean }> = props => {
   const { currentBid, auctionEnded } = props;
   const isCool = useAppSelector(state => state.application.isCoolBackground);
-  const titleContent = auctionEnded ? <Trans>Winning bid</Trans> : <Trans>Current bid</Trans>;
+  const titleContent = auctionEnded ? 'Winning bid' : 'Current bid';
 
   return (
     <Row className={clsx(classes.wrapper, classes.container, classes.section)}>

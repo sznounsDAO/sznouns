@@ -26,6 +26,7 @@ export const getNounData = (seed: NounSeed): NounData => {
  * @param seed The Noun seed
  */
 export const getRandomNounSeed = (): NounSeed => {
+  // const glasses = Math.random() * glasses.length;
   return {
     background: Math.floor(Math.random() * bgcolors.length),
     body: Math.floor(Math.random() * bodies.length),

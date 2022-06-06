@@ -20,7 +20,6 @@ import ProposalTransactionFormModal from '../../components/ProposalTransactionFo
 import { withStepProgress } from 'react-stepz';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
-import { Trans } from '@lingui/macro';
 
 const CreateProposalPage = () => {
   const { account } = useEthers();
@@ -107,24 +106,24 @@ const CreateProposalPage = () => {
         break;
       case 'Success':
         setModal({
-          title: <Trans>Success</Trans>,
-          message: <Trans>Proposal Created!</Trans>,
+          title: 'Success',
+          message: 'Proposal Created!',
           show: true,
         });
         setProposePending(false);
         break;
       case 'Fail':
         setModal({
-          title: <Trans>Transaction Failed</Trans>,
-          message: proposeState?.errorMessage || <Trans>Please try again.</Trans>,
+          title: 'Transaction Failed',
+          message: proposeState?.errorMessage || 'Please try again.',
           show: true,
         });
         setProposePending(false);
         break;
       case 'Exception':
         setModal({
-          title: <Trans>Error</Trans>,
-          message: proposeState?.errorMessage || <Trans>Please try again.</Trans>,
+          title: 'Error',
+          message: proposeState?.errorMessage || 'Please try again.',
           show: true,
         });
         setProposePending(false);
@@ -140,24 +139,14 @@ const CreateProposalPage = () => {
         onProposalTransactionAdded={handleAddProposalAction}
       />
       <Col lg={{ span: 8, offset: 2 }}>
-        <Link to="/vote">
-          ← <Trans>All Proposals</Trans>
-        </Link>
+        <Link to="/vote">← All Proposals</Link>
       </Col>
       <Col lg={{ span: 8, offset: 2 }} className={classes.createProposalForm}>
-        <h3 className={classes.heading}>
-          <Trans>Create Proposal</Trans>
-        </h3>
+        <h3 className={classes.heading}>"Create Proposal"</h3>
         <Alert variant="secondary" className={classes.voterIneligibleAlert}>
-          <b>
-            <Trans>Tip:</Trans>
-          </b>
-          :
-          <Trans>
-            Add one or more transactions and describe your proposal for the community. The proposal
-            cannot modified after submission, so please verify all information before submitting.
-            The voting period will begin after 2 1/3 days and last for 3 days.
-          </Trans>
+          <b>Tip:</b>: Add one or more transactions and describe your proposal for the community.
+          The proposal cannot modified after submission, so please verify all information before
+          submitting. The voting period will begin after 2 1/3 days and last for 3 days.
         </Alert>
         <div className="d-grid">
           <Button
@@ -165,7 +154,7 @@ const CreateProposalPage = () => {
             variant="dark"
             onClick={() => setShowTransactionFormModal(true)}
           >
-            <Trans>Add Transaction</Trans>
+            Add Transaction
           </Button>
         </div>
         <ProposalTransactions

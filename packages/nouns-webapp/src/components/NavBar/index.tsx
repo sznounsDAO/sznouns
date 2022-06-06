@@ -19,7 +19,7 @@ import { faComments } from '@fortawesome/free-solid-svg-icons';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import NavBarTreasury from '../NavBarTreasury';
 import NavWallet from '../NavWallet';
-import { Trans } from '@lingui/macro';
+
 import React, { useState } from 'react';
 import NavLocaleSwitcher from '../NavLocaleSwitcher';
 
@@ -82,11 +82,15 @@ const NavBar = () => {
               )}
             </Nav.Item>
           </div>
-          <Navbar.Toggle className={classes.navBarToggle} aria-controls="basic-navbar-nav" onClick={() => setIsNavExpanded(!isNavExpanded)} />
+          <Navbar.Toggle
+            className={classes.navBarToggle}
+            aria-controls="basic-navbar-nav"
+            onClick={() => setIsNavExpanded(!isNavExpanded)}
+          />
           <Navbar.Collapse className="justify-content-end">
-            <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav} >
+            <Nav.Link as={Link} to="/vote" className={classes.nounsNavLink} onClick={closeNav}>
               <NavBarButton
-                buttonText={<Trans>DAO</Trans>}
+                buttonText={'DAO'}
                 buttonIcon={<FontAwesomeIcon icon={faUsers} />}
                 buttonStyle={nonWalletButtonStyle}
               />
@@ -99,7 +103,7 @@ const NavBar = () => {
               onClick={closeNav}
             >
               <NavBarButton
-                buttonText={<Trans>Docs</Trans>}
+                buttonText={'Docs'}
                 buttonIcon={<FontAwesomeIcon icon={faBookOpen} />}
                 buttonStyle={nonWalletButtonStyle}
               />
@@ -112,14 +116,19 @@ const NavBar = () => {
               onClick={closeNav}
             >
               <NavBarButton
-                buttonText={<Trans>Discourse</Trans>}
+                buttonText={'Discourse'}
                 buttonIcon={<FontAwesomeIcon icon={faComments} />}
                 buttonStyle={nonWalletButtonStyle}
               />
             </Nav.Link>
-            <Nav.Link as={Link} to="/playground" className={classes.nounsNavLink}  onClick={closeNav}>
+            <Nav.Link
+              as={Link}
+              to="/playground"
+              className={classes.nounsNavLink}
+              onClick={closeNav}
+            >
               <NavBarButton
-                buttonText={<Trans>Playground</Trans>}
+                buttonText={'Playground'}
                 buttonIcon={<FontAwesomeIcon icon={faPlay} />}
                 buttonStyle={nonWalletButtonStyle}
               />

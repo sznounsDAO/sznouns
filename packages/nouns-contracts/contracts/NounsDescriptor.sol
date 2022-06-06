@@ -57,6 +57,10 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
 
     // Noun Glasses (Custom RLE)
     bytes[] public override glasses;
+    // Noun Glasses (Custom RLE)
+    bytes[] public override lefts;
+    // Noun Glasses (Custom RLE)
+    bytes[] public override rights;
 
     /**
      * @notice Require that the parts have not been locked.
@@ -99,6 +103,14 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
      */
     function glassesCount() external view override returns (uint256) {
         return glasses.length;
+    }
+
+    function leftCount() external view override returns (uint256) {
+        return lefts.length;
+    }
+
+    function rightCount() external view override returns (uint256) {
+        return rights.length;
     }
 
     /**
@@ -162,6 +174,18 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
         }
     }
 
+    function addManyLefts(bytes[] calldata _lefts) external override onlyOwner whenPartsNotLocked {
+        for (uint256 i = 0; i < _lefts.length; i++) {
+            _addLeft(_lefts[i]);
+        }
+    }
+
+    function addManyRights(bytes[] calldata _rights) external override onlyOwner whenPartsNotLocked {
+        for (uint256 i = 0; i < _rights.length; i++) {
+            _addRight(_rights[i]);
+        }
+    }
+
     /**
      * @notice Add a single color to a color palette.
      * @dev This function can only be called by the owner.
@@ -209,6 +233,14 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
      */
     function addGlasses(bytes calldata _glasses) external override onlyOwner whenPartsNotLocked {
         _addGlasses(_glasses);
+    }
+
+    function addLeft(bytes calldata _left) external override onlyOwner whenPartsNotLocked {
+        _addLeft(_left);
+    }
+
+    function addRight(bytes calldata _right) external override onlyOwner whenPartsNotLocked {
+        _addRight(_right);
     }
 
     /**
@@ -337,6 +369,14 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
         glasses.push(_glasses);
     }
 
+    function _addLeft(bytes calldata _left) internal {
+        lefts.push(_left);
+    }
+
+    function _addRight(bytes calldata _right) internal {
+        rights.push(_right);
+    }
+
     /**
      * @notice Get all Noun parts for the passed `seed`.
      */
@@ -346,6 +386,8 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
         _parts[1] = accessories[seed.accessory];
         _parts[2] = heads[seed.head];
         _parts[3] = glasses[seed.glasses];
+        _parts[4] = glasses[seed.left];
+        _parts[5] = glasses[seed.right];
         return _parts;
     }
 }

@@ -1,7 +1,6 @@
-import { ReactNode } from 'react';
 import classes from './Link.module.css';
 
-const Link: React.FC<{ text: ReactNode; url: string; leavesPage: boolean }> = props => {
+const Link: React.FC<{ text: string; url: string; leavesPage: boolean }> = props => {
   const { text, url, leavesPage } = props;
   return (
     <a

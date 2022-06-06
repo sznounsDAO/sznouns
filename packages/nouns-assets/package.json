@@ -8,6 +8,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "flip": "ts-node scripts/flip.ts",
     "encode": "ts-node scripts/encode.ts",
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "build": "tsc -p tsconfig.build.json",
@@ -23,6 +24,7 @@
   },
   "dependencies": {
     "@ethersproject/bignumber": "^5.5.0",
-    "@ethersproject/solidity": "^5.5.0"
+    "@ethersproject/solidity": "^5.5.0",
+    "jimp": "^0.16.1"
   }
 }

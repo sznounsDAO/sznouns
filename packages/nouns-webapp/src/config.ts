@@ -88,6 +88,7 @@ const getAddresses = (): ContractAddresses => {
   let nounsAddresses = {} as NounsContractAddresses;
   try {
     nounsAddresses = getContractAddressesForChainOrThrow(CHAIN_ID);
+    console.log('nouns addresses: ', nounsAddresses);
   } catch {}
   return { ...nounsAddresses, ...externalAddresses[CHAIN_ID] };
 };

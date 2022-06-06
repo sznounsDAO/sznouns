@@ -14,7 +14,6 @@ import VoteStatusPill from '../VoteStatusPill';
 import _PendingVoteIcon from '../../assets/icons/PendingVote.svg';
 import { Vote } from '../../utils/vote';
 import { NounVoteHistory } from '../ProfileActivityFeed';
-import { Trans } from '@lingui/macro';
 import { useActiveLocale } from '../../hooks/useActivateLocale';
 import responsiveUiUtilsClasses from '../../utils/ResponsiveUIUtils.module.css';
 
@@ -45,19 +44,19 @@ const selectIconForNounVoteActivityRow = (proposal: Proposal, vote?: NounVoteHis
 const selectVotingInfoText = (proposal: Proposal, vote?: NounVoteHistory) => {
   if (!vote) {
     if (proposal.status === ProposalState.PENDING || proposal.status === ProposalState.ACTIVE) {
-      return <Trans>Waiting for</Trans>;
+      return 'Waiting for';
     }
-    return <Trans>Absent for</Trans>;
+    return 'Absent for';
   } else if (vote.supportDetailed) {
     switch (vote.supportDetailed) {
       case Vote.FOR:
-        return <Trans>Voted for</Trans>;
+        return 'Voted for';
       case Vote.ABSTAIN:
       default:
-        return <Trans>Abstained on</Trans>;
+        return 'Abstained on';
     }
   } else {
-    return <Trans>Voted aginst</Trans>;
+    return 'Voted aginst';
   }
 };
 
@@ -84,25 +83,25 @@ const selectProposalStatus = (proposal: Proposal) => {
 const selectProposalText = (proposal: Proposal) => {
   switch (proposal.status) {
     case ProposalState.PENDING:
-      return <Trans>Pending</Trans>;
+      return 'Pending';
     case ProposalState.ACTIVE:
-      return <Trans>Active</Trans>;
+      return 'Active';
     case ProposalState.SUCCEEDED:
-      return <Trans>Succeeded</Trans>;
+      return 'Succeeded';
     case ProposalState.EXECUTED:
-      return <Trans>Executed</Trans>;
+      return 'Executed';
     case ProposalState.DEFEATED:
-      return <Trans>Defeated</Trans>;
+      return 'Defeated';
     case ProposalState.QUEUED:
-      return <Trans>Queued</Trans>;
+      return 'Queued';
     case ProposalState.CANCELLED:
-      return <Trans>Canceled</Trans>;
+      return 'Canceled';
     case ProposalState.VETOED:
-      return <Trans>Vetoed</Trans>;
+      return 'Vetoed';
     case ProposalState.EXPIRED:
-      return <Trans>Expired</Trans>;
+      return 'Expired';
     default:
-      return <Trans>Undetermined</Trans>;
+      return 'Undetermined';
   }
 };
 

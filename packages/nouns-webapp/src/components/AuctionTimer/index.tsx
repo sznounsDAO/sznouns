@@ -6,7 +6,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { useAppSelector } from '../../hooks';
 import clsx from 'clsx';
-import { Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 
 dayjs.extend(duration);
@@ -45,16 +44,8 @@ const AuctionTimer: React.FC<{
     }
   }, [auction, auctionTimer]);
 
-  const auctionContentLong = auctionEnded ? (
-    <Trans>Auction ended</Trans>
-  ) : (
-    <Trans>Auction ends in</Trans>
-  );
-  const auctionContentShort = auctionEnded ? (
-    <Trans>Auction ended</Trans>
-  ) : (
-    <Trans>Time left</Trans>
-  );
+  const auctionContentLong = auctionEnded ? 'Auction ended' : 'Auction ends in';
+  const auctionContentShort = auctionEnded ? 'Auction ended' : 'Time left';
 
   const flooredMinutes = Math.floor(timerDuration.minutes());
   const flooredSeconds = Math.floor(timerDuration.seconds());
@@ -81,8 +72,8 @@ const AuctionTimer: React.FC<{
             )
           ) : (
             <>
-              <Trans>Ends on</Trans> {i18n.date(new Date(endTimeUnix * 1000), { month: 'short' })}{' '}
-              {i18n.date(new Date(endTimeUnix * 1000), { day: 'numeric' })} <Trans>at</Trans>
+              Ends on {i18n.date(new Date(endTimeUnix * 1000), { month: 'short' })}{' '}
+              {i18n.date(new Date(endTimeUnix * 1000), { day: 'numeric' })} at
             </>
           )}
         </h4>
@@ -98,25 +89,19 @@ const AuctionTimer: React.FC<{
             <div className={classes.timerSection}>
               <span>
                 {`${Math.floor(timerDuration.hours())}`}
-                <span className={classes.small}>
-                  <Trans>h</Trans>
-                </span>
+                <span className={classes.small}>h</span>
               </span>
             </div>
             <div className={classes.timerSection}>
               <span>
                 {`${flooredMinutes}`}
-                <span className={classes.small}>
-                  <Trans>m</Trans>
-                </span>
+                <span className={classes.small}>m</span>
               </span>
             </div>
             <div className={classes.timerSectionFinal}>
               <span>
                 {`${flooredSeconds}`}
-                <span className={classes.small}>
-                  <Trans>s</Trans>
-                </span>
+                <span className={classes.small}>s</span>
               </span>
             </div>
           </h2>

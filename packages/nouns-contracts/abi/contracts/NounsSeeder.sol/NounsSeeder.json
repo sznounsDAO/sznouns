@@ -40,6 +40,16 @@
             "internalType": "uint48",
             "name": "glasses",
             "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "left",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "right",
+            "type": "uint48"
           }
         ],
         "internalType": "struct INounsSeeder.Seed",

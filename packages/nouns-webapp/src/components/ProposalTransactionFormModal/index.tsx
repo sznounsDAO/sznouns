@@ -19,7 +19,6 @@ import classes from './ProposalTransactionFormModal.module.css';
 import BigNumber from 'bignumber.js';
 import 'bs-custom-file-input';
 import 'react-stepz/dist/index.css';
-import { Trans } from '@lingui/macro';
 
 interface ProposalTransactionFormModalProps {
   show: boolean;
@@ -200,16 +199,12 @@ const ProposalTransactionFormModal = ({
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title>
-          <Trans>Add a Proposal Transaction</Trans>
-        </Modal.Title>
+        <Modal.Title>Add a Proposal Transaction</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <StepProgressBar className={classes.stepProgressBar} steps={steps} />
         <Step step={0}>
-          <label htmlFor="callee-address">
-            <Trans>Address (Callee or Recipient)</Trans>
-          </label>
+          <label htmlFor="callee-address">Address (Callee or Recipient)</label>
           <FormControl
             value={address}
             type="text"
@@ -218,15 +213,11 @@ const ProposalTransactionFormModal = ({
           />
         </Step>
         <Step step={1}>
-          <label htmlFor="eth-value">
-            <Trans>Value in ETH (Optional)</Trans>
-          </label>
+          <label htmlFor="eth-value">Value in ETH (Optional)</label>
           <FormControl value={value} id="eth-value" onChange={e => setValue(e.target.value)} />
         </Step>
         <Step step={2}>
-          <label htmlFor="function">
-            <Trans>Function (Optional)</Trans>
-          </label>
+          <label htmlFor="function">Function (Optional)</label>
           <FormControl
             value={func}
             as="select"
@@ -271,15 +262,13 @@ const ProposalTransactionFormModal = ({
               ))}
             </FormGroup>
           ) : (
-            <Trans>No arguments required </Trans>
+            'No arguments required'
           )}
         </Step>
         <Step step={4}>
           <Row>
             <Col sm="3">
-              <b>
-                <Trans>Address</Trans>
-              </b>
+              <b>Address</b>
             </Col>
             <Col sm="9" className="text-break">
               <a href={buildEtherscanAddressLink(address)} target="_blank" rel="noreferrer">
@@ -289,32 +278,26 @@ const ProposalTransactionFormModal = ({
           </Row>
           <Row>
             <Col sm="3">
-              <b>
-                <Trans>Value</Trans>
-              </b>
+              <b>Value</b>
             </Col>
-            <Col sm="9">{value ? `${value} ETH` : <Trans>None</Trans>}</Col>
+            <Col sm="9">{value ? `${value} ETH` : 'None'}</Col>
           </Row>
           <Row>
             <Col sm="3">
-              <b>
-                <Trans>Function</Trans>
-              </b>
+              <b>Function</b>
             </Col>
             <Col sm="9" className="text-break">
-              {func || <Trans>None</Trans>}
+              {func || 'None'}
             </Col>
           </Row>
           <Row>
             <Col sm="3">
-              <b>
-                <Trans>Arguments</Trans>
-              </b>
+              <b>Arguments</b>
             </Col>
             <Col sm="9">
               <hr />
             </Col>
-            <Col sm="9">{abi?.functions[func]?.inputs?.length ? '' : <Trans>None</Trans>}</Col>
+            <Col sm="9">{abi?.functions[func]?.inputs?.length ? '' : 'None'}</Col>
           </Row>
           {abi?.functions[func]?.inputs.map((input, i) => (
             <Row key={i}>
@@ -334,14 +317,10 @@ const ProposalTransactionFormModal = ({
             size="lg"
             disabled={currentStep === 0}
           >
-            <Trans>Back</Trans>
+            Back
           </Button>
           <Button onClick={stepForwardOrCallback} variant="primary" size="lg">
-            {currentStep !== steps.length - 1 ? (
-              <Trans>Next</Trans>
-            ) : (
-              <Trans>Add Transaction</Trans>
-            )}
+            {currentStep !== steps.length - 1 ? 'Next' : 'Add Transaction'}
           </Button>
         </div>
       </Modal.Body>

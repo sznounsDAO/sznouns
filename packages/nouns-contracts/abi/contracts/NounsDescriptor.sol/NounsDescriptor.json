@@ -168,6 +168,19 @@
   {
     "inputs": [
       {
+        "internalType": "bytes",
+        "name": "_left",
+        "type": "bytes"
+      }
+    ],
+    "name": "addLeft",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "bytes[]",
         "name": "_accessories",
         "type": "bytes[]"
@@ -244,6 +257,45 @@
       }
     ],
     "name": "addManyHeads",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes[]",
+        "name": "_lefts",
+        "type": "bytes[]"
+      }
+    ],
+    "name": "addManyLefts",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes[]",
+        "name": "_rights",
+        "type": "bytes[]"
+      }
+    ],
+    "name": "addManyRights",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "_right",
+        "type": "bytes"
+      }
+    ],
+    "name": "addRight",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -371,6 +423,16 @@
             "internalType": "uint48",
             "name": "glasses",
             "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "left",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "right",
+            "type": "uint48"
           }
         ],
         "internalType": "struct INounsSeeder.Seed",
@@ -416,6 +478,16 @@
           {
             "internalType": "uint48",
             "name": "glasses",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "left",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "right",
             "type": "uint48"
           }
         ],
@@ -472,6 +544,16 @@
           {
             "internalType": "uint48",
             "name": "glasses",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "left",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "right",
             "type": "uint48"
           }
         ],
@@ -570,6 +652,38 @@
   },
   {
     "inputs": [],
+    "name": "leftCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "lefts",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "lockParts",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -617,6 +731,38 @@
     "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rightCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "rights",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -671,6 +817,16 @@
           {
             "internalType": "uint48",
             "name": "glasses",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "left",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint48",
+            "name": "right",
             "type": "uint48"
           }
         ],
