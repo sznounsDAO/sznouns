@@ -3,6 +3,7 @@ import { ChainId, ContractDeployment, ContractName, DeployedContract } from './t
 import { Interface } from 'ethers/lib/utils';
 import { task, types } from 'hardhat/config';
 import promptjs from 'prompt';
+import { TASK_COMPILE_SOLIDITY_LOG_NOTHING_TO_COMPILE } from 'hardhat/builtin-tasks/task-names';
 
 promptjs.colors = false;
 promptjs.message = '> ';
@@ -47,7 +48,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
   .addOptionalParam(
     'auctionDuration',
     'The auction duration (seconds)',
-    60 * 60 * 24 /* 24 hours */,
+    60 * 10 /* 10 minutes */,
     types.int,
   )
   .addOptionalParam(
@@ -83,6 +84,10 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
   .setAction(async (args, { ethers }) => {
     const network = await ethers.provider.getNetwork();
     const [deployer] = await ethers.getSigners();
+
+    console.log('Current network:', network.name);
+    const pendingCount = await deployer.getTransactionCount('pending');
+    console.log('Pending tx count:', pendingCount);
 
     // prettier-ignore
     const proxyRegistryAddress = proxyRegistries[network.chainId] ?? proxyRegistries[ChainId.Rinkeby];
