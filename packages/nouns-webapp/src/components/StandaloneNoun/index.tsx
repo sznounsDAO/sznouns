@@ -27,7 +27,6 @@ const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
   const name = `Noun ${id}`;
   const description = `Noun ${id} is a member of the Nouns DAO`;
   const { parts, background } = getNounData(seed);
-  console.log('parts on other webapp standalone: ', parts, 'seed: ', seed);
   const image = `data:image/svg+xml;base64,${btoa(buildSVG(parts, data.palette, background))}`;
 
   return {
@@ -39,9 +38,7 @@ const getNoun = (nounId: string | EthersBN, seed: INounSeed) => {
 
 const StandaloneNoun: React.FC<StandaloneNounProps> = (props: StandaloneNounProps) => {
   const { nounId } = props;
-  console.log('standalone nounId: ', nounId);
   const seed = useNounSeed(nounId);
-  console.log('standalone seed: ', seed);
   const noun = seed && getNoun(nounId, seed);
 
   const dispatch = useDispatch();
@@ -123,7 +120,6 @@ export const StandaloneNounWithSeed: React.FC<StandaloneNounWithSeedProps> = (
 
   const dispatch = useDispatch();
   const seed = useNounSeed(nounId);
-  console.log('standalone seed: ', seed);
   const seedIsInvalid = Object.values(seed || {}).every(v => v === 0);
 
   if (!seed || seedIsInvalid || !nounId || !onLoadSeed) return <Noun imgPath="" alt="Noun" />;

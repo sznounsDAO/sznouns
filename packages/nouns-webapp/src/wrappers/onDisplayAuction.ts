@@ -35,15 +35,11 @@ const deserializeBids = (reduxSafeBids: BidEvent[]): Bid[] => {
 
 const useOnDisplayAuction = (): Auction | undefined => {
   const lastAuctionNounId = useAppSelector(state => state.auction.activeAuction?.nounId);
-  console.log('lastAuctionNounId: ', lastAuctionNounId);
   const onDisplayAuctionNounId = useAppSelector(
     state => state.onDisplayAuction.onDisplayAuctionNounId,
   );
-  console.log('onDisplayAuctionNounId: ', onDisplayAuctionNounId);
   const currentAuction = useAppSelector(state => state.auction.activeAuction);
-  console.log('currentAuction: ', currentAuction);
   const pastAuctions = useAppSelector(state => state.pastAuctions.pastAuctions);
-  console.log('pastAuctions: ', pastAuctions);
 
   if (
     onDisplayAuctionNounId === undefined ||
