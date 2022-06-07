@@ -106,7 +106,7 @@ contract NounsToken is INounsToken, Ownable, ERC721Checkpointable {
         INounsDescriptor _descriptor,
         INounsSeeder _seeder,
         IProxyRegistry _proxyRegistry
-    ) ERC721('Nouns', 'NOUN') {
+    ) ERC721('szNouns', 'SZNOUN') {
         noundersDAO = _noundersDAO;
         minter = _minter;
         descriptor = _descriptor;
@@ -146,7 +146,7 @@ contract NounsToken is INounsToken, Ownable, ERC721Checkpointable {
      * until 183 nounder Nouns have been minted (5 years w/ 24 hour auctions).
      * @dev Call _mintTo with the to address(es).
      */
-    function mint() public override onlyMinter returns (uint256) {
+    function mint() public virtual override onlyMinter returns (uint256) {
         if (_currentNounId <= 1820 && _currentNounId % 10 == 0) {
             _mintTo(noundersDAO, _currentNounId++);
         }

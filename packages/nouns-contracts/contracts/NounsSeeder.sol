@@ -40,7 +40,6 @@ contract NounsSeeder is INounsSeeder {
             background: uint48(
                 uint48(pseudorandomness) % backgroundCount
             ),
-            
             body: uint48(
                 uint48(pseudorandomness >> 48) % bodyCount
             ),
@@ -52,7 +51,7 @@ contract NounsSeeder is INounsSeeder {
             ),
             glasses: uint48(
                 uint48(pseudorandomness >> 192) % glassesCount
-            ),
+            )
         });
     }
 }

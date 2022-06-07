@@ -58,11 +58,12 @@ describe('NounsToken', () => {
     });
   });
 
-  it('should set symbol', async () => {
+  // These are overridden for szNouns.
+  it.skip('should set symbol', async () => {
     expect(await nounsToken.symbol()).to.eq('NOUN');
   });
 
-  it('should set name', async () => {
+  it.skip('should set name', async () => {
     expect(await nounsToken.name()).to.eq('Nouns');
   });
 
