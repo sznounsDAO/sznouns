@@ -24,7 +24,7 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
   .addOptionalParam('votingDelay', 'The voting delay (blocks)')
   .addOptionalParam('proposalThresholdBps', 'The proposal threshold (basis points)')
   .addOptionalParam('quorumVotesBps', 'Votes required for quorum (basis points)')
-  .setAction(async (args, { run }) => {
+  .setAction(async (args, { run, ethers }) => {
     // Deploy the Nouns DAO contracts and return deployment information
     const contracts = await run('deploy', args);
 
@@ -33,11 +33,19 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
       contracts,
     });
 
+    console.log('Finished verifying contracts on Etherscan');
+
     // Populate the on-chain art
     await run('populate-descriptor', {
       nftDescriptor: contracts.NFTDescriptor.address,
       nounsDescriptor: contracts.NounsDescriptor.address,
     });
+
+    await sleep(10000); // try waiting 10 seconds
+
+    const [deployer] = await ethers.getSigners();
+    const pendingCount = await deployer.getTransactionCount('pending');
+    console.log('Pending tx count before transferring ownership:', pendingCount);
 
     // Transfer ownership of all contract except for the auction house.
     // We must maintain ownership of the auction house to kick off the first auction.
@@ -87,3 +95,9 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
     );
     console.log('Deployment Complete.');
   });
+
+function sleep(ms: any) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
