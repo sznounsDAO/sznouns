@@ -33,23 +33,125 @@ const decodeImage = (image: string): DecodedImage => {
  * @param bgColor The hex background color
  */
 export const buildSVG = (
-  parts: { data: string }[],
+  parts: { filename: string; data: string }[],
   paletteColors: string[],
   bgColor: string,
 ): string => {
-  const svgWithoutEndTag = parts.reduce((result, part) => {
+  const svgWithoutEndTag = parts.reduce((result, part, idx) => {
+    if (idx > 3) return '';
     const svgRects: string[] = [];
     const { bounds, rects } = decodeImage(part.data);
 
     let currentX = bounds.left;
     let currentY = bounds.top;
 
+    // console.log('parts: ', part.filename.startsWith('glasses'));
+
+    const isGlasses = part.filename.startsWith('glasses');
+    if (isGlasses) console.log('rects for glasses: ', rects);
+
+    if (isGlasses) {
+      const [length, colorIndex1] = rects[0];
+      const [, colorIndex2] = rects[2];
+      const [, colorIndex3] = rects[5];
+      const hexColor1 = paletteColors[colorIndex1];
+      const hexColor2 = paletteColors[colorIndex2];
+      const hexColor3 = paletteColors[colorIndex3];
+
+      // left eye frame
+      result += `<circle r="${(length / 2) * 10}" cx="${(currentX + length / 2) * 10}" cy="${
+        (currentY + length / 2) * 10
+      }" fill="#${hexColor1}" />`;
+
+      // long frame
+      result += `<rect width="${(length * 2 + 1) * 10}" height="10" x="${
+        (currentX + length / 2) * 10
+      }" y="${(currentY + 2) * 10}" fill="#${hexColor1}" />`;
+
+      // right eye frame
+      result += `<circle r="${(length / 2) * 10}" cx="${
+        (currentX + (3 * length) / 2 + 1) * 10
+      }" cy="${(currentY + length / 2) * 10}" fill="#${hexColor2}" />`;
+
+      // ear frame
+      result += `<rect width="10" height="20" x="${(currentX + (5 / 2) * length) * 10}" y="${
+        (currentY + 2 + 1) * 10
+      }" fill="#${hexColor2}" />`;
+
+      // handle special case of fullblack
+      if (colorIndex3 === 1) {
+        console.log('here');
+        result += `<rect width="10" height="20" x="${(currentX + 1) * 10}" y="${
+          (currentY + 1) * 10
+        }" fill="#${hexColor3}" />`;
+        result += `<rect width="10" height="20" x="${(currentX + length + 1 + 1) * 10}" y="${
+          (currentY + 1) * 10
+        }" fill="#${hexColor3}" />`;
+
+        return result;
+      }
+
+      // handle special case of black-rgb
+      if (colorIndex3 === 100) {
+        const [, colorIndex4] = rects[14];
+        const [, colorIndex5] = rects[16];
+        const hexColor4 = paletteColors[colorIndex4];
+        const hexColor5 = paletteColors[colorIndex5];
+        // loop this...
+        result += `<rect width="10" height="10" x="${(currentX + 2) * 10}" y="${
+          (currentY + 1) * 10
+        }" fill="#${hexColor3}" />`;
+        result += `<rect width="10" height="10" x="${(currentX + 1) * 10}" y="${
+          (currentY + 3) * 10
+        }" fill="#${hexColor4}" />`;
+        result += `<rect width="10" height="10" x="${(currentX + 4) * 10}" y="${
+          (currentY + 3) * 10
+        }" fill="#${hexColor5}" />`;
+
+        result += `<rect width="10" height="10" x="${(currentX + length + 1 + 2) * 10}" y="${
+          (currentY + 1) * 10
+        }" fill="#${hexColor3}" />`;
+        result += `<rect width="10" height="10" x="${(currentX + length + 1 + 1) * 10}" y="${
+          (currentY + 3) * 10
+        }" fill="#${hexColor4}" />`;
+        result += `<rect width="10" height="10" x="${(currentX + length + 1 + 4) * 10}" y="${
+          (currentY + 3) * 10
+        }" fill="#${hexColor5}" />`;
+
+        return result;
+      }
+
+      // left eye
+      result += `<path d="M${(currentX + 3) * 10},${(currentY + 1) * 10} A${20},${20} 0 0 1 ${
+        (currentX + 3) * 10
+      },${(currentY + 5) * 10}" fill="white" />`;
+
+      result += `<path d="M${(currentX + 3) * 10},${(currentY + 5) * 10} A${20},${20} 0 0 1 ${
+        (currentX + 3) * 10
+      },${(currentY + 1) * 10}" fill="#${hexColor3}" />`;
+
+      // right eye
+      result += `<path d="M${(currentX + 3 + length + 1) * 10},${
+        (currentY + 1) * 10
+      } A${20},${20} 0 0 1 ${(currentX + 3 + length + 1) * 10},${
+        (currentY + 5) * 10
+      }" fill="white" />`;
+
+      result += `<path d="M${(currentX + 3 + length + 1) * 10},${
+        (currentY + 5) * 10
+      } A${20},${20} 0 0 1 ${(currentX + 3 + length + 1) * 10},${
+        (currentY + 1) * 10
+      }" fill="#${hexColor3}" />`;
+
+      return result;
+    }
+
     rects.forEach(rect => {
       const [length, colorIndex] = rect;
       const hexColor = paletteColors[colorIndex];
 
       // Do not push rect if transparent
-      if (colorIndex !== 0) {
+      if (!isGlasses && colorIndex !== 0) {
         svgRects.push(
           `<rect width="${length * 10}" height="10" x="${currentX * 10}" y="${
             currentY * 10

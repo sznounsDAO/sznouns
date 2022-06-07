@@ -3,7 +3,7 @@ import classes from './LanguageSelectionModal.module.css';
 import { setLocale } from '../../i18n/setLocale';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { Trans } from '@lingui/macro';
+
 import { SUPPORTED_LOCALES, SupportedLocale, LOCALE_LABEL } from '../../i18n/locales';
 import { useActiveLocale } from '../../hooks/useActivateLocale';
 
@@ -40,8 +40,6 @@ const LanguageSelectionModal: React.FC<LanguageSelectionModalProps> = props => {
     </div>
   );
 
-  return (
-    <Modal title={<Trans>Select Language</Trans>} content={modalContent} onDismiss={onDismiss} />
-  );
+  return <Modal title={'Select Language'} content={modalContent} onDismiss={onDismiss} />;
 };
 export default LanguageSelectionModal;

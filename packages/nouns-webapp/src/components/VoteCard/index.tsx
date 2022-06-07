@@ -5,7 +5,6 @@ import { Proposal } from '../../wrappers/nounsDao';
 import NounImageVoteTable from '../NounImageVoteTable';
 import VoteProgressBar from '../VoteProgressBar';
 import classes from './VoteCard.module.css';
-import { Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 
 export enum VoteCardVariant {
@@ -31,17 +30,17 @@ const VoteCard: React.FC<VoteCardProps> = props => {
   switch (variant) {
     case VoteCardVariant.FOR:
       titleClass = classes.for;
-      titleCopy = <Trans>For</Trans>;
+      titleCopy = 'For';
       voteCount = proposal.forCount;
       break;
     case VoteCardVariant.AGAINST:
       titleClass = classes.against;
-      titleCopy = <Trans>Against</Trans>;
+      titleCopy = 'Against';
       voteCount = proposal.againstCount;
       break;
     default:
       titleClass = classes.abstain;
-      titleCopy = <Trans>Abstain</Trans>;
+      titleCopy = 'Abstain';
       voteCount = proposal.abstainCount;
       break;
   }

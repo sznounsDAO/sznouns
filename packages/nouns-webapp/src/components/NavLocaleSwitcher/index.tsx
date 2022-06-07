@@ -11,7 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { usePickByState } from '../../utils/colorResponsiveUIUtils';
 import LanguageSelectionModal from '../LanguageSelectionModal';
 import { setLocale } from '../../i18n/setLocale';
-import { Trans } from '@lingui/macro';
+
 import navDropdownClasses from '../NavWallet/NavBarDropdown.module.css';
 import responsiveUiUtilsClasses from '../../utils/ResponsiveUIUtils.module.css';
 import { SUPPORTED_LOCALES, SupportedLocale, LOCALE_LABEL } from '../../i18n/locales';
@@ -152,7 +152,7 @@ const NavLocaleSwitcher: React.FC<NavLocalSwitcherProps> = props => {
         onClick={() => setShowLanguagePickerModal(true)}
       >
         <NavBarButton
-          buttonText={<Trans>Language</Trans>}
+          buttonText={'Language'}
           buttonIcon={<FontAwesomeIcon icon={faGlobe} />}
           buttonStyle={buttonStyle}
         />

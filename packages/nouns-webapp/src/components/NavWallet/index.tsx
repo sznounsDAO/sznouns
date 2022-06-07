@@ -15,7 +15,7 @@ import clsx from 'clsx';
 import { useHistory } from 'react-router-dom';
 import { usePickByState } from '../../utils/colorResponsiveUIUtils';
 import WalletConnectButton from './WalletConnectButton';
-import { Trans } from '@lingui/macro';
+
 import {
   shortENS,
   useShortAddress,
@@ -159,7 +159,7 @@ const NavWallet: React.FC<NavWalletProps> = props => {
               ),
             )}
           >
-            <Trans>Switch wallet</Trans>
+            Switch wallet
           </div>
 
           <div
@@ -176,7 +176,7 @@ const NavWallet: React.FC<NavWalletProps> = props => {
               classes.disconnectText,
             )}
           >
-            <Trans>Disconnect</Trans>
+            Disconnect
           </div>
         </div>
       </div>
@@ -228,10 +228,10 @@ const NavWallet: React.FC<NavWalletProps> = props => {
             className={classes.mobileSwitchWalletText}
             onClick={switchWalletHandler}
           >
-            <Trans>Switch</Trans>
+            Switch
           </div>
           <div className={classes.disconnectText} onClick={disconectWalletHandler}>
-            <Trans>Sign out</Trans>
+            Sign out
           </div>
         </div>
       </div>

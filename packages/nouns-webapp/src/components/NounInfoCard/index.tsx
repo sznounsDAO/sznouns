@@ -13,7 +13,6 @@ import { useAppSelector } from '../../hooks';
 
 import config from '../../config';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
-import { Trans } from '@lingui/macro';
 
 interface NounInfoCardProps {
   nounId: number;
@@ -40,12 +39,12 @@ const NounInfoCard: React.FC<NounInfoCardProps> = props => {
       <Col lg={12} className={classes.nounInfoRow}>
         <NounInfoRowButton
           iconImgSource={_BidsIcon}
-          btnText={lastAuctionNounId === nounId ? <Trans>Bids</Trans> : <Trans>Bid history</Trans>}
+          btnText={lastAuctionNounId === nounId ? 'Bids' : 'Bid history'}
           onClickHandler={bidHistoryOnClickHandler}
         />
         <NounInfoRowButton
           iconImgSource={_AddressIcon}
-          btnText={<Trans>Etherscan</Trans>}
+          btnText={'Etherscan'}
           onClickHandler={etherscanButtonClickHandler}
         />
       </Col>

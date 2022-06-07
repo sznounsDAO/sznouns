@@ -6,7 +6,6 @@ import classes from './Governance.module.css';
 import { utils } from 'ethers/lib/ethers';
 import clsx from 'clsx';
 import { useTreasuryBalance, useTreasuryUSDValue } from '../../hooks/useTreasuryBalance';
-import { Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 
 const GovernancePage = () => {
@@ -18,37 +17,29 @@ const GovernancePage = () => {
   const treasuryBalanceUSD = useTreasuryUSDValue();
 
   // Note: We have to extract this copy out of the <span> otherwise the Lingui macro gets confused
-  const nounSingular = <Trans>Noun</Trans>;
-  const nounPlural = <Trans>Nouns</Trans>;
+  const nounSingular = 'Noun';
+  const nounPlural = 'Nouns';
 
   return (
     <Section fullWidth={false} className={classes.section}>
       <Col lg={10} className={classes.wrapper}>
         <Row className={classes.headerRow}>
-          <span>
-            <Trans>Governance</Trans>
-          </span>
-          <h1>
-            <Trans>Nouns DAO</Trans>
-          </h1>
+          <span>Governance</span>
+          <h1>Nouns DAO</h1>
         </Row>
         <p className={classes.subheading}>
-          <Trans>
-            Nouns govern <span className={classes.boldText}>Nouns DAO</span>. Nouns can vote on
-            proposals or delegate their vote to a third party. A minimum of{' '}
-            <span className={classes.boldText}>
-              {nounsRequired} {threshold === 0 ? nounSingular : nounPlural}
-            </span>{' '}
-            is required to submit proposals.
-          </Trans>
+          Nouns govern <span className={classes.boldText}>Nouns DAO</span>. Nouns can vote on
+          proposals or delegate their vote to a third party. A minimum of{' '}
+          <span className={classes.boldText}>
+            {nounsRequired} {threshold === 0 ? nounSingular : nounPlural}
+          </span>{' '}
+          is required to submit proposals.
         </p>
 
         <Row className={classes.treasuryInfoCard}>
           <Col lg={8} className={classes.treasuryAmtWrapper}>
             <Row className={classes.headerRow}>
-              <span>
-                <Trans>Treasury</Trans>
-              </span>
+              <span>Treasury</span>
             </Row>
             <Row>
               <Col className={clsx(classes.ethTreasuryAmt)} lg={3}>
@@ -70,11 +61,9 @@ const GovernancePage = () => {
             </Row>
           </Col>
           <Col className={classes.treasuryInfoText}>
-            <Trans>
-              This treasury exists for <span className={classes.boldText}>Nouns DAO</span>{' '}
-              participants to allocate resources for the long-term growth and prosperity of the
-              Nouns project.
-            </Trans>
+            This treasury exists for <span className={classes.boldText}>Nouns DAO</span>{' '}
+            participants to allocate resources for the long-term growth and prosperity of the Nouns
+            project.
           </Col>
         </Row>
         <Proposals proposals={proposals} />

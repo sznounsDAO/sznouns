@@ -75,12 +75,14 @@ export const useNounSeed = (nounId: EthersBN) => {
   const seeds = useNounSeeds();
   const seed = seeds?.[nounId.toString()];
   // prettier-ignore
-  const request = seed ? false : {
-    abi,
-    address: config.addresses.nounsToken,
-    method: 'seeds',
-    args: [nounId],
-  };
+  const request = seed
+    ? false
+    : {
+        abi,
+        address: config.addresses.nounsToken,
+        method: 'seeds',
+        args: [nounId],
+      };
   const response = useContractCall<INounSeed>(request);
   if (response) {
     const seedCache = localStorage.getItem(seedCacheKey);

@@ -1,5 +1,4 @@
 import { Button, Spinner } from 'react-bootstrap';
-import { Trans } from '@lingui/macro';
 import { i18n } from '@lingui/core';
 
 const CreateProposalButton = ({
@@ -21,19 +20,17 @@ const CreateProposalButton = ({
 }) => {
   const buttonText = () => {
     if (hasActiveOrPendingProposal) {
-      return <Trans>You already have an active or pending proposal</Trans>;
+      return 'You already have an active or pending proposal';
     }
     if (!hasEnoughVote) {
       if (proposalThreshold) {
-        return (
-          <Trans>
-            You must have {i18n.number(proposalThreshold || 0 + 1)} votes to submit a proposal
-          </Trans>
-        );
+        return `You must have ${i18n.number(
+          proposalThreshold || 0 + 1,
+        )} votes to submit a proposal`;
       }
-      return <Trans>You don't have enough votes to submit a proposal</Trans>;
+      return "You don't have enough votes to submit a proposal";
     }
-    return <Trans>Create Proposal</Trans>;
+    return 'Create Proposal';
   };
 
   return (

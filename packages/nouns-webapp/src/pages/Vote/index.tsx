@@ -30,7 +30,7 @@ import {
   Delegates,
 } from '../../wrappers/subgraph';
 import { getNounVotes } from '../../utils/getNounsVotes';
-import { Trans } from '@lingui/macro';
+
 import { i18n } from '@lingui/core';
 import { ReactNode } from 'react-markdown/lib/react-markdown';
 
@@ -102,12 +102,12 @@ const VotePage = ({
 
   const startOrEndTimeCopy = () => {
     if (startDate?.isBefore(now) && endDate?.isAfter(now)) {
-      return <Trans>Ends</Trans>;
+      return 'Ends';
     }
     if (endDate?.isBefore(now)) {
-      return <Trans>Ended</Trans>;
+      return 'Ended';
     }
-    return <Trans>Starts</Trans>;
+    return 'Starts';
   };
 
   const startOrEndTimeTime = () => {
@@ -117,7 +117,7 @@ const VotePage = ({
     return endDate;
   };
 
-  const moveStateButtonAction = hasSucceeded ? <Trans>Queue</Trans> : <Trans>Execute</Trans>;
+  const moveStateButtonAction = hasSucceeded ? 'Queue' : 'Execute';
   const moveStateAction = (() => {
     if (hasSucceeded) {
       return () => {
@@ -150,8 +150,8 @@ const VotePage = ({
           break;
         case 'Success':
           setModal({
-            title: <Trans>Success</Trans>,
-            message: successMessage || <Trans>Transaction Successful!</Trans>,
+            title: 'Success',
+            message: successMessage || 'Transaction Successful!',
             show: true,
           });
           setPending?.(false);
@@ -159,8 +159,8 @@ const VotePage = ({
           break;
         case 'Fail':
           setModal({
-            title: <Trans>Transaction Failed</Trans>,
-            message: tx?.errorMessage || <Trans>Please try again.</Trans>,
+            title: 'Transaction Failed',
+            message: tx?.errorMessage || 'Please try again.',
             show: true,
           });
           setPending?.(false);
@@ -168,8 +168,8 @@ const VotePage = ({
           break;
         case 'Exception':
           setModal({
-            title: <Trans>Error</Trans>,
-            message: getErrorMessage?.(tx?.errorMessage) || <Trans>Please try again.</Trans>,
+            title: Error,
+            message: getErrorMessage?.(tx?.errorMessage) || 'Please try again.',
             show: true,
           });
           setPending?.(false);
@@ -181,22 +181,12 @@ const VotePage = ({
   );
 
   useEffect(
-    () =>
-      onTransactionStateChange(
-        queueProposalState,
-        <Trans>Proposal Queued!</Trans>,
-        setQueuePending,
-      ),
+    () => onTransactionStateChange(queueProposalState, 'Proposal Queued!', setQueuePending),
     [queueProposalState, onTransactionStateChange, setModal],
   );
 
   useEffect(
-    () =>
-      onTransactionStateChange(
-        executeProposalState,
-        <Trans>Proposal Executed!</Trans>,
-        setExecutePending,
-      ),
+    () => onTransactionStateChange(executeProposalState, 'Proposal Executed!', setExecutePending),
     [executeProposalState, onTransactionStateChange, setModal],
   );
 
@@ -246,7 +236,7 @@ const VotePage = ({
   }
 
   if (error) {
-    return <Trans>Failed to fetch</Trans>;
+    return <>Failed to fetch</>;
   }
 
   const isWalletConnected = !(activeAccount === undefined);
@@ -287,7 +277,7 @@ const VotePage = ({
                 {isQueuePending || isExecutePending ? (
                   <Spinner animation="border" />
                 ) : (
-                  <Trans>{moveStateButtonAction} Proposal ⌐◧-◧</Trans>
+                  `${moveStateButtonAction} Proposal ⌐◧-◧`
                 )}
               </Button>
             </Col>
@@ -321,17 +311,11 @@ const VotePage = ({
               <Card.Body className="p-2">
                 <div className={classes.voteMetadataRow}>
                   <div className={classes.voteMetadataRowTitle}>
-                    <h1>
-                      <Trans>Threshold</Trans>
-                    </h1>
+                    <h1>Threshold</h1>
                   </div>
                   <div className={classes.thresholdInfo}>
-                    <span>
-                      <Trans>Quorum</Trans>
-                    </span>
-                    <h3>
-                      <Trans>{i18n.number(proposal.quorumVotes)} votes</Trans>
-                    </h3>
+                    <span>Quorum</span>
+                    <h3>{i18n.number(proposal.quorumVotes)} votes</h3>
                   </div>
                 </div>
               </Card.Body>
@@ -372,9 +356,7 @@ const VotePage = ({
                     <h1>Snapshot</h1>
                   </div>
                   <div className={classes.snapshotBlock}>
-                    <span>
-                      <Trans>Taken at block</Trans>
-                    </span>
+                    <span>Taken at block</span>
                     <h3>{proposal.createdBlock}</h3>
                   </div>
                 </div>

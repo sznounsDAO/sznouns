@@ -1,7 +1,7 @@
 import classes from './NavBarTreasury.module.css';
 import { NavBarButtonStyle } from '../NavBarButton';
 import clsx from 'clsx';
-import { Trans } from '@lingui/macro';
+
 import { i18n } from '@lingui/core';
 
 interface NavBarTreasuryProps {
@@ -41,7 +41,7 @@ const NavBarTreasury: React.FC<NavBarTreasuryProps> = props => {
               treasuryStyle === NavBarButtonStyle.WHITE_INFO ? classes.whiteTreasuryHeader : '',
             )}
           >
-            <Trans>Treasury</Trans>
+            Treasury
           </div>
           <div className={classes.treasuryBalance}>Ξ {i18n.number(Number(treasuryBalance))}</div>
         </div>

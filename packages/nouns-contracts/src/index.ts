@@ -2,7 +2,7 @@ export { default as NounsTokenABI } from '../abi/contracts/NounsToken.sol/NounsT
 export { default as NounsAuctionHouseABI } from '../abi/contracts/NounsAuctionHouse.sol/NounsAuctionHouse.json';
 export { default as NounsDescriptorABI } from '../abi/contracts/NounsDescriptor.sol/NounsDescriptor.json';
 export { default as NounsSeederABI } from '../abi/contracts/NounsSeeder.sol/NounsSeeder.json';
-export { default as NounsDAOABI } from '../abi/contracts/governance/NounsDAOLogicV1.sol/NounsDAOLogicV1.json';
+export { default as NounsDAOABI } from '../abi/contracts/NounsDAOLogicV1.sol/NounsDAOLogicV1.json';
 export { NounsToken__factory as NounsTokenFactory } from '../typechain/factories/contracts/NounsToken__factory';
 export { NounsAuctionHouse__factory as NounsAuctionHouseFactory } from '../typechain/factories/contracts/NounsAuctionHouse__factory';
 export { NounsDescriptor__factory as NounsDescriptorFactory } from '../typechain/factories/contracts/NounsDescriptor__factory';

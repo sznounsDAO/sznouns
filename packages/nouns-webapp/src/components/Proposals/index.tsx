@@ -7,7 +7,6 @@ import { useBlockNumber, useEthers } from '@usedapp/core';
 import { isMobileScreen } from '../../utils/isMobile';
 import clsx from 'clsx';
 import { useUserVotes } from '../../wrappers/nounToken';
-import { Trans } from '@lingui/macro';
 import { ClockIcon } from '@heroicons/react/solid';
 import proposalStatusClasses from '../ProposalStatus/ProposalStatus.module.css';
 import dayjs from 'dayjs';
@@ -41,22 +40,12 @@ const getCountdownCopy = (proposal: Proposal, currentBlock: number, locale: Supp
   const now = dayjs();
 
   if (startDate?.isBefore(now) && endDate?.isAfter(now)) {
-    return (
-      <Trans>Ends {endDate.locale(SUPPORTED_LOCALE_TO_DAYSJS_LOCALE[locale]).fromNow()}</Trans>
-    );
+    return `Ends ${endDate.locale(SUPPORTED_LOCALE_TO_DAYSJS_LOCALE[locale]).fromNow()}`;
   }
   if (endDate?.isBefore(now)) {
-    return (
-      <Trans>
-        Expires {expiresDate.locale(SUPPORTED_LOCALE_TO_DAYSJS_LOCALE[locale]).fromNow()}
-      </Trans>
-    );
+    return `Expires ${expiresDate.locale(SUPPORTED_LOCALE_TO_DAYSJS_LOCALE[locale]).fromNow()}`;
   }
-  return (
-    <Trans>
-      Starts {dayjs(startDate).locale(SUPPORTED_LOCALE_TO_DAYSJS_LOCALE[locale]).fromNow()}
-    </Trans>
-  );
+  return `Starts ${dayjs(startDate).locale(SUPPORTED_LOCALE_TO_DAYSJS_LOCALE[locale]).fromNow()}`;
 };
 
 const Proposals = ({ proposals }: { proposals: Proposal[] }) => {
@@ -70,30 +59,26 @@ const Proposals = ({ proposals }: { proposals: Proposal[] }) => {
 
   const nullStateCopy = () => {
     if (account !== null) {
-      return <Trans>You have no Votes.</Trans>;
+      return 'You have no Votes.';
     }
-    return <Trans>Connect wallet to make a proposal.</Trans>;
+    return 'Connect wallet to make a proposal.';
   };
 
   return (
     <div className={classes.proposals}>
       <div>
-        <h3 className={classes.heading}>
-          <Trans>Proposals</Trans>
-        </h3>
+        <h3 className={classes.heading}>Proposals</h3>
         {account !== undefined && connectedAccountNounVotes > 0 ? (
           <div className={classes.submitProposalButtonWrapper}>
             <Button className={classes.generateBtn} onClick={() => history.push('create-proposal')}>
-              <Trans>Submit Proposal</Trans>
+              Submit Proposal
             </Button>
           </div>
         ) : (
           <div className={clsx('d-flex', classes.submitProposalButtonWrapper)}>
             {!isMobile && <div className={classes.nullStateCopy}>{nullStateCopy()}</div>}
             <div className={classes.nullBtnWrapper}>
-              <Button className={classes.generateBtnDisabled}>
-                <Trans>Submit Proposal</Trans>
-              </Button>
+              <Button className={classes.generateBtnDisabled}>Submit Proposal</Button>
             </div>
           </div>
         )}
@@ -151,12 +136,8 @@ const Proposals = ({ proposals }: { proposals: Proposal[] }) => {
           })
       ) : (
         <Alert variant="secondary">
-          <Alert.Heading>
-            <Trans>No proposals found</Trans>
-          </Alert.Heading>
-          <p>
-            <Trans>Proposals submitted by community members will appear here.</Trans>
-          </p>
+          <Alert.Heading>No proposals found</Alert.Heading>
+          <p>Proposals submitted by community members will appear here.</p>
         </Alert>
       )}
     </div>
