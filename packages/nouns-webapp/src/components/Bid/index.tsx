@@ -287,11 +287,6 @@ const Bid: React.FC<{
           </Button>
         ) : (
           <>
-            <Col lg={12} className={classes.voteForNextNounBtnWrapper}>
-              <Button className={classes.bidBtnAuctionEnded} onClick={fomoNounsBtnOnClickHandler}>
-                Vote for the next Noun ⌐◧-◧
-              </Button>
-            </Col>
             {/* Only show force settle button if wallet connected */}
             {isWalletConnected && (
               <Col lg={12}>
