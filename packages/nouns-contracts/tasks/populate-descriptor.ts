@@ -26,6 +26,10 @@ task('populate-descriptor', 'Populates the descriptor with color palettes and No
     const { bgcolors, palette, images } = ImageData;
     const { bodies, accessories, heads, glasses } = images;
 
+    const [deployer] = await ethers.getSigners();
+    const pendingCount = await deployer.getTransactionCount('pending');
+    console.log('Pending tx count before adding many features:', pendingCount);
+
     // Chunk head and accessory population due to high gas usage
     await descriptorContract.addManyBackgrounds(bgcolors);
     await descriptorContract.addManyColorsToPalette(0, palette);
@@ -34,14 +38,23 @@ task('populate-descriptor', 'Populates the descriptor with color palettes and No
     const accessoryChunk = chunkArray(accessories, 10);
     for (const chunk of accessoryChunk) {
       await descriptorContract.addManyAccessories(chunk.map(({ data }) => data));
+      await sleep(1000);
     }
 
     const headChunk = chunkArray(heads, 10);
     for (const chunk of headChunk) {
       await descriptorContract.addManyHeads(chunk.map(({ data }) => data));
+      await sleep(1000);
     }
 
     await descriptorContract.addManyGlasses(glasses.map(({ data }) => data));
 
     console.log('Descriptor populated with palettes and parts.');
   });
+
+
+function sleep(ms: any) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
