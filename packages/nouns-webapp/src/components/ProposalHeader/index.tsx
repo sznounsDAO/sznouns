@@ -13,8 +13,6 @@ import { i18n } from '@lingui/core';
 import { buildEtherscanAddressLink } from '../../utils/etherscan';
 import { transactionLink } from '../ProposalContent';
 import ShortAddress from '../ShortAddress';
-import { useActiveLocale } from '../../hooks/useActivateLocale';
-import { Locales } from '../../i18n/locales';
 
 interface ProposalHeaderProps {
   proposal: Proposal;
@@ -42,7 +40,6 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
   const proposalVote = useProposalVote(proposal?.id);
   const proposalCreationTimestamp = useBlockTimestamp(proposal?.createdBlock);
   const disableVoteButton = !isWalletConnected || !availableVotes || hasVoted;
-  const activeLocale = useActiveLocale();
 
   const voteButton = (
     <>
@@ -71,10 +68,6 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
       <ShortAddress address={proposal.proposer || ''} avatar={false} />
     </a>
   );
-
-  const proposedAtTransactionHash = `at ${(
-    <span className={classes.propTransactionHash}>{transactionLink(proposal.transactionHash)}</span>
-  )}`;
 
   return (
     <>
@@ -107,24 +100,20 @@ const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
       </div>
 
       <div className={classes.byLineWrapper}>
-        {activeLocale === Locales.ja_JP ? (
-          <div className={classes.proposalByLineWrapperJp}>
-            <span className={classes.proposedByJp}>Proposed by: </span>
-            <span className={classes.proposerJp}>{proposer}</span>
-            <span className={classes.propTransactionWrapperJp}>{proposedAtTransactionHash}</span>
+        <>
+          <h3>Proposed by</h3>
+          <div className={classes.byLineContentWrapper}>
+            <h3>
+              {proposer}
+              <span className={classes.propTransactionWrapper}>
+                at{' '}
+                <span className={classes.propTransactionHash}>
+                  {transactionLink(proposal.transactionHash)}
+                </span>
+              </span>
+            </h3>
           </div>
-        ) : (
-          <>
-            <h3>Proposed by</h3>
-
-            <div className={classes.byLineContentWrapper}>
-              <h3>
-                {proposer}
-                <span className={classes.propTransactionWrapper}>{proposedAtTransactionHash}</span>
-              </h3>
-            </div>
-          </>
-        )}
+        </>
       </div>
 
       {isMobile && (
