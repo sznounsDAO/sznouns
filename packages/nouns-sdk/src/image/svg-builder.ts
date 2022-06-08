@@ -40,7 +40,6 @@ export const buildSVG = (
   bgColor: string,
 ): string => {
   const svgWithoutEndTag = parts.reduce((result, part, idx) => {
-    if (idx > 3) return '';
     const svgRects: string[] = [];
     const { bounds, rects } = decodeImage(part.data);
 
