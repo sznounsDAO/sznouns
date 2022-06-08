@@ -42,6 +42,9 @@ yarn codegen
 # Official Subgraph
 yarn deploy:[network] # Supports rinkeby and mainnet
 
+Note: this step assumes you have created a hosted service on The Graph, associated with your organization/github account.
 # Fork
 yarn deploy [organization]/[subgraph-name]
 ```
+
+Once the subgraph is deployed, be sure to update `subgraphApiUri` in `nouns-webapp/src/config.ts`

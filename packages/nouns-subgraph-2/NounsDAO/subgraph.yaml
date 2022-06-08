@@ -1,0 +1,65 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: NounsDAOProxy
+    network: rinkeby
+    source:
+      address: "0xa78b2cFcf24c96297C98E86B3A7df2275F5131F1"
+      abi: NounsDAOProxy
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - NewAdmin
+        - NewImplementation
+        - NewPendingAdmin
+        - NewVetoer
+        - ProposalCanceled
+        - ProposalCreated
+        - ProposalCreatedWithRequirements
+        - ProposalExecuted
+        - ProposalQueued
+        - ProposalThresholdBPSSet
+        - ProposalVetoed
+        - QuorumVotesBPSSet
+        - VoteCast
+        - VotingDelaySet
+        - VotingPeriodSet
+      abis:
+        - name: NounsDAOProxy
+          file: ./abis/NounsDAOProxy.json
+      eventHandlers:
+        - event: NewAdmin(address,address)
+          handler: handleNewAdmin
+        - event: NewImplementation(address,address)
+          handler: handleNewImplementation
+        - event: NewPendingAdmin(address,address)
+          handler: handleNewPendingAdmin
+        - event: NewVetoer(address,address)
+          handler: handleNewVetoer
+        - event: ProposalCanceled(uint256)
+          handler: handleProposalCanceled
+        - event: ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,string)
+          handler: handleProposalCreated
+        - event: ProposalCreatedWithRequirements(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,uint256,uint256,string)
+          handler: handleProposalCreatedWithRequirements
+        - event: ProposalExecuted(uint256)
+          handler: handleProposalExecuted
+        - event: ProposalQueued(uint256,uint256)
+          handler: handleProposalQueued
+        - event: ProposalThresholdBPSSet(uint256,uint256)
+          handler: handleProposalThresholdBPSSet
+        - event: ProposalVetoed(uint256)
+          handler: handleProposalVetoed
+        - event: QuorumVotesBPSSet(uint256,uint256)
+          handler: handleQuorumVotesBPSSet
+        - event: VoteCast(indexed address,uint256,uint8,uint256,string)
+          handler: handleVoteCast
+        - event: VotingDelaySet(uint256,uint256)
+          handler: handleVotingDelaySet
+        - event: VotingPeriodSet(uint256,uint256)
+          handler: handleVotingPeriodSet
+      file: ./src/nouns-dao-proxy.ts
