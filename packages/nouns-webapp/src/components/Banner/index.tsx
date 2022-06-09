@@ -10,7 +10,7 @@ const Banner = () => {
       <Col lg={6}>
         <div className={classes.wrapper}>
           <h1>
-            ONE NOUN,
+            SZNOUNS,
             <br />
             EVERY DAY,
             <br />
