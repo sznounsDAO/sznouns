@@ -50,28 +50,25 @@ export const buildSVG = (
 
     // additional logic to build svg for circular glasses
     if (isGlasses) {
-      const BRIDGE = 1;
-      const FRAME_OFFSET = 2;
-
       const [length, colorIdx0] = rects[0];
       const [, colorIdx2] = rects[2];
-      const [len5] = rects[5];
       const [, colorIdx10] = rects[10];
-      const [, colorIdx14] = rects[14];
+
       const hexColor0 = paletteColors[colorIdx0];
       const hexColor2 = paletteColors[colorIdx2];
       const hexColor10 = paletteColors[colorIdx10];
+
       const radius = length / 2;
 
       // GLASSES FRAME: left eye frame, right eye frame, long frame, ear frame
       result += drawCircle(radius, currentX + radius, currentY + radius, hexColor0);
-      result += drawRect(5 * radius + BRIDGE, 1, currentX, currentY + FRAME_OFFSET, hexColor0);
-      result += drawCircle(radius, currentX + 3 * radius + BRIDGE, currentY + radius, hexColor2);
-      result += drawRect(1, 2, currentX + 5 * radius, currentY + FRAME_OFFSET + 1, hexColor2);
+      result += drawRect(5 * radius, 1, currentX + 1, currentY + 2, hexColor0);
+      result += drawCircle(radius, currentX + 3 * radius + 1, currentY + radius, hexColor2);
+      result += drawRect(1, 2, currentX + 5 * radius, currentY + 3, hexColor2);
 
       // ROUND EYES: all glasses apply except `square-fullblack` and `square-black-rgb`
       // len of 5th === 1 identifies fullblack, colorIdx14 === 90 identifies black-rgb
-      if (len5 !== 1 && colorIdx14 !== 90) {
+      if (rects[5][0] !== 1 && rects[14][1] !== 90) {
         // left eye (colored half, white half)
         result += drawPath(currentX + 3, currentY + 5, currentX + 3, currentY + 1, hexColor10);
         result += drawPath(currentX + 3, currentY + 1, currentX + 3, currentY + 5, 'FFFFFF');
