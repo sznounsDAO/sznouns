@@ -41,6 +41,12 @@ library MultiPartRLEToSVG {
         Rect[] rects;
     }
 
+    struct DecodedGlasses {
+        uint8 paletteIndex;
+        uint8 isHalfMoon;
+        uint8[5][] shapes;
+    }
+
     /**
      * @notice Given RLE image parts and color palettes, merge to generate a single SVG image.
      */
@@ -68,7 +74,7 @@ library MultiPartRLEToSVG {
         private
         view
         returns (string memory svg)
-    {
+      {
         string[33] memory lookup = [
             '0', '10', '20', '30', '40', '50', '60', '70', 
             '80', '90', '100', '110', '120', '130', '140', '150', 
@@ -77,94 +83,41 @@ library MultiPartRLEToSVG {
             '320' 
         ];
         string memory rects;
+        string[5] memory shape;
+        string memory part;
         for (uint8 p = 0; p < params.parts.length; p++) {
-            // isGlasses logic
             DecodedImage memory image = _decodeRLEImage(params.parts[p]);
             string[] storage palette = palettes[image.paletteIndex];
+            if (p == 3) {
+                DecodedGlasses memory glasses = _decodeRLEGlasses(params.parts[p]);
+                for (uint256 i = 0; i < glasses.shapes.length; i++) {
+                    shape[0] = palette[glasses.shapes[i][0]];   // colorIdx
+                    shape[1] = lookup[glasses.shapes[i][1]];    // svg shape param 1
+                    shape[2] = lookup[glasses.shapes[i][2]];    // svg shape param 2
+                    shape[3] = lookup[glasses.shapes[i][3]];    // svg shape param 3
+                    shape[4] = lookup[glasses.shapes[i][4]];    // svg shape param 4
+                    if (i < 2) {
+                        part = string(abi.encodePacked(part, _drawRect(shape)));
+                    } else if (i < 4) {
+                        part = string(abi.encodePacked(part, _drawCircle(shape)));
+                    } else {
+                    if (glasses.isHalfMoon == 1) {
+                        part = string(abi.encodePacked(part, _drawPath(shape)));
+                    } else {
+                        part = string(abi.encodePacked(part, _drawRect(shape)));
+                    }
+                    }
+                }
+                rects = string(abi.encodePacked(rects, part));
+                return rects;
+            }
             uint256 currentX = image.bounds.left;
             uint256 currentY = image.bounds.top;
             uint256 cursor;
             string[16] memory buffer;
             
-            string memory part;
-            if (p == 3) {
-                uint256 length = image.rects[0].length;
-                uint256 radius = length / 2;
-
-                buffer[0] = lookup[radius];
-                buffer[1] = lookup[currentX + radius];
-                buffer[2] = lookup[currentY + radius];
-                buffer[3] = palette[image.rects[0].colorIndex];
-
-                part = string(abi.encodePacked(part, _drawCircle(buffer)));
-
-                buffer[0] = lookup[5 * radius];
-                buffer[1] = lookup[1];
-                buffer[2] = lookup[currentX + 1];
-                buffer[3] = lookup[currentY + 2];
-                buffer[4] = palette[image.rects[0].colorIndex];
-                
-                part = string(abi.encodePacked(part, _drawRect(buffer)));
-                
-                buffer[0] = lookup[radius];
-                buffer[1] = lookup[currentX + 3 * radius + 1];
-                buffer[2] = lookup[currentY + radius];
-                buffer[3] = palette[image.rects[2].colorIndex];
-                
-                part = string(abi.encodePacked(part, _drawCircle(buffer)));
-
-                buffer[0] = lookup[1];
-                buffer[1] = lookup[2];
-                buffer[2] = lookup[currentX + 5 * radius];
-                buffer[3] = lookup[currentY + 3];
-                buffer[4] = palette[image.rects[2].colorIndex];
-                
-                part = string(abi.encodePacked(part, _drawRect(buffer)));
-
-                if (image.rects[5].length != 1 && image.rects[14].colorIndex != 90) {          
-                    buffer[0] = lookup[currentX + 3];
-                    buffer[1] = lookup[currentY + 5];
-                    buffer[2] = lookup[currentX + 3];
-                    buffer[3] = lookup[currentY + 1];
-                    buffer[4] = palette[image.rects[10].colorIndex];
-                            
-                    part = string(abi.encodePacked(part, _drawPath(buffer)));
-
-                    buffer[0] = lookup[currentX + 3];
-                    buffer[1] = lookup[currentY + 1];
-                    buffer[2] = lookup[currentX + 3];
-                    buffer[3] = lookup[currentY + 5];
-                    buffer[4] = 'FFFFFF';
-                    part = string(abi.encodePacked(part, _drawPath(buffer)));
-
-                    buffer[0] = lookup[currentX + 10];
-                    buffer[1] = lookup[currentY + 5];
-                    buffer[2] = lookup[currentX + 10];
-                    buffer[3] = lookup[currentY + 1];
-                    buffer[4] = palette[image.rects[10].colorIndex];
-                    part = string(abi.encodePacked(part, _drawPath(buffer)));
-
-                    buffer[0] =lookup[currentX + 10];
-                    buffer[1] =lookup[currentY + 1];
-                    buffer[2] =lookup[currentX + 10];
-                    buffer[3] =lookup[currentY + 5];
-                    buffer[4] ='FFFFFF';
-
-                    part = string(abi.encodePacked(part, _drawPath(buffer)));
-                    rects = string(abi.encodePacked(rects, part));
-                    return rects;
-                }
-            }
             for (uint256 i = 0; i < image.rects.length; i++) {
                 Rect memory rect = image.rects[i];
-                if (p == 3 && rect.colorIndex != 0 && keccak256(abi.encodePacked((palette[rect.colorIndex]))) != keccak256(abi.encodePacked(('000000')))) {
-                    buffer[0] = lookup[rect.length];
-                    buffer[1] = lookup[1];
-                    buffer[2] = lookup[currentX];
-                    buffer[3] = lookup[currentY];
-                    buffer[4] = palette[rect.colorIndex];
-                    part = string(abi.encodePacked(part, _drawRect(buffer)));
-                }
 
                 if (p != 3 && rect.colorIndex != 0) {
                     buffer[cursor] = lookup[rect.length];          // width
@@ -213,6 +166,30 @@ library MultiPartRLEToSVG {
     }
 
     /**
+     * @notice Return an svg string that draws a circle given the provided `shape`.
+     */
+    // prettier-ignore
+    function _drawCircle(string[5] memory shape) private pure returns (string memory) {
+    return string(abi.encodePacked('<circle r="', shape[1],'" cx="',shape[2],'" cy="',shape[3],'" fill="#',shape[0],'" shape-rendering="geometricPrecision"/>'));
+    }
+
+    /**
+     * @notice Return an svg string that draws a rectangle given the provided `shape`.
+     */
+    // prettier-ignore
+    function _drawRect(string[5] memory shape) private pure returns (string memory) {
+    return string(abi.encodePacked('<rect width="', shape[1], '" height="', shape[2],'" x="', shape[3], '" y="', shape[4], '" fill="#', shape[0], '" />'));
+    }
+
+    /**
+     * @notice Return an svg string that draws a path given the provided `shape`.
+     */
+    // prettier-ignore
+    function _drawPath(string[5] memory shape)  private pure returns (string memory) {
+        return string(abi.encodePacked('<path d="M', shape[1], ',',shape[2], ' A20,20 0 0 1 ', shape[3],',',shape[4],'" fill="#',shape[0],'" shape-rendering="geometricPrecision"/>'));
+    }
+
+    /**
      * @notice Decode a single RLE compressed image into a `DecodedImage`.
      */
     function _decodeRLEImage(bytes memory image) private pure returns (DecodedImage memory) {
@@ -233,18 +210,22 @@ library MultiPartRLEToSVG {
         return DecodedImage({ paletteIndex: paletteIndex, bounds: bounds, rects: rects });
     }
 
-    // prettier-ignore
-    function _drawCircle(string[16] memory buffer) private pure returns (string memory) {
-    return string(abi.encodePacked('<circle r="', buffer[0],'" cx="',buffer[1],'" cy="',buffer[2],'" fill="#',buffer[3],'" shape-rendering="geometricPrecision"/>'));
-    }
-
-    // prettier-ignore
-    function _drawRect(string[16] memory buffer) private pure returns (string memory) {
-    return string(abi.encodePacked('<rect width="', buffer[0], '" height="', buffer[1],'" x="', buffer[2], '" y="', buffer[3], '" fill="#', buffer[4], '" />'));
-    }
-
-    // prettier-ignore
-    function _drawPath(string[16] memory buffer)  private pure returns (string memory) {
-        return string(abi.encodePacked('<path d="M', buffer[0], ',',buffer[1], ' A20,20 0 0 1 ', buffer[2],',',buffer[3],'" fill="#',buffer[4],'" shape-rendering="geometricPrecision"/>'));
+    /**
+     * @notice Decode a single RLE compressed glasses image into a `DecodedGlasses`.
+     */
+    function _decodeRLEGlasses(bytes memory image) private pure returns (DecodedGlasses memory) {
+        uint256 cursor;
+        uint8[5][] memory shapes = new uint8[5][]((image.length - 2) / 5);
+        for (uint256 i = 2; i < image.length; i += 5) {
+            shapes[cursor] = [
+                uint8(image[i]),
+                uint8(image[i + 1]),
+                uint8(image[i + 2]),
+                uint8(image[i + 3]),
+                uint8(image[i + 4])
+            ];
+            cursor++;
+        }
+        return DecodedGlasses({ paletteIndex: uint8(image[0]), isHalfMoon: uint8(image[1]), shapes: shapes });
     }
 }
