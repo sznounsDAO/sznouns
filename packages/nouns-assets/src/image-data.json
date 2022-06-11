@@ -1,5 +1,8 @@
 {
-  "bgcolors": ["d5d7e1", "e1d7d5"],
+  "bgcolors": [
+    "d5d7e1",
+    "e1d7d5"
+  ],
   "palette": [
     "",
     "ffffff",
@@ -1855,87 +1858,87 @@
     ],
     "glasses": [
       {
-        "filename": "glasses-circular-pixelated-black-eyes-red",
+        "filename": "glasses-circular-black-eyes-red",
         "data": "0x0001230d010c0d230102180e23030c0e002303130e00640c100c0c010c0c0c10641310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-black",
+        "filename": "glasses-circular-black",
         "data": "0x0001230d010c0d230102180e23030c0e002303130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-blue-med-saturated",
+        "filename": "glasses-circular-blue-med-saturated",
         "data": "0x0001430d010c0d430102180e43030c0e004303130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-blue-multi",
+        "filename": "glasses-circular-blue-multi",
         "data": "0x00018b0d010c0d8b0102180e8b030c0e000f03130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-blue",
+        "filename": "glasses-circular-blue",
         "data": "0x0001070d010c0d070102180e07030c0e000703130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-fullblack",
+        "filename": "glasses-circular-fullblack",
         "data": "0x0000230d010c0d230102180e23030c0e002303130e000101010b0c010101120c0101010b0d010101120d"
       },
       {
-        "filename": "glasses-circular-pixelated-green",
+        "filename": "glasses-circular-green",
         "data": "0x0001c00d010c0dc00102180ec0030c0e00c003130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-grey-light",
+        "filename": "glasses-circular-grey-light",
         "data": "0x0001c80d010c0dc80102180ec8030c0e00c803130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-guava",
+        "filename": "glasses-circular-guava",
         "data": "0x0001370d010c0d370102180e37030c0e003703130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-hip-rose",
+        "filename": "glasses-circular-hip-rose",
         "data": "0x0001200d010c0d200102180e20030c0e002003130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-honey",
+        "filename": "glasses-circular-honey",
         "data": "0x0001de0d010c0dde0102180ede030c0e00de03130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-magenta",
+        "filename": "glasses-circular-magenta",
         "data": "0x0001090d010c0d090102180e09030c0e000903130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-orange",
+        "filename": "glasses-circular-orange",
         "data": "0x0001140d010c0d140102180e14030c0e001403130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-purple-multi",
+        "filename": "glasses-circular-purple-multi",
         "data": "0x00019a0d010c0d9a0102180e9a030c0e002003130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-red",
+        "filename": "glasses-circular-red",
         "data": "0x0001240d010c0d240102180e24030c0e002403130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-rgb",
+        "filename": "glasses-circular-rgb",
         "data": "0x0000230d010c0d230102180e23030c0e002303130e006401010b0c640101120c6501010a0e5a01010d0e650101110e5a0101140e"
       },
       {
-        "filename": "glasses-circular-pixelated-smoke",
+        "filename": "glasses-circular-smoke",
         "data": "0x0001590d010c0d590102180e59030c0e005903130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-teal",
+        "filename": "glasses-circular-teal",
         "data": "0x00011c0d010c0d1c0102180e1c030c0e001c03130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-watermelon",
+        "filename": "glasses-circular-watermelon",
         "data": "0x0001370d010c0d370102180e37030c0e003703130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-yellow-orange-multi",
+        "filename": "glasses-circular-yellow-orange-multi",
         "data": "0x0001130d010c0d260102180e13030c0e002803130e00230c100c0c010c0c0c10231310130c01130c1310"
       },
       {
-        "filename": "glasses-circular-pixelated-yellow-saturated",
+        "filename": "glasses-circular-yellow-saturated",
         "data": "0x0001280d010c0d280102180e28030c0e002803130e00230c100c0c010c0c0c10231310130c01130c1310"
       }
     ]
