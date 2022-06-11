@@ -34,7 +34,7 @@ const encode = async () => {
 
   const partfolders = ['1-bodies', '2-accessories', '3-heads', '4-glasses'];
   for (const folder of partfolders) {
-    const folderpath = path.join(__dirname, '../images', folder);
+    const folderpath = path.join(__dirname, '../flipped', folder);
     const files = await fs.readdir(folderpath);
     for (const file of files) {
       const image = await readPngImage(path.join(folderpath, file));
