@@ -19,6 +19,11 @@
   font-size: 1.2rem !important;
 }
 
+.emoji {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
 @media (max-width: 992px) {
   .headerWrapper {
     padding: 1rem;
