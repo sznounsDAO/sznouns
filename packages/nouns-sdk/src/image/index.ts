@@ -11,4 +11,5 @@ export {
   DecodedImage,
   EncodedImage,
   PngImage,
+  DecodedGlasses,
 } from './types';

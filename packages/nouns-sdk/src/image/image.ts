@@ -1,7 +1,23 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ImageBounds, ImageRow, ImageRows, Rect, RGBAColor } from './types';
-import { rgbToHex, toPaddedHex } from './utils';
-
+import { getHexColorAt, isSingleColor, rgbToHex, toPaddedHex } from './utils';
+import {
+  COORD_BLANK,
+  COORD_LEFT_FRAME,
+  COORD_RIGHT_FRAME,
+  COORD_BRIDGE_FRAME,
+  COORD_EAR_FRAME,
+  COORD_LEFT_HALF_MOON_FRAME,
+  COORD_RIGHT_HALF_MOON_FRAME,
+  COORD_LEFT_EYE_HALF_MOON_1,
+  COORD_RIGHT_EYE_HALF_MOON_1,
+  COORD_LEFT_EYE_HALF_MOON_2,
+  COORD_RIGHT_EYE_HALF_MOON_2,
+  PARAMS_CIRCLE,
+  PARAMS_PATH,
+  PARAMS_BRIDGE,
+  PARAMS_EAR,
+} from './constants';
 /**
  * A class used to convert an image into the following RLE format:
  * Palette Index, Bounds [Top (Y), Right (X), Bottom (Y), Left (X)] (4 Bytes), [Pixel Length (1 Byte), Color Index (1 Byte)][].
@@ -60,6 +76,22 @@ export class Image {
       this._rle = this.encode(getRgbaAt, colors);
     }
     return this._rle;
+  }
+
+  /**
+   * Convert a glasses image to a run-length encoded string using the provided RGBA
+   * and color palette values.
+   * @param getRgbaAt A function used to fetch the RGBA values at specific x-y coordinates
+   * @param colors The color palette map
+   */
+  public toGlassesRLE(
+    getRgbaAt: (x: number, y: number) => RGBAColor,
+    colors: Map<string, number>,
+  ): string {
+    this.checkValid(getRgbaAt); // checks if its a valid glasses image
+    const isHalfMoon = this.checkHalfMoon(getRgbaAt);
+    const rle = this.encodeGlasses(getRgbaAt, colors, isHalfMoon);
+    return `0x00${rle}`;
   }
 
   /**
@@ -237,5 +269,166 @@ export class Image {
    */
   private isEmptyRow(rect: Rect) {
     return rect?.length === this._width && rect?.colorIndex === 0;
+  }
+
+  /**
+   * Using the image pixel information, run-length encode a glasses image.
+   * @param getRgbaAt A function used to fetch the RGBA values at specific x-y coordinates
+   * @param colors The color palette map
+   * @param isHalfMoon Boolean to indicate whether or not they are half-moon glasses
+   */
+  private encodeGlasses(
+    getRgbaAt: (x: number, y: number) => RGBAColor,
+    colors: Map<string, number>,
+    isHalfMoon: boolean,
+  ): string {
+    const rleArray = [];
+
+    isHalfMoon ? rleArray.push(1) : rleArray.push(0);
+
+    const traitColors = {
+      bridgeFrame: getHexColorAt(getRgbaAt, COORD_BRIDGE_FRAME[0][0], COORD_BRIDGE_FRAME[0][1]),
+      earFrame: getHexColorAt(getRgbaAt, COORD_EAR_FRAME[0][0], COORD_EAR_FRAME[0][1]),
+      leftFrame: getHexColorAt(getRgbaAt, COORD_LEFT_FRAME[0][0], COORD_LEFT_FRAME[0][1]),
+      rightFrame: getHexColorAt(getRgbaAt, COORD_RIGHT_FRAME[0][0], COORD_RIGHT_FRAME[0][1]),
+      leftEyeHalfMoon1: getHexColorAt(
+        getRgbaAt,
+        COORD_LEFT_EYE_HALF_MOON_1[0][0],
+        COORD_LEFT_EYE_HALF_MOON_1[0][1],
+      ),
+      leftEyeHalfMoon2: getHexColorAt(
+        getRgbaAt,
+        COORD_LEFT_EYE_HALF_MOON_2[0][0],
+        COORD_LEFT_EYE_HALF_MOON_2[0][1],
+      ),
+      rightEyeHalfMoon1: getHexColorAt(
+        getRgbaAt,
+        COORD_RIGHT_EYE_HALF_MOON_1[0][0],
+        COORD_RIGHT_EYE_HALF_MOON_1[0][1],
+      ),
+      rightEyeHalfMoon2: getHexColorAt(
+        getRgbaAt,
+        COORD_RIGHT_EYE_HALF_MOON_2[0][0],
+        COORD_RIGHT_EYE_HALF_MOON_2[0][1],
+      ),
+    };
+
+    const svgParams = {
+      bridgeFrame: [...Object.values(PARAMS_BRIDGE)],
+      earFrame: [...Object.values(PARAMS_EAR)],
+      leftFrame: [PARAMS_CIRCLE.r, PARAMS_CIRCLE.cx_left, PARAMS_CIRCLE.cy, 0],
+      rightFrame: [PARAMS_CIRCLE.r, PARAMS_CIRCLE.cx_right, PARAMS_CIRCLE.cy, 0],
+      leftEyeHalfMoon1: [PARAMS_PATH.left, PARAMS_PATH.bottom, PARAMS_PATH.left, PARAMS_PATH.top],
+      leftEyeHalfMoon2: [PARAMS_PATH.left, PARAMS_PATH.top, PARAMS_PATH.left, PARAMS_PATH.bottom],
+      rightEyeHalfMoon1: [
+        PARAMS_PATH.right,
+        PARAMS_PATH.bottom,
+        PARAMS_PATH.right,
+        PARAMS_PATH.top,
+      ],
+      rightEyeHalfMoon2: [
+        PARAMS_PATH.right,
+        PARAMS_PATH.top,
+        PARAMS_PATH.right,
+        PARAMS_PATH.bottom,
+      ],
+    };
+
+    const flatTraitColors = isHalfMoon
+      ? Object.entries(traitColors)
+      : Object.entries(traitColors).slice(0, 4);
+
+    for (const [trait, color] of flatTraitColors) {
+      if (!colors.has(color)) {
+        colors.set(color, colors.size);
+      }
+
+      const colorIndex = color === '00FFFFFF' ? 0 : colors.get(color)!;
+
+      rleArray.push(colorIndex);
+
+      const params = svgParams[trait as keyof typeof svgParams];
+
+      params?.forEach(value => {
+        rleArray.push(value);
+      });
+    }
+
+    if (!isHalfMoon) {
+      for (let y = 12; y < 15; y++) {
+        for (let x = 10; x < 21; x++) {
+          const hexColor = getHexColorAt(getRgbaAt, x, y);
+          if (
+            (x < 14 && hexColor !== traitColors.leftFrame) ||
+            (x >= 17 && hexColor !== traitColors.rightFrame)
+          ) {
+            if (!colors.has(hexColor)) {
+              colors.set(hexColor, colors.size);
+            }
+
+            const colorIndex = colors.get(hexColor)!;
+
+            rleArray.push(colorIndex);
+            rleArray.push(1, 1, x, y);
+          }
+        }
+      }
+    }
+
+    const buffer = Buffer.from(rleArray);
+    const rle = buffer.toString('hex');
+    return rle;
+  }
+
+  /**
+   * Check whether given image depicts half-moon glasses or not
+   * @param getRgbaAt A function used to fetch the RGBA values at specific x-y coordinates
+   */
+  private checkHalfMoon(getRgbaAt: (x: number, y: number) => RGBAColor): boolean {
+    if (
+      !isSingleColor(getRgbaAt, COORD_LEFT_HALF_MOON_FRAME) ||
+      !isSingleColor(getRgbaAt, COORD_RIGHT_HALF_MOON_FRAME) ||
+      !isSingleColor(getRgbaAt, COORD_LEFT_EYE_HALF_MOON_1) ||
+      !isSingleColor(getRgbaAt, COORD_RIGHT_EYE_HALF_MOON_1) ||
+      !isSingleColor(getRgbaAt, COORD_LEFT_EYE_HALF_MOON_2) ||
+      !isSingleColor(getRgbaAt, COORD_RIGHT_EYE_HALF_MOON_2)
+    )
+      return false;
+
+    return true;
+  }
+
+  /**
+   * Check whether given image is a valid glasses image
+   * @param getRgbaAt A function used to fetch the RGBA values at specific x-y coordinates
+   */
+  private checkValid(getRgbaAt: (x: number, y: number) => RGBAColor): void {
+    for (const [x, y] of COORD_BLANK) {
+      const { a } = getRgbaAt(x, y);
+      if (a !== 0)
+        throw new Error(
+          'Invalid pixels. Please check that you are conforming to the SZNouns glasses.png  standard.',
+        );
+    }
+
+    if (!isSingleColor(getRgbaAt, COORD_LEFT_FRAME))
+      throw new Error(
+        'Invalid left eye frame coloring. All pixels on the left eye frame of the glasses image must be of the same color. Check the constants.ts file for the relevant pixel coordinates.',
+      );
+
+    if (!isSingleColor(getRgbaAt, COORD_RIGHT_FRAME))
+      throw new Error(
+        'Invalid right eye frame coloring. All pixels on the right eye frame of the glasses image must be of the same color. Check the constants.ts file for the relevant pixel coordinates.',
+      );
+
+    if (!isSingleColor(getRgbaAt, COORD_BRIDGE_FRAME))
+      throw new Error(
+        'Invalid bridge frame coloring. All pixels on the bridge frame of the glasses image must be of the same color. Check the constants.ts file for the relevant pixel coordinates.',
+      );
+
+    if (!isSingleColor(getRgbaAt, COORD_EAR_FRAME))
+      throw new Error(
+        'Invalid ear frame coloring. All pixels on the ear frame of the glasses image must be of the same color. Check the constants.ts file for the relevant pixel coordinates.',
+      );
   }
 }
