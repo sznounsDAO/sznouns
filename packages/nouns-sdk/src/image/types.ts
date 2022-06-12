@@ -39,6 +39,12 @@ export interface DecodedImage {
   rects: [length: number, colorIndex: number][];
 }
 
+export interface DecodedGlasses {
+  paletteIndex: number;
+  isHalfMoon: number;
+  shapes: number[][];
+}
+
 export interface EncodedImage {
   filename: string;
   data: string;
