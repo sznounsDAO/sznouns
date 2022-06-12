@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-/// @title The szNouns ERC-721 token
+/// @title The SZNouns ERC-721 token
 
 /********************************************************************************
  * @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ *
@@ -28,7 +28,7 @@ import { IProxyRegistry } from './external/opensea/IProxyRegistry.sol';
 
 import { NounsToken } from './NounsToken.sol';
 
-contract szNounsToken is NounsToken {
+contract SZNounsToken is NounsToken {
     // The sznounders DAO address (creators org)
     address public sznoundersDAO;
     address public nounsDAO;
@@ -82,10 +82,10 @@ contract szNounsToken is NounsToken {
     }
 
     /**
-     * @notice Mint a szNoun to the minter, along with a possible
+     * @notice Mint a SZNoun to the minter, along with a possible
      * reward for:
-     *   - szNounder's reward (one per 50 minted)
-     *   - NounDAO reward (one per 20 minted)
+     *   - SZNounders' reward (one per 50 minted)
+     *   - NounsDAO reward (one per 20 minted)
      *   - sznsDAO reward (one per 20 minted)
      * @dev Call _mintTo with the to address(es).
      */

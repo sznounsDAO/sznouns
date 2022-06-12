@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-/// @title The szNouns DAO auction house
+/// @title The SZNouns DAO auction house
 
 // TODO(szns) pixel art
 /*********************************
@@ -17,7 +17,7 @@
  *********************************/
 
 // LICENSE
-// szNounsAuctionHouse.sol is a modified version NounsAuctionHouse.sol, which is a modified version of Zora's AuctionHouse.sol:
+// SZNounsAuctionHouse.sol is a modified version NounsAuctionHouse.sol, which is a modified version of Zora's AuctionHouse.sol:
 // https://github.com/ourzora/auction-house/blob/54a12ec1a6cf562e49f0a4917990474b11350a2d/contracts/AuctionHouse.sol
 //
 // AuctionHouse.sol source code Copyright Zora licensed under the GPL-3.0 license.
@@ -28,7 +28,7 @@ pragma solidity ^0.8.6;
 import { NounsAuctionHouse } from './NounsAuctionHouse.sol';
 import './libs/BokkyPooBahsDateTimeLibrary.sol';
 
-contract szNounsAuctionHouse is NounsAuctionHouse {
+contract SZNounsAuctionHouse is NounsAuctionHouse {
     enum SZN {
         WINTER,
         SPRING,

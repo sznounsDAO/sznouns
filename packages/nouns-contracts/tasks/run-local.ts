@@ -16,7 +16,7 @@ task(
     nounsDescriptor: contracts.NounsDescriptor.instance.address,
   });
 
-  await contracts.NounsAuctionHouse.instance
+  await contracts.SZNounsAuctionHouse.instance
     .attach(contracts.NounsAuctionHouseProxy.instance.address)
     .unpause({
       gasLimit: 1_000_000,
@@ -44,7 +44,7 @@ task(
     `Noun contracts deployed to local node at http://localhost:8545 (Chain ID: ${chainId})`,
   );
   console.log(`Auction House Proxy address: ${contracts.NounsAuctionHouseProxy.instance.address}`);
-  console.log(`Nouns ERC721 address: ${contracts.NounsToken.instance.address}`);
+  console.log(`Nouns ERC721 address: ${contracts.SZNounsToken.instance.address}`);
   console.log(`Nouns DAO Executor address: ${contracts.NounsDAOExecutor.instance.address}`);
   console.log(`Nouns DAO Proxy address: ${contracts.NounsDAOProxy.instance.address}`);
 

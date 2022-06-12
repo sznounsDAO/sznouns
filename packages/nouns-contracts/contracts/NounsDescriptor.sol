@@ -67,35 +67,35 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Get the number of available Noun `backgrounds`.
+     * @notice Get the number of available SZNoun `backgrounds`.
      */
     function backgroundCount() external view override returns (uint256) {
         return backgrounds.length;
     }
 
     /**
-     * @notice Get the number of available Noun `bodies`.
+     * @notice Get the number of available SZNoun `bodies`.
      */
     function bodyCount() external view override returns (uint256) {
         return bodies.length;
     }
 
     /**
-     * @notice Get the number of available Noun `accessories`.
+     * @notice Get the number of available SZNoun `accessories`.
      */
     function accessoryCount() external view override returns (uint256) {
         return accessories.length;
     }
 
     /**
-     * @notice Get the number of available Noun `heads`.
+     * @notice Get the number of available SZNoun `heads`.
      */
     function headCount() external view override returns (uint256) {
         return heads.length;
     }
 
     /**
-     * @notice Get the number of available Noun `glasses`.
+     * @notice Get the number of available SZNoun `glasses`.
      */
     function glassesCount() external view override returns (uint256) {
         return glasses.length;
@@ -113,7 +113,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Batch add Noun backgrounds.
+     * @notice Batch add SZNoun backgrounds.
      * @dev This function can only be called by the owner when not locked.
      */
     function addManyBackgrounds(string[] calldata _backgrounds) external override onlyOwner whenPartsNotLocked {
@@ -123,7 +123,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Batch add Noun bodies.
+     * @notice Batch add SZNoun bodies.
      * @dev This function can only be called by the owner when not locked.
      */
     function addManyBodies(bytes[] calldata _bodies) external override onlyOwner whenPartsNotLocked {
@@ -133,7 +133,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Batch add Noun accessories.
+     * @notice Batch add SZNoun accessories.
      * @dev This function can only be called by the owner when not locked.
      */
     function addManyAccessories(bytes[] calldata _accessories) external override onlyOwner whenPartsNotLocked {
@@ -143,7 +143,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Batch add Noun heads.
+     * @notice Batch add SZNoun heads.
      * @dev This function can only be called by the owner when not locked.
      */
     function addManyHeads(bytes[] calldata _heads) external override onlyOwner whenPartsNotLocked {
@@ -153,7 +153,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Batch add Noun glasses.
+     * @notice Batch add SZNoun glasses.
      * @dev This function can only be called by the owner when not locked.
      */
     function addManyGlasses(bytes[] calldata _glasses) external override onlyOwner whenPartsNotLocked {
@@ -172,7 +172,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Add a Noun background.
+     * @notice Add a SZNoun background.
      * @dev This function can only be called by the owner when not locked.
      */
     function addBackground(string calldata _background) external override onlyOwner whenPartsNotLocked {
@@ -180,7 +180,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Add a Noun body.
+     * @notice Add a SZNoun body.
      * @dev This function can only be called by the owner when not locked.
      */
     function addBody(bytes calldata _body) external override onlyOwner whenPartsNotLocked {
@@ -188,7 +188,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Add a Noun accessory.
+     * @notice Add a SZNoun accessory.
      * @dev This function can only be called by the owner when not locked.
      */
     function addAccessory(bytes calldata _accessory) external override onlyOwner whenPartsNotLocked {
@@ -196,7 +196,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Add a Noun head.
+     * @notice Add a SZNoun head.
      * @dev This function can only be called by the owner when not locked.
      */
     function addHead(bytes calldata _head) external override onlyOwner whenPartsNotLocked {
@@ -204,7 +204,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Add Noun glasses.
+     * @notice Add SZNoun glasses.
      * @dev This function can only be called by the owner when not locked.
      */
     function addGlasses(bytes calldata _glasses) external override onlyOwner whenPartsNotLocked {
@@ -212,7 +212,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Lock all Noun parts.
+     * @notice Lock all SZNoun parts.
      * @dev This cannot be reversed and can only be called by the owner when not locked.
      */
     function lockParts() external override onlyOwner whenPartsNotLocked {
@@ -246,7 +246,7 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Given a token ID and seed, construct a token URI for an official Nouns DAO noun.
+     * @notice Given a token ID and seed, construct a token URI for an official SZNouns DAO noun.
      * @dev The returned value may be a base64 encoded data URI or an API URL.
      */
     function tokenURI(uint256 tokenId, INounsSeeder.Seed memory seed) external view override returns (string memory) {
@@ -257,12 +257,12 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Given a token ID and seed, construct a base64 encoded data URI for an official Nouns DAO noun.
+     * @notice Given a token ID and seed, construct a base64 encoded data URI for an official SZNouns DAO noun.
      */
     function dataURI(uint256 tokenId, INounsSeeder.Seed memory seed) public view override returns (string memory) {
         string memory nounId = tokenId.toString();
-        string memory name = string(abi.encodePacked('Noun ', nounId));
-        string memory description = string(abi.encodePacked('Noun ', nounId, ' is a member of the Nouns DAO'));
+        string memory name = string(abi.encodePacked('SZNoun ', nounId));
+        string memory description = string(abi.encodePacked('SZNoun ', nounId, ' is a member of the SZNouns DAO'));
 
         return genericDataURI(name, description, seed);
     }
@@ -303,42 +303,42 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
     }
 
     /**
-     * @notice Add a Noun background.
+     * @notice Add a SZNoun background.
      */
     function _addBackground(string calldata _background) internal {
         backgrounds.push(_background);
     }
 
     /**
-     * @notice Add a Noun body.
+     * @notice Add a SZNoun body.
      */
     function _addBody(bytes calldata _body) internal {
         bodies.push(_body);
     }
 
     /**
-     * @notice Add a Noun accessory.
+     * @notice Add a SZNoun accessory.
      */
     function _addAccessory(bytes calldata _accessory) internal {
         accessories.push(_accessory);
     }
 
     /**
-     * @notice Add a Noun head.
+     * @notice Add a SZNoun head.
      */
     function _addHead(bytes calldata _head) internal {
         heads.push(_head);
     }
 
     /**
-     * @notice Add Noun glasses.
+     * @notice Add SZNoun glasses.
      */
     function _addGlasses(bytes calldata _glasses) internal {
         glasses.push(_glasses);
     }
 
     /**
-     * @notice Get all Noun parts for the passed `seed`.
+     * @notice Get all SZNoun parts for the passed `seed`.
      */
     function _getPartsForSeed(INounsSeeder.Seed memory seed) internal view returns (bytes[] memory) {
         bytes[] memory _parts = new bytes[](4);

@@ -7,8 +7,8 @@ import {
   NounsToken__factory as NounsTokenFactory,
   NounsSeeder,
   NounsSeeder__factory as NounsSeederFactory,
-  SzNounsToken,
-  SzNounsToken__factory as szNounsTokenFactory,
+  SZNounsToken,
+  SZNounsToken__factory as SZNounsTokenFactory,
   WETH,
   WETH__factory as WethFactory,
 } from '../typechain';
@@ -75,7 +75,7 @@ export const deployNounsToken = async (
   );
 };
 
-export const deploySzNounsToken = async (
+export const deploySZNounsToken = async (
   deployer?: SignerWithAddress,
   noundersDAO?: string,
   minter?: string,
@@ -84,9 +84,9 @@ export const deploySzNounsToken = async (
   descriptor?: string,
   seeder?: string,
   proxyRegistryAddress?: string,
-): Promise<SzNounsToken> => {
+): Promise<SZNounsToken> => {
   const signer = deployer || (await getSigners()).deployer;
-  const factory = new szNounsTokenFactory(signer);
+  const factory = new SZNounsTokenFactory(signer);
 
   return factory.deploy(
     noundersDAO || signer.address,
