@@ -30,7 +30,8 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
   .addOptionalParam(
     'auctionTimeBuffer',
     'The auction time buffer (seconds)',
-    5 * 60 /* 5 minutes */,
+    // 5 * 60 /* 5 minutes */,
+    15 /* 15 sec temp for testing*/,
     types.int,
   )
   .addOptionalParam(
@@ -48,25 +49,29 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
   .addOptionalParam(
     'auctionDuration',
     'The auction duration (seconds)',
-    60 * 5 /* 5 minutes */,
+    // 60 * 5 /* 5 minutes */,
+    60 * 1 /* 1 minute */,
     types.int,
   )
   .addOptionalParam(
     'timelockDelay',
     'The timelock delay (seconds)',
-    60 * 60 * 24 * 2 /* 2 days */,
+    // 60 * 60 * 24 * 2 /* 2 days */,
+    60 * 10 /* 10 minutes temp for testing */,
     types.int,
   )
   .addOptionalParam(
     'votingPeriod',
     'The voting period (blocks)',
-    Math.round(4 * 60 * 24 * (60 / 13)) /* 4 days (13s blocks) */,
+    // Math.round(4 * 60 * 24 * (60 / 13)) /* 4 days (13s blocks) */,
+    Math.round(10 * (60 / 13)) /* 10 minutes temp for testing */,
     types.int,
   )
   .addOptionalParam(
     'votingDelay',
     'The voting delay (blocks)',
-    Math.round(3 * 60 * 24 * (60 / 13)) /* 3 days (13s blocks) */,
+    // Math.round(3 * 60 * 24 * (60 / 13)) /* 3 days (13s blocks) */,
+    Math.round(5 * (60 / 13)) /* 5 minutes temp for testing */,
     types.int,
   )
   .addOptionalParam(
