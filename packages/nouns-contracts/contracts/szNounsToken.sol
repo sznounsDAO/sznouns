@@ -7,13 +7,13 @@
  * @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ *
  * @@@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@@@@@@@@@@@@ *
  * @@@@@@@@@@@               @@@@@@@@@@@@@@               @@@@@@@@@@@@@@@@@@@@@ *
- * @@@@@@@@@     @@@@@////      @@@@@@@@@      @@@@////      @@@@@@@@@@@@@@@@@@ *
- * @@@@@@@     @@@@@@@//////     @@@@@@     @@@@@@@//////     @@@@@@@@@@@@@@@@@ *
- * @@@@@@     @@@@@@@@////////             @@@@@@@@////////                 @@@ *
- * @@@@@@    @@@@@@@@@////////    @@@@    @@@@@@@@@////////    @@@@@@@@     @@@ *
- * @@@@@@@    @@@@@@@@///////     @@@@     @@@@@@@@///////     @@@@@@@@     @@@ *
- * @@@@@@@@    @@@@@@@//////     @@@@@@     @@@@@@@//////     @@@@@@@@@     @@@ *
- * @@@@@@@@@      @@@@///      @@@@@@@@@@      @@@@///      @@@@@@@@@@@     @@@ *
+ * @@@@@@@@@     \\\\@@@@@      @@@@@@@@@     \\\\@@@@      @@@@@@@@@@@@@@@@@@@ *
+ * @@@@@@@     \\\\\\@@@@@@@     @@@@@@     \\\\\\@@@@@@@     @@@@@@@@@@@@@@@@@ *
+ * @@@@@@     \\\\\\\@@@@@@@@              \\\\\\\@@@@@@@@                  @@@ *
+ * @@@@@@    \\\\\\\\@@@@@@@@@    @@@@    \\\\\\\\@@@@@@@@@    @@@@@@@@     @@@ *
+ * @@@@@@@    \\\\\\\@@@@@@@@     @@@@     \\\\\\\@@@@@@@@     @@@@@@@@     @@@ *
+ * @@@@@@@@    \\\\\\@@@@@@@     @@@@@@     \\\\\\@@@@@@@     @@@@@@@@@     @@@ *
+ * @@@@@@@@@      \\\@@@@      @@@@@@@@@@      \\\@@@@      @@@@@@@@@@@     @@@ *
  * @@@@@@@@@@@@              @@@@@@@@@@@@@@@              @@@@@@@@@@@@@@@@@@@@@ *
  * @@@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@@@@ *
  * @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ *
@@ -29,6 +29,8 @@ import { IProxyRegistry } from './external/opensea/IProxyRegistry.sol';
 import { NounsToken } from './NounsToken.sol';
 
 contract szNounsToken is NounsToken {
+    // The sznounders DAO address (creators org)
+    address public sznoundersDAO;
     address public nounsDAO;
     address public sznsDAO;
 
@@ -38,23 +40,32 @@ contract szNounsToken is NounsToken {
     event sznsDAOUpdated(address sznsDAO);
 
     constructor(
-        address _noundersDAO,
+        address _sznoundersDAO,
         address _minter,
         INounsDescriptor _descriptor,
         INounsSeeder _seeder,
         IProxyRegistry _proxyRegistry,
         address _nounsDAO,
         address _sznsDAO
-    ) NounsToken(_noundersDAO, _minter, _descriptor, _seeder, _proxyRegistry) {
+    ) NounsToken(_sznoundersDAO, _minter, _descriptor, _seeder, _proxyRegistry) {
+        sznoundersDAO = _sznoundersDAO;
         nounsDAO = _nounsDAO;
         sznsDAO = _sznsDAO;
+    }
+
+    /**
+     * @notice Require that the sender is the nounders DAO.
+     */
+    modifier onlySZNoundersDAO() {
+        require(msg.sender == sznoundersDAO, 'Sender is not the nounders DAO');
+        _;
     }
 
     /**
      * @notice Set the Nouns DAO.
      * @dev Only callable by the nounders DAO when not locked.
      */
-    function setNounsDAO(address _nounsDAO) external onlyNoundersDAO {
+    function setNounsDAO(address _nounsDAO) external onlySZNoundersDAO {
         nounsDAO = _nounsDAO;
 
         emit NounsDAOUpdated(_nounsDAO);
@@ -64,7 +75,7 @@ contract szNounsToken is NounsToken {
      * @notice Set the szns DAO.
      * @dev Only callable by the nounders DAO when not locked.
      */
-    function setSznsDAO(address _sznsDAO) external onlyNoundersDAO {
+    function setSznsDAO(address _sznsDAO) external onlySZNoundersDAO {
         sznsDAO = _sznsDAO;
 
         emit sznsDAOUpdated(_sznsDAO);
@@ -83,7 +94,7 @@ contract szNounsToken is NounsToken {
         // (Nouns and Lilnouns do this)
         // Could also make these params adjustable by gov
         if (_currentNounId % 50 == 0) {
-            _mintTo(noundersDAO, _currentNounId++);
+            _mintTo(sznoundersDAO, _currentNounId++);
         }
         if (_currentNounId % 20 == 1) {
             _mintTo(nounsDAO, _currentNounId++);
