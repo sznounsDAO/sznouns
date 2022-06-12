@@ -3,7 +3,6 @@ import { ChainId, ContractDeployment, ContractName, DeployedContract } from './t
 import { Interface } from 'ethers/lib/utils';
 import { task, types } from 'hardhat/config';
 import promptjs from 'prompt';
-import { TASK_COMPILE_SOLIDITY_LOG_NOTHING_TO_COMPILE } from 'hardhat/builtin-tasks/task-names';
 
 promptjs.colors = false;
 promptjs.message = '> ';
