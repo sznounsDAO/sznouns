@@ -1,6 +1,8 @@
 import {
   NounsTokenFactory,
+  SZNounsTokenFactory,
   NounsAuctionHouseFactory,
+  SZNounsAuctionHouseFactory,
   NounsDescriptorFactory,
   NounsSeederFactory,
   NounsDaoLogicV1Factory,
@@ -8,10 +10,12 @@ import {
 
 export interface ContractAddresses {
   nounsToken: string;
+  SZNounsToken: string;
   nounsSeeder: string;
   nounsDescriptor: string;
   nftDescriptor: string;
   nounsAuctionHouse: string;
+  SZNounsAuctionHouse: string;
   nounsAuctionHouseProxy: string;
   nounsAuctionHouseProxyAdmin: string;
   nounsDaoExecutor: string;
@@ -21,7 +25,9 @@ export interface ContractAddresses {
 
 export interface Contracts {
   nounsTokenContract: ReturnType<typeof NounsTokenFactory.connect>;
+  SZNounsTokenContract: ReturnType<typeof SZNounsTokenFactory.connect>;
   nounsAuctionHouseContract: ReturnType<typeof NounsAuctionHouseFactory.connect>;
+  SZNounsAuctionHouseContract: ReturnType<typeof SZNounsAuctionHouseFactory.connect>;
   nounsDescriptorContract: ReturnType<typeof NounsDescriptorFactory.connect>;
   nounsSeederContract: ReturnType<typeof NounsSeederFactory.connect>;
   nounsDaoContract: ReturnType<typeof NounsDaoLogicV1Factory.connect>;

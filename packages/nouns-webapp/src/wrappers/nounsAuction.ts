@@ -1,6 +1,6 @@
 import { useContractCall } from '@usedapp/core';
 import { BigNumber as EthersBN, utils } from 'ethers';
-import { NounsAuctionHouseABI } from '@nouns/sdk';
+import { SZNounsAuctionHouseABI } from '@nouns/sdk';
 import config from '../config';
 import BigNumber from 'bignumber.js';
 import { isNounderNoun } from '../utils/nounderNoun';
@@ -25,7 +25,7 @@ export interface Auction {
   settled: boolean;
 }
 
-const abi = new utils.Interface(NounsAuctionHouseABI);
+const abi = new utils.Interface(SZNounsAuctionHouseABI);
 
 export const useAuction = (auctionHouseProxyAddress: string) => {
   const auction = useContractCall<Auction>({

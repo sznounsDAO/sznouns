@@ -10,7 +10,7 @@ import { Spinner, InputGroup, FormControl, Button, Col } from 'react-bootstrap';
 import { useAuctionMinBidIncPercentage } from '../../wrappers/nounsAuction';
 import { useAppDispatch } from '../../hooks';
 import { AlertModal, setAlertModal } from '../../state/slices/application';
-import { NounsAuctionHouseFactory } from '@nouns/sdk';
+import { SZNounsAuctionHouseFactory } from '@nouns/sdk';
 import config from '../../config';
 import WalletConnectModal from '../WalletConnectModal';
 import SettleManuallyBtn from '../SettleManuallyBtn';
@@ -53,7 +53,7 @@ const Bid: React.FC<{
   const { library } = useEthers();
   let { auction, auctionEnded } = props;
   const activeLocale = useActiveLocale();
-  const nounsAuctionHouseContract = new NounsAuctionHouseFactory().attach(
+  const nounsAuctionHouseContract = new SZNounsAuctionHouseFactory().attach(
     config.addresses.nounsAuctionHouseProxy,
   );
 

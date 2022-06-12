@@ -1,4 +1,5 @@
 import { default as NounsAuctionHouseABI } from '../abi/contracts/NounsAuctionHouse.sol/NounsAuctionHouse.json';
+import { default as SZNounsAuctionHouseABI } from '../abi/contracts/SZNounsAuctionHouse.sol/SZNounsAuctionHouse.json';
 import { ChainId, ContractDeployment, ContractName, DeployedContract } from './types';
 import { Interface } from 'ethers/lib/utils';
 import { task, types } from 'hardhat/config';
@@ -157,7 +158,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
           () => deployment.SZNounsAuctionHouse.address,
           () => deployment.NounsAuctionHouseProxyAdmin.address,
           () =>
-            new Interface(NounsAuctionHouseABI).encodeFunctionData('initialize', [
+            new Interface(SZNounsAuctionHouseABI).encodeFunctionData('initialize', [
               deployment.SZNounsToken.address,
               args.weth,
               args.auctionTimeBuffer,

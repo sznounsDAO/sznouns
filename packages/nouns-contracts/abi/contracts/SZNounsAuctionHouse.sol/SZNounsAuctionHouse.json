@@ -248,8 +248,59 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "enum SZNounsAuctionHouse.SZN",
+        "name": "szn",
+        "type": "uint8"
+      }
+    ],
+    "name": "getDefaultDuration",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getDuration",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getSzn",
+    "outputs": [
+      {
+        "internalType": "enum SZNounsAuctionHouse.SZN",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum SZNounsAuctionHouse.SZN",
+        "name": "szn",
+        "type": "uint8"
+      }
+    ],
+    "name": "getSznDuration",
     "outputs": [
       {
         "internalType": "uint256",
@@ -375,6 +426,24 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum SZNounsAuctionHouse.SZN",
+        "name": "szn",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "duration",
+        "type": "uint256"
+      }
+    ],
+    "name": "setDuration",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

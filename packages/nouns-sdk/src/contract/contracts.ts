@@ -1,6 +1,8 @@
 import {
   NounsTokenFactory,
+  SZNounsTokenFactory,
   NounsAuctionHouseFactory,
+  SZNounsAuctionHouseFactory,
   NounsDescriptorFactory,
   NounsSeederFactory,
   NounsDaoLogicV1Factory,
@@ -28,7 +30,15 @@ export const getContractsForChainOrThrow = (
       addresses.nounsToken,
       signerOrProvider as Signer | Provider,
     ),
+    SZNounsTokenContract: SZNounsTokenFactory.connect(
+      addresses.SZNounsToken,
+      signerOrProvider as Signer | Provider,
+    ),
     nounsAuctionHouseContract: NounsAuctionHouseFactory.connect(
+      addresses.nounsAuctionHouseProxy,
+      signerOrProvider as Signer | Provider,
+    ),
+    SZNounsAuctionHouseContract: SZNounsAuctionHouseFactory.connect(
       addresses.nounsAuctionHouseProxy,
       signerOrProvider as Signer | Provider,
     ),
