@@ -115,7 +115,7 @@ const Documentation = () => {
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2" className={classes.accordionItem}>
-            <Accordion.Header className={classes.accordionHeader}>Nouns DAO</Accordion.Header>
+            <Accordion.Header className={classes.accordionHeader}>SZNouns DAO</Accordion.Header>
             <Accordion.Body>
               Like the Nouns DAO, SZNouns DAO utilizes a fork of {compoundGovLink} and is the main
               governing body of the SZNouns ecosystem. The SZNouns DAO treasury receives 100% of ETH
@@ -187,7 +187,7 @@ const Documentation = () => {
           </Accordion.Item>
           <Accordion.Item eventKey="6" className={classes.accordionItem}>
             <Accordion.Header className={classes.accordionHeader}>
-              Noun Seeder Contract
+              SZNoun Seeder Contract
             </Accordion.Header>
             <Accordion.Body>
               <p>
@@ -207,7 +207,7 @@ const Documentation = () => {
           </Accordion.Item>
           <Accordion.Item eventKey="7" className={classes.accordionItem}>
             <Accordion.Header className={classes.accordionHeader}>
-              Nounder's Reward
+              SZNounder's Reward
             </Accordion.Header>
             <Accordion.Body>
               <p>
