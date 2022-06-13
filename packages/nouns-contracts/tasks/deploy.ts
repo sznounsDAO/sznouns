@@ -145,10 +145,10 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
       SZNounsToken: {
         args: [
           args.noundersdao, // sznoundersdao; defaults to deployer address
-          expectedAuctionHouseProxyAddress,
-          () => deployment.NounsDescriptor.address,
-          () => NounsSeederAddress,
-          proxyRegistryAddress,
+          expectedAuctionHouseProxyAddress, // minter
+          () => deployment.NounsDescriptor.address, // descriptor
+          () => NounsSeederAddress, // seeder
+          proxyRegistryAddress, // proxyRegistry
           args.noundersdao, // nounsdao
           args.noundersdao, // sznsdao
         ],
@@ -160,16 +160,16 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
       // NounsAuctionHouseProxy: {
       NounsAuctionHouseProxy: {
         args: [
-          () => deployment.SZNounsAuctionHouse.address,
-          () => deployment.NounsAuctionHouseProxyAdmin.address,
+          () => deployment.SZNounsAuctionHouse.address, // logic contract address
+          () => deployment.NounsAuctionHouseProxyAdmin.address, // admin address
           () =>
             new Interface(SZNounsAuctionHouseABI).encodeFunctionData('initialize', [
-              deployment.SZNounsToken.address,
-              args.weth,
-              args.auctionTimeBuffer,
-              args.auctionReservePrice,
-              args.auctionMinIncrementBidPercentage,
-              args.auctionDuration,
+              deployment.SZNounsToken.address, // nouns token address
+              args.weth, // weth token address
+              args.auctionTimeBuffer, // timeBuffer
+              args.auctionReservePrice, // reservePrice 
+              args.auctionMinIncrementBidPercentage, // minBidIncrementPercentage
+              args.auctionDuration, // duration
             ]),
         ],
         waitForConfirmation: true,
@@ -191,15 +191,15 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
       },
       NounsDAOProxy: {
         args: [
-          () => deployment.NounsDAOExecutor.address,
-          () => deployment.SZNounsToken.address,
-          args.noundersdao,
-          () => deployment.NounsDAOExecutor.address,
-          () => deployment.NounsDAOLogicV1.address,
-          args.votingPeriod,
-          args.votingDelay,
-          args.proposalThresholdBps,
-          args.quorumVotesBps,
+          () => deployment.NounsDAOExecutor.address, // timelock address
+          () => deployment.SZNounsToken.address, // nouns address
+          args.noundersdao, // vetoer address
+          () => deployment.NounsDAOExecutor.address, // admin address
+          () => deployment.NounsDAOLogicV1.address, // implementation address
+          args.votingPeriod, // votingPeriod
+          args.votingDelay, // votingDelay
+          args.proposalThresholdBps, // proposalThresholdBPS
+          args.quorumVotesBps, // quorumVotesBPS
         ],
         waitForConfirmation: true,
         validateDeployment: () => {
