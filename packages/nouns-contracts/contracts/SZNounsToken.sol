@@ -94,7 +94,7 @@ contract SZNounsToken is NounsToken {
         // Could also make these params adjustable by gov
         if (_currentNounId % 20 == 0) {
             _mintTo(sznoundersDAO, _currentNounId++);
-            _mintTo(sznsDAO, _currentNounId++);
+            _mintTo(nounsDAO, _currentNounId++);
         }
         return _mintTo(minter, _currentNounId++);
     }
