@@ -8,9 +8,11 @@ import { Auction as IAuction } from '../../wrappers/nounsAuction';
 import classes from './Auction.module.css';
 import { INounSeed } from '../../wrappers/nounToken';
 import NounderNounContent from '../NounderNounContent';
+import NounsDAONounContent from '../NounsDAONounContent';
 import { useHistory } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { isNounderNoun } from '../../utils/nounderNoun';
+import { isNounsDAONoun } from '../../utils/nounsDAONoun';
 import {
   setNextOnDisplayAuctionNounId,
   setPrevOnDisplayAuctionNounId,
@@ -78,6 +80,15 @@ const Auction: React.FC<AuctionProps> = props => {
       onNextAuctionClick={nextAuctionHandler}
     />
   );
+  const nounsDAONounContent = currentAuction && lastNounId && (
+    <NounsDAONounContent
+      mintTimestamp={currentAuction.startTime}
+      nounId={currentAuction.nounId}
+      isLastAuction={currentAuction.nounId.eq(lastNounId)}
+      onPrevAuctionClick={prevAuctionHandler}
+      onNextAuctionClick={nextAuctionHandler}
+    />
+  );
 
   return (
     <div style={{ backgroundColor: stateBgColor }} className={classes.wrapper}>
@@ -90,6 +101,8 @@ const Auction: React.FC<AuctionProps> = props => {
             {currentAuction &&
               (isNounderNoun(currentAuction.nounId)
                 ? nounderNounContent
+                : isNounsDAONoun(currentAuction.nounId)
+                ? nounsDAONounContent
                 : currentAuctionActivityContent)}
           </Col>
         </Row>

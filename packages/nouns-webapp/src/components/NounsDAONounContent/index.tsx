@@ -6,7 +6,7 @@ import AuctionActivityNounTitle from '../AuctionActivityNounTitle';
 import AuctionActivityDateHeadline from '../AuctionActivityDateHeadline';
 import AuctionTitleAndNavWrapper from '../AuctionTitleAndNavWrapper';
 import { Link } from 'react-router-dom';
-import nounContentClasses from './NounderNounContent.module.css';
+import nounContentClasses from './NounsDAONounContent.module.css';
 import auctionBidClasses from '../AuctionActivity/BidHistory.module.css';
 import bidBtnClasses from '../BidHistoryBtn/BidHistoryBtn.module.css';
 import auctionActivityClasses from '../AuctionActivity/AuctionActivity.module.css';
@@ -15,22 +15,14 @@ import Winner from '../Winner';
 
 import { useAppSelector } from '../../hooks';
 
-const NounderNounContent: React.FC<{
+const NounsDAONounContent: React.FC<{
   mintTimestamp: BigNumber;
   nounId: BigNumber;
-  isFirstAuction: boolean;
   isLastAuction: boolean;
   onPrevAuctionClick: () => void;
   onNextAuctionClick: () => void;
 }> = props => {
-  const {
-    mintTimestamp,
-    nounId,
-    isFirstAuction,
-    isLastAuction,
-    onPrevAuctionClick,
-    onNextAuctionClick,
-  } = props;
+  const { mintTimestamp, nounId, isLastAuction, onPrevAuctionClick, onNextAuctionClick } = props;
 
   const isCool = useAppSelector(state => state.application.isCoolBackground);
 
@@ -40,7 +32,7 @@ const NounderNounContent: React.FC<{
         <Row className={auctionActivityClasses.activityRow}>
           <AuctionTitleAndNavWrapper>
             <AuctionNavigation
-              isFirstAuction={isFirstAuction}
+              isFirstAuction={false}
               isLastAuction={isLastAuction}
               onNextAuctionClick={onNextAuctionClick}
               onPrevAuctionClick={onPrevAuctionClick}
@@ -74,14 +66,12 @@ const NounderNounContent: React.FC<{
                 ` ${nounContentClasses.bidRow}`
               }
             >
-              All Noun auction proceeds are sent to the{' '}
-              <Link to="/vote" className={nounContentClasses.link}>
-                SZNouns DAO
-              </Link>
-              . For this reason, we, the project's founders (SZNounders) have chosen to compensate
-              ourselves with Nouns. Every 20th Noun for the first 5 years of the project will be
-              sent to our multisig, where it will be vested and distributed to individual
-              SZNounders.
+              As we aspire to become the most premier subDAO for the Nouns ecosystem, SZNounders
+              have chosen to compensate the Nouns DAO with SZNouns, for being selfless stewards of
+              cc0 and open-source. Every 19th SZNoun for the first 5 years of the project will be
+              automatically sent to the Nouns DAO to be vested and shared among members of the
+              project. This is equivalent to approximately 5% of total supply in the first five
+              years.
             </li>
           </ul>
           <div
@@ -90,7 +80,7 @@ const NounderNounContent: React.FC<{
             }
           >
             <Link
-              to="/nounders"
+              to="https://nouns.wtf"
               className={isCool ? bidBtnClasses.bidHistoryCool : bidBtnClasses.bidHistoryWarm}
             >
               Learn more →
@@ -101,4 +91,4 @@ const NounderNounContent: React.FC<{
     </AuctionActivityWrapper>
   );
 };
-export default NounderNounContent;
+export default NounsDAONounContent;

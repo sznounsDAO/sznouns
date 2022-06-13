@@ -129,7 +129,7 @@ const NoundersPage = () => {
   return (
     <Section fullWidth={true} className={classes.noundersPage}>
       <Col lg={{ span: 6, offset: 3 }}>
-        <h2 style={{ marginBottom: '2rem' }}>The Nounders</h2>
+        <h2 style={{ marginBottom: '2rem' }}>The SZNounders</h2>
         <h3 style={{ marginBottom: '2rem' }}>3.5 artists, 6.5 technologists</h3>
         <Row style={{ marginBottom: '0rem' }}>
           <BioCards min={0} max={5} />
@@ -142,7 +142,7 @@ const NoundersPage = () => {
           20th SZNoun for the first 5 years of the project will be sent to our multisig, where it
           will be vested and distributed to individual SZNounders.
         </p>
-        <p style={{ textAlign: 'justify' }}>
+        <p style={{ textAlign: 'justify', paddingBottom: '2rem' }}>
           The SZNounders reward is intended as compensation for our pre and post-launch
           contributions to the project, and to help us participate meaningfully in governance as the
           project matures. After 5 years, the SZNounders could receive up to 5% of the SZNouns
