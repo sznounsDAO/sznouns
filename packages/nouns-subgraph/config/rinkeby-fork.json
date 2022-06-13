@@ -1,15 +1,15 @@
 {
   "network": "rinkeby",
   "nounsToken": {
-    "address": "0x62d6ac8491D590Dc670a33c3972981877e6f4a40",
-    "startBlock": 10807954
+    "address": "0x994216734f1223AdCD14c3612B4b46694727dE49",
+    "startBlock": 10842098
   },
   "nounsAuctionHouse": {
-    "address": "0xe8060BE0702409645AB660CCc915d7459D092373",
-    "startBlock": 10807955
+    "address": "0xB91bDE59d755a195aF13d39f9EbC4E0661f047CB",
+    "startBlock": 10842098
   },
   "nounsDAO": {
-    "address": "0xa78b2cFcf24c96297C98E86B3A7df2275F5131F1",
-    "startBlock": 10807957
+    "address": "0xcb8a75DC9BAA5609ceF05338AeAcB1e6fbCE470F",
+    "startBlock": 10842098
   }
 }
