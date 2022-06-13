@@ -28,7 +28,7 @@ const getTranslatedVoteCopyFromString = (proposalVote: string) => {
   if (proposalVote === 'Against') {
     return `You voted against this proposal`;
   }
-  return `You Abstained from this proposal`;
+  return `You abstained from this proposal`;
 };
 
 const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
