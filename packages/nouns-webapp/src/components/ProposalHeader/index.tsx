@@ -23,12 +23,12 @@ interface ProposalHeaderProps {
 
 const getTranslatedVoteCopyFromString = (proposalVote: string) => {
   if (proposalVote === 'For') {
-    return `You voted ${(<strong>For</strong>)} this proposal`;
+    return `You voted for this proposal`;
   }
   if (proposalVote === 'Against') {
-    return `You voted ${(<strong>Against</strong>)} this proposal`;
+    return `You voted against this proposal`;
   }
-  return `You ${(<strong>Abstained</strong>)} from this proposal`;
+  return `You Abstained from this proposal`;
 };
 
 const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
