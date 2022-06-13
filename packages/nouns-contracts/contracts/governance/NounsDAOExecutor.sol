@@ -60,7 +60,7 @@ contract NounsDAOExecutor {
     );
 
     uint256 public constant GRACE_PERIOD = 14 days;
-    uint256 public constant MINIMUM_DELAY = 2 days;
+    uint256 public constant MINIMUM_DELAY = 1 seconds; // TODO(szns): revert this change to 2 days
     uint256 public constant MAXIMUM_DELAY = 30 days;
 
     address public admin;
