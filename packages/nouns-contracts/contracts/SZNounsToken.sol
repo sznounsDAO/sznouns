@@ -84,20 +84,16 @@ contract SZNounsToken is NounsToken {
     /**
      * @notice Mint a SZNoun to the minter, along with a possible
      * reward for:
-     *   - SZNounders' reward (one per 50 minted)
+     *   - SZNounders' reward (one per 20 minted)
      *   - NounsDAO reward (one per 20 minted)
-     *   - sznsDAO reward (one per 20 minted)
      * @dev Call _mintTo with the to address(es).
      */
     function mint() public override onlyMinter returns (uint256) {
         // TODO(szns) should rewards stop after a certain number minted?
         // (Nouns and Lilnouns do this)
         // Could also make these params adjustable by gov
-        if (_currentNounId % 50 == 0) {
+        if (_currentNounId % 20 == 0) {
             _mintTo(sznoundersDAO, _currentNounId++);
-        }
-        if (_currentNounId % 20 == 1) {
-            _mintTo(nounsDAO, _currentNounId++);
             _mintTo(sznsDAO, _currentNounId++);
         }
         return _mintTo(minter, _currentNounId++);
