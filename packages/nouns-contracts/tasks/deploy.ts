@@ -1,4 +1,5 @@
 import { default as NounsAuctionHouseABI } from '../abi/contracts/NounsAuctionHouse.sol/NounsAuctionHouse.json';
+import { default as SZNounsAuctionHouseABI } from '../abi/contracts/SZNounsAuctionHouse.sol/SZNounsAuctionHouse.json';
 import { ChainId, ContractDeployment, ContractName, DeployedContract } from './types';
 import { Interface } from 'ethers/lib/utils';
 import { task, types } from 'hardhat/config';
@@ -19,8 +20,8 @@ const wethContracts: Record<number, string> = {
   [ChainId.Kovan]: '0xd0a1e359811322d97991e03f863a0c30c2cf029c',
 };
 
-const AUCTION_HOUSE_PROXY_NONCE_OFFSET = 6;
-const GOVERNOR_N_DELEGATOR_NONCE_OFFSET = 9;
+const AUCTION_HOUSE_PROXY_NONCE_OFFSET = 5; // 6 - 1
+const GOVERNOR_N_DELEGATOR_NONCE_OFFSET = 8; // 9 - 1
 
 task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsToken')
   .addFlag('autoDeploy', 'Deploy all contracts without user interaction')
@@ -29,7 +30,8 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
   .addOptionalParam(
     'auctionTimeBuffer',
     'The auction time buffer (seconds)',
-    5 * 60 /* 5 minutes */,
+    // 5 * 60 /* 5 minutes */,
+    15 /* 15 sec temp for testing*/,
     types.int,
   )
   .addOptionalParam(
@@ -47,25 +49,29 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
   .addOptionalParam(
     'auctionDuration',
     'The auction duration (seconds)',
-    60 * 5 /* 5 minutes */,
+    // 60 * 5 /* 5 minutes */,
+    60 * 1 /* 1 minute */,
     types.int,
   )
   .addOptionalParam(
     'timelockDelay',
     'The timelock delay (seconds)',
-    60 * 60 * 24 * 2 /* 2 days */,
+    // 60 * 60 * 24 * 2 /* 2 days */,
+    60 * 10 /* 10 minutes temp for testing */,
     types.int,
   )
   .addOptionalParam(
     'votingPeriod',
     'The voting period (blocks)',
-    Math.round(4 * 60 * 24 * (60 / 13)) /* 4 days (13s blocks) */,
+    // Math.round(4 * 60 * 24 * (60 / 13)) /* 4 days (13s blocks) */,
+    Math.round(10 * (60 / 13)) /* 10 minutes temp for testing */,
     types.int,
   )
   .addOptionalParam(
     'votingDelay',
     'The voting delay (blocks)',
-    Math.round(3 * 60 * 24 * (60 / 13)) /* 3 days (13s blocks) */,
+    // Math.round(3 * 60 * 24 * (60 / 13)) /* 3 days (13s blocks) */,
+    Math.round(5 * (60 / 13)) /* 5 minutes temp for testing */,
     types.int,
   )
   .addOptionalParam(
@@ -108,6 +114,8 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     }
 
     const nonce = await deployer.getTransactionCount();
+    // The following two `getContractAddress` calls get the expected contract addresses,
+    // given contract address generation is relatively deterministic (provided contract + from + nonce remain the same)
     const expectedAuctionHouseProxyAddress = ethers.utils.getContractAddress({
       from: deployer.address,
       nonce: nonce + AUCTION_HOUSE_PROXY_NONCE_OFFSET,
@@ -120,6 +128,11 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
       ContractName,
       DeployedContract
     >;
+
+    // Use references to existing contracts
+    // Mainnet and Rinkeby contracts respectively
+    const NounsSeederAddress = network.chainId == 1 ? '0xCC8a0FB5ab3C7132c1b2A0109142Fb112c4Ce515' : '0x8D88a3DA5A4837b41e154BA7ed1E754d53E85b11';
+
     const contracts: Record<ContractName, ContractDeployment> = {
       NFTDescriptor: {},
       NounsDescriptor: {
@@ -127,32 +140,36 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
           NFTDescriptor: deployment.NFTDescriptor.address,
         }),
       },
-      NounsSeeder: {},
-      NounsToken: {
+      // NOTE: NounsSeeder deployment not needed as this logic remains the same
+      // NounsSeeder: {},
+      SZNounsToken: {
         args: [
-          args.noundersdao,
-          expectedAuctionHouseProxyAddress,
-          () => deployment.NounsDescriptor.address,
-          () => deployment.NounsSeeder.address,
-          proxyRegistryAddress,
+          args.noundersdao, // sznoundersdao; defaults to deployer address
+          expectedAuctionHouseProxyAddress, // minter
+          () => deployment.NounsDescriptor.address, // descriptor
+          () => NounsSeederAddress, // seeder
+          proxyRegistryAddress, // proxyRegistry
+          args.noundersdao, // nounsdao
+          args.noundersdao, // sznsdao
         ],
       },
-      NounsAuctionHouse: {
+      SZNounsAuctionHouse: {
         waitForConfirmation: true,
       },
       NounsAuctionHouseProxyAdmin: {},
+      // NounsAuctionHouseProxy: {
       NounsAuctionHouseProxy: {
         args: [
-          () => deployment.NounsAuctionHouse.address,
-          () => deployment.NounsAuctionHouseProxyAdmin.address,
+          () => deployment.SZNounsAuctionHouse.address, // logic contract address
+          () => deployment.NounsAuctionHouseProxyAdmin.address, // admin address
           () =>
-            new Interface(NounsAuctionHouseABI).encodeFunctionData('initialize', [
-              deployment.NounsToken.address,
-              args.weth,
-              args.auctionTimeBuffer,
-              args.auctionReservePrice,
-              args.auctionMinIncrementBidPercentage,
-              args.auctionDuration,
+            new Interface(SZNounsAuctionHouseABI).encodeFunctionData('initialize', [
+              deployment.SZNounsToken.address, // nouns token address
+              args.weth, // weth token address
+              args.auctionTimeBuffer, // timeBuffer
+              args.auctionReservePrice, // reservePrice 
+              args.auctionMinIncrementBidPercentage, // minBidIncrementPercentage
+              args.auctionDuration, // duration
             ]),
         ],
         waitForConfirmation: true,
@@ -174,15 +191,15 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
       },
       NounsDAOProxy: {
         args: [
-          () => deployment.NounsDAOExecutor.address,
-          () => deployment.NounsToken.address,
-          args.noundersdao,
-          () => deployment.NounsDAOExecutor.address,
-          () => deployment.NounsDAOLogicV1.address,
-          args.votingPeriod,
-          args.votingDelay,
-          args.proposalThresholdBps,
-          args.quorumVotesBps,
+          () => deployment.NounsDAOExecutor.address, // timelock address
+          () => deployment.SZNounsToken.address, // nouns address
+          args.noundersdao, // vetoer address
+          () => deployment.NounsDAOExecutor.address, // admin address
+          () => deployment.NounsDAOLogicV1.address, // implementation address
+          args.votingPeriod, // votingPeriod
+          args.votingDelay, // votingDelay
+          args.proposalThresholdBps, // proposalThresholdBPS
+          args.quorumVotesBps, // quorumVotesBPS
         ],
         waitForConfirmation: true,
         validateDeployment: () => {

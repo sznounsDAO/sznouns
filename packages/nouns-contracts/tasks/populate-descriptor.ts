@@ -38,13 +38,13 @@ task('populate-descriptor', 'Populates the descriptor with color palettes and No
     const accessoryChunk = chunkArray(accessories, 10);
     for (const chunk of accessoryChunk) {
       await descriptorContract.addManyAccessories(chunk.map(({ data }) => data));
-      await sleep(1000);
+      await sleep(500);
     }
 
     const headChunk = chunkArray(heads, 10);
     for (const chunk of headChunk) {
       await descriptorContract.addManyHeads(chunk.map(({ data }) => data));
-      await sleep(1000);
+      await sleep(500);
     }
 
     await descriptorContract.addManyGlasses(glasses.map(({ data }) => data));

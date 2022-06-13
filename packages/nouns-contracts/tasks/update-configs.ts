@@ -15,11 +15,11 @@ task('update-configs', 'Write the deployed addresses to the SDK and subgraph con
       const addressesPath = join(sdkPath, 'src/contract/addresses.json');
       const addresses = JSON.parse(readFileSync(addressesPath, 'utf8'));
       addresses[chainId] = {
-        nounsToken: contracts.NounsToken.address,
-        nounsSeeder: contracts.NounsSeeder.address,
+        nounsToken: contracts.SZNounsToken.address,
+        // nounsSeeder: contracts.NounsSeeder.address,
         nounsDescriptor: contracts.NounsDescriptor.address,
         nftDescriptor: contracts.NFTDescriptor.address,
-        nounsAuctionHouse: contracts.NounsAuctionHouse.address,
+        nounsAuctionHouse: contracts.SZNounsAuctionHouse.address,
         nounsAuctionHouseProxy: contracts.NounsAuctionHouseProxy.address,
         nounsAuctionHouseProxyAdmin: contracts.NounsAuctionHouseProxyAdmin.address,
         nounsDaoExecutor: contracts.NounsDAOExecutor.address,
@@ -42,8 +42,8 @@ task('update-configs', 'Write the deployed addresses to the SDK and subgraph con
       const subgraphConfig = {
         network,
         nounsToken: {
-          address: contracts.NounsToken.address,
-          startBlock: contracts.NounsToken.instance.deployTransaction.blockNumber,
+          address: contracts.SZNounsToken.address,
+          startBlock: contracts.SZNounsToken.instance.deployTransaction.blockNumber,
         },
         nounsAuctionHouse: {
           address: contracts.NounsAuctionHouseProxy.address,

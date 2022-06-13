@@ -1,0 +1,38 @@
+[
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes[]",
+            "name": "parts",
+            "type": "bytes[]"
+          },
+          {
+            "internalType": "string",
+            "name": "background",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct MultiPartRLEToSVG.SVGParams",
+        "name": "params",
+        "type": "tuple"
+      },
+      {
+        "internalType": "string[]",
+        "name": "palette",
+        "type": "string[]"
+      }
+    ],
+    "name": "generateSVG",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "svg",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

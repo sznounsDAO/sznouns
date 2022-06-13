@@ -7,8 +7,17 @@ export enum ChainId {
   Kovan = 42,
 }
 
-// prettier-ignore
-export type ContractName = 'NFTDescriptor' | 'NounsDescriptor' | 'NounsSeeder' | 'NounsToken' | 'NounsAuctionHouse' | 'NounsAuctionHouseProxyAdmin' | 'NounsAuctionHouseProxy' | 'NounsDAOExecutor' | 'NounsDAOLogicV1' | 'NounsDAOProxy';
+export type ContractName =
+  | 'NFTDescriptor'
+  | 'NounsDescriptor'
+  // | 'NounsSeeder'
+  | 'SZNounsToken' // replacement for NounsToken
+  | 'SZNounsAuctionHouse' // replacement for NounsAuctionHouse
+  | 'NounsAuctionHouseProxyAdmin'
+  | 'NounsAuctionHouseProxy'
+  | 'NounsDAOExecutor'
+  | 'NounsDAOLogicV1'
+  | 'NounsDAOProxy';
 
 export interface ContractDeployment {
   args?: (string | number | (() => string))[];

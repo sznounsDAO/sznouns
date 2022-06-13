@@ -58,7 +58,7 @@ describe('NounsToken', () => {
     });
   });
 
-  // These are overridden for szNouns.
+  // These are overridden for SZNouns.
   it.skip('should set symbol', async () => {
     expect(await nounsToken.symbol()).to.eq('NOUN');
   });

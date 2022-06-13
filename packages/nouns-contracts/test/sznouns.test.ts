@@ -2,15 +2,15 @@ import chai from 'chai';
 import { ethers } from 'hardhat';
 import { BigNumber as EthersBN, constants } from 'ethers';
 import { solidity } from 'ethereum-waffle';
-import { NounsDescriptor__factory as NounsDescriptorFactory, SzNounsToken } from '../typechain';
-import { deploySzNounsToken, populateDescriptor } from './utils';
+import { NounsDescriptor__factory as NounsDescriptorFactory, SZNounsToken } from '../typechain';
+import { deploySZNounsToken, populateDescriptor } from './utils';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 
 chai.use(solidity);
 const { expect } = chai;
 
-describe('szNounsToken', () => {
-  let nounsToken: SzNounsToken;
+describe('SZNounsToken', () => {
+  let nounsToken: SZNounsToken;
   let deployer: SignerWithAddress;
   let noundersDAO: SignerWithAddress;
   let snapshotId: number;
@@ -21,7 +21,7 @@ describe('szNounsToken', () => {
 
   before(async () => {
     [deployer, noundersDAO] = await ethers.getSigners();
-    nounsToken = await deploySzNounsToken(
+    nounsToken = await deploySZNounsToken(
       deployer,
       noundersDAO.address,
       deployer.address,

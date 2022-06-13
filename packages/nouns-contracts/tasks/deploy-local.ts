@@ -1,10 +1,11 @@
 import { default as NounsAuctionHouseABI } from '../abi/contracts/NounsAuctionHouse.sol/NounsAuctionHouse.json';
+import { default as SZNounsAuctionHouseABI } from '../abi/contracts/SZNounsAuctionHouse.sol/SZNounsAuctionHouse.json';
 import { task, types } from 'hardhat/config';
 import { Interface } from 'ethers/lib/utils';
 import { Contract as EthersContract } from 'ethers';
 import { ContractName } from './types';
 
-type LocalContractName = ContractName | 'WETH';
+type LocalContractName = ContractName | 'NounsSeeder' | 'WETH';
 
 interface Contract {
   args?: (string | number | (() => string | undefined))[];
@@ -60,26 +61,28 @@ task('deploy-local', 'Deploy contracts to hardhat')
         }),
       },
       NounsSeeder: {},
-      NounsToken: {
+      SZNounsToken: {
         args: [
           args.noundersdao || deployer.address,
           expectedAuctionHouseProxyAddress,
           () => contracts.NounsDescriptor.instance?.address,
           () => contracts.NounsSeeder.instance?.address,
           proxyRegistryAddress,
+          args.noundersdao || deployer.address,
+          args.noundersdao || deployer.address,
         ],
       },
-      NounsAuctionHouse: {
+      SZNounsAuctionHouse: {
         waitForConfirmation: true,
       },
       NounsAuctionHouseProxyAdmin: {},
       NounsAuctionHouseProxy: {
         args: [
-          () => contracts.NounsAuctionHouse.instance?.address,
+          () => contracts.SZNounsAuctionHouse.instance?.address,
           () => contracts.NounsAuctionHouseProxyAdmin.instance?.address,
           () =>
-            new Interface(NounsAuctionHouseABI).encodeFunctionData('initialize', [
-              contracts.NounsToken.instance?.address,
+            new Interface(SZNounsAuctionHouseABI).encodeFunctionData('initialize', [
+              contracts.SZNounsToken.instance?.address,
               contracts.WETH.instance?.address,
               args.auctionTimeBuffer,
               args.auctionReservePrice,
@@ -97,7 +100,7 @@ task('deploy-local', 'Deploy contracts to hardhat')
       NounsDAOProxy: {
         args: [
           () => contracts.NounsDAOExecutor.instance?.address,
-          () => contracts.NounsToken.instance?.address,
+          () => contracts.SZNounsToken.instance?.address,
           args.noundersdao || deployer.address,
           () => contracts.NounsDAOExecutor.instance?.address,
           () => contracts.NounsDAOLogicV1.instance?.address,

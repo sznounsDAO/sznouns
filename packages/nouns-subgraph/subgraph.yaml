@@ -8,9 +8,9 @@ dataSources:
     name: NounsAuctionHouse
     network: rinkeby
     source:
-      address: '0xe8060BE0702409645AB660CCc915d7459D092373'
+      address: '0xC30aBd3A5FD62B4Ffd4a416C68c18027d8e924A1'
       abi: NounsAuctionHouse
-      startBlock: 10807955
+      startBlock: 10842716
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -37,9 +37,9 @@ dataSources:
     name: NounsToken
     network: rinkeby
     source:
-      address: '0x62d6ac8491D590Dc670a33c3972981877e6f4a40'
+      address: '0x399bB8F6a4aB23be76a37DDCF4857302cb56E3ED'
       abi: NounsToken
-      startBlock: 10807954
+      startBlock: 10842716
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -67,9 +67,9 @@ dataSources:
     name: NounsDAO
     network: rinkeby
     source:
-      address: '0xa78b2cFcf24c96297C98E86B3A7df2275F5131F1'
+      address: '0x59C04243cABB15c98A12641e64456f62a2a36990'
       abi: NounsDAO
-      startBlock: 10807957
+      startBlock: 10842716
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -83,7 +83,7 @@ dataSources:
         - Governance
       abis:
         - name: NounsDAO
-          file: ../nouns-contracts/abi/contracts/NounsDAOLogicV1.sol/NounsDAOLogicV1.json
+          file: ../nouns-contracts/abi/contracts/governance/NounsDAOLogicV1.sol/NounsDAOLogicV1.json
       eventHandlers:
         - event: ProposalCreatedWithRequirements(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,uint256,uint256,string)
           handler: handleProposalCreatedWithRequirements

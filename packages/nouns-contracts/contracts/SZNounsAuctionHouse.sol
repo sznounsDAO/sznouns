@@ -1,23 +1,27 @@
 // SPDX-License-Identifier: GPL-3.0
 
-/// @title The szNouns DAO auction house
+/// @title The SZNouns DAO auction house
 
-// TODO(szns) pixel art
-/*********************************
- * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
- * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
- * ░░░░░░█████████░░█████████░░░ *
- * ░░░░░░██░░░████░░██░░░████░░░ *
- * ░░██████░░░████████░░░████░░░ *
- * ░░██░░██░░░████░░██░░░████░░░ *
- * ░░██░░██░░░████░░██░░░████░░░ *
- * ░░░░░░█████████░░█████████░░░ *
- * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
- * ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ *
- *********************************/
+/********************************************************************************
+ * @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ *
+ * @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ *
+ * @@@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@@      @@@@@@@@@@@@@@@@@@@@@@@@@ *
+ * @@@@@@@@@@@               @@@@@@@@@@@@@@               @@@@@@@@@@@@@@@@@@@@@ *
+ * @@@@@@@@@     \\\\@@@@@      @@@@@@@@@     \\\\@@@@      @@@@@@@@@@@@@@@@@@@ *
+ * @@@@@@@     \\\\\\@@@@@@@     @@@@@@     \\\\\\@@@@@@@     @@@@@@@@@@@@@@@@@ *
+ * @@@@@@     \\\\\\\@@@@@@@@              \\\\\\\@@@@@@@@                  @@@ *
+ * @@@@@@    \\\\\\\\@@@@@@@@@    @@@@    \\\\\\\\@@@@@@@@@    @@@@@@@@     @@@ *
+ * @@@@@@@    \\\\\\\@@@@@@@@     @@@@     \\\\\\\@@@@@@@@     @@@@@@@@     @@@ *
+ * @@@@@@@@    \\\\\\@@@@@@@     @@@@@@     \\\\\\@@@@@@@     @@@@@@@@@     @@@ *
+ * @@@@@@@@@      \\\@@@@      @@@@@@@@@@      \\\@@@@      @@@@@@@@@@@     @@@ *
+ * @@@@@@@@@@@@              @@@@@@@@@@@@@@@              @@@@@@@@@@@@@@@@@@@@@ *
+ * @@@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@       @@@@@@@@@@@@@@@@@@@@@@@@@ *
+ * @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ *
+ * @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ *
+ ********************************************************************************/
 
 // LICENSE
-// szNounsAuctionHouse.sol is a modified version NounsAuctionHouse.sol, which is a modified version of Zora's AuctionHouse.sol:
+// SZNounsAuctionHouse.sol is a modified version NounsAuctionHouse.sol, which is a modified version of Zora's AuctionHouse.sol:
 // https://github.com/ourzora/auction-house/blob/54a12ec1a6cf562e49f0a4917990474b11350a2d/contracts/AuctionHouse.sol
 //
 // AuctionHouse.sol source code Copyright Zora licensed under the GPL-3.0 license.
@@ -28,7 +32,7 @@ pragma solidity ^0.8.6;
 import { NounsAuctionHouse } from './NounsAuctionHouse.sol';
 import './libs/BokkyPooBahsDateTimeLibrary.sol';
 
-contract szNounsAuctionHouse is NounsAuctionHouse {
+contract SZNounsAuctionHouse is NounsAuctionHouse {
     enum SZN {
         WINTER,
         SPRING,
@@ -36,32 +40,32 @@ contract szNounsAuctionHouse is NounsAuctionHouse {
         FALL
     }
 
-    uint256 constant DEFAULT_WINTER_DURATION = 48 hours;
-    uint256 constant DEFAULT_FALL_SPRING_DURATION = 24 hours;
-    uint256 constant DEFAULT_SUMMER_DURATION = 12 hours;
+    uint256 constant DEFAULT_WINTER_DURATION = 3 minutes;
+    uint256 constant DEFAULT_FALL_SPRING_DURATION = 2 minutes;
+    uint256 constant DEFAULT_SUMMER_DURATION = 1 minutes;
 
     // Length of 4, indices corresponding to int cast of enum value.
     uint256[4] durations;
 
     function getSzn() public view returns (SZN) {
-        uint256 month = BokkyPooBahsDateTimeLibrary.getMonth(block.timestamp);
+        uint256 minute = BokkyPooBahsDateTimeLibrary.getMinute(block.timestamp);
         // Before March is winter.
-        if (month < 3) {
-            return SZN.WINTER;
-        }
-        // After March and before May is Spring.
-        if (month < 5) {
-            return SZN.SPRING;
-        }
-        // Afer May and before August is Summer.
-        if (month < 8) {
-            return SZN.SUMMER;
-        }
-        // After August and before December is Fall.
-        // TODO(szns) fall is currently 4 months, should one of those months be SPRING?
-        if (month < 12) {
-            return SZN.FALL;
-        }
+        if (minute % 8 < 2) {
+           return SZN.WINTER;
+       }
+       // After March and before May is Spring.
+       if (minute % 8 < 4) {
+           return SZN.SPRING;
+       }
+       // After May and before August is Summer.
+       if (minute % 8 < 6) {
+           return SZN.SUMMER;
+       }
+       // After August and before December is Fall.
+       // TODO(szns) fall is currently 4 minutes, should one of those minutes be SPRING?
+       if (minute % 8 < 8) {
+           return SZN.FALL;
+       }
         // December is winter.
         return SZN.WINTER;
     }

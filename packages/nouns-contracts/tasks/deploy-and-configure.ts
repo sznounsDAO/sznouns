@@ -41,7 +41,7 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
       nounsDescriptor: contracts.NounsDescriptor.address,
     });
 
-    await sleep(10000); // try waiting 10 seconds
+    await sleep(2500); // try waiting 2.5 seconds
 
     const [deployer] = await ethers.getSigners();
     const pendingCount = await deployer.getTransactionCount('pending');
@@ -51,7 +51,7 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
     // We must maintain ownership of the auction house to kick off the first auction.
     const executorAddress = contracts.NounsDAOExecutor.address;
     await contracts.NounsDescriptor.instance.transferOwnership(executorAddress);
-    await contracts.NounsToken.instance.transferOwnership(executorAddress);
+    await contracts.SZNounsToken.instance.transferOwnership(executorAddress);
     await contracts.NounsAuctionHouseProxyAdmin.instance.transferOwnership(executorAddress);
     console.log(
       'Transferred ownership of the descriptor, token, and proxy admin contracts to the executor.',
@@ -60,7 +60,7 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
     // Optionally kick off the first auction and transfer ownership of the auction house
     // to the Nouns DAO executor.
     if (args.startAuction) {
-      const auctionHouse = contracts.NounsAuctionHouse.instance.attach(
+      const auctionHouse = contracts.SZNounsAuctionHouse.instance.attach(
         contracts.NounsAuctionHouseProxy.address,
       );
       await auctionHouse.unpause({

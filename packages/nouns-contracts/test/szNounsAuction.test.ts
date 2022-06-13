@@ -5,7 +5,7 @@ import { constants } from 'ethers';
 import { ethers, upgrades } from 'hardhat';
 import {
   MaliciousBidder__factory as MaliciousBidderFactory,
-  SzNounsAuctionHouse,
+  SZNounsAuctionHouse,
   NounsDescriptor__factory as NounsDescriptorFactory,
   NounsToken,
   WETH,
@@ -15,8 +15,8 @@ import { deployNounsToken, deployWeth, populateDescriptor } from './utils';
 chai.use(solidity);
 const { expect } = chai;
 
-describe('szNounsAuctionHouse', () => {
-  let nounsAuctionHouse: SzNounsAuctionHouse;
+describe('SZNounsAuctionHouse', () => {
+  let nounsAuctionHouse: SZNounsAuctionHouse;
   let nounsToken: NounsToken;
   let weth: WETH;
   let deployer: SignerWithAddress;
@@ -31,7 +31,7 @@ describe('szNounsAuctionHouse', () => {
   const DURATION = 60 * 60 * 24;
 
   async function deploy(deployer?: SignerWithAddress) {
-    const auctionHouseFactory = await ethers.getContractFactory('szNounsAuctionHouse', deployer);
+    const auctionHouseFactory = await ethers.getContractFactory('SZNounsAuctionHouse', deployer);
     return upgrades.deployProxy(auctionHouseFactory, [
       nounsToken.address,
       weth.address,
@@ -39,7 +39,7 @@ describe('szNounsAuctionHouse', () => {
       RESERVE_PRICE,
       MIN_INCREMENT_BID_PERCENTAGE,
       DURATION,
-    ]) as Promise<SzNounsAuctionHouse>;
+    ]) as Promise<SZNounsAuctionHouse>;
   }
 
   before(async () => {
