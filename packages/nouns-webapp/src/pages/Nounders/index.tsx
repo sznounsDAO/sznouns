@@ -135,18 +135,23 @@ const NoundersPage = () => {
           <BioCards min={0} max={5} />
           <BioCards min={5} max={10} />
         </Row>
-        <h3>Nounders' Reward</h3>
+        <h3>SZNounders' Reward</h3>
         <p style={{ textAlign: 'justify' }}>
-          All Noun auction proceeds are sent to the Nouns DAO. For this reason, we, the project's
-          founders (‘Nounders’) have chosen to compensate ourselves with Nouns. Every 10th noun for
-          the first 5 years of the project will be sent to our multisig (5/10), where it will be
-          vested and distributed to individual Nounders.
+          All SZNoun auction proceeds are sent to the SZNouns DAO. For this reason, we, the
+          project's founders ('SZNounders') have chosen to compensate ourselves with SZNouns. Every
+          20th SZNoun for the first 5 years of the project will be sent to our multisig, where it
+          will be vested and distributed to individual SZNounders.
         </p>
         <p style={{ textAlign: 'justify' }}>
-          The Nounders reward is intended as compensation for our pre and post-launch contributions
-          to the project, and to help us participate meaningfully in governance as the project
-          matures. Since there are 10 Nounders, after 5 years each Nounder could receive up to 1% of
-          the Noun supply.
+          The SZNounders reward is intended as compensation for our pre and post-launch
+          contributions to the project, and to help us participate meaningfully in governance as the
+          project matures. After 5 years, the SZNounders could receive up to 5% of the SZNouns
+          supply.
+        </p>
+        <h3>Noun DAO's Reward</h3>
+        <p style={{ textAlign: 'justify' }}>
+          The same amount is rewarded to the original Nouns DAO (every 21th SZNoun) as gratitude for
+          being selfless pioneers and encouraging derivative ecosystems.
         </p>
       </Col>
     </Section>
