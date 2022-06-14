@@ -67,10 +67,10 @@ const NounsDAONounContent: React.FC<{
               }
             >
               SZNounders have chosen to compensate the Nouns DAO with SZNouns, for being selfless
-              stewards of cc0 and open-source. Every 19th SZNoun for the first 5 years of the
-              project will be automatically sent to the Nouns DAO to be vested and shared among
-              members of the project. This is equivalent to approximately 5% of total supply in the
-              first five years.
+              stewards of cc0 and open-source. The second SZNoun at every 20th for the first 5 years
+              of the project will be automatically sent to the Nouns DAO to be vested and shared
+              among members of the project. This is equivalent to approximately 5% of total supply
+              in the first five years.
             </li>
           </ul>
           <div
