@@ -6,7 +6,7 @@ const AuctionActivityNounTitle: React.FC<{ nounId: BigNumber; isCool?: boolean }
   return (
     <div className={classes.wrapper}>
       <h1 style={{ color: isCool ? 'var(--brand-cool-dark-text)' : 'var(--brand-warm-dark-text)' }}>
-        Noun {nounId.toString()}
+        SZNoun {nounId.toString()}
       </h1>
     </div>
   );

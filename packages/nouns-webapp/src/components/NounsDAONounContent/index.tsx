@@ -52,7 +52,7 @@ const NounsDAONounContent: React.FC<{
             className={`${auctionActivityClasses.currentBidCol} ${nounContentClasses.currentBidCol} ${auctionActivityClasses.auctionTimerCol}`}
           >
             <div className={auctionActivityClasses.section}>
-              <Winner winner={''} isNounders={true} />
+              <Winner winner={''} isNounsDAO={true} />
             </div>
           </Col>
         </Row>
@@ -66,12 +66,11 @@ const NounsDAONounContent: React.FC<{
                 ` ${nounContentClasses.bidRow}`
               }
             >
-              As we aspire to become the most premier subDAO for the Nouns ecosystem, SZNounders
-              have chosen to compensate the Nouns DAO with SZNouns, for being selfless stewards of
-              cc0 and open-source. Every 19th SZNoun for the first 5 years of the project will be
-              automatically sent to the Nouns DAO to be vested and shared among members of the
-              project. This is equivalent to approximately 5% of total supply in the first five
-              years.
+              SZNounders have chosen to compensate the Nouns DAO with SZNouns, for being selfless
+              stewards of cc0 and open-source. Every 19th SZNoun for the first 5 years of the
+              project will be automatically sent to the Nouns DAO to be vested and shared among
+              members of the project. This is equivalent to approximately 5% of total supply in the
+              first five years.
             </li>
           </ul>
           <div
@@ -80,7 +79,8 @@ const NounsDAONounContent: React.FC<{
             }
           >
             <Link
-              to="https://nouns.wtf"
+              to={{ pathname: 'https://nouns.wtf' }}
+              target="_blank"
               className={isCool ? bidBtnClasses.bidHistoryCool : bidBtnClasses.bidHistoryWarm}
             >
               Learn more →
