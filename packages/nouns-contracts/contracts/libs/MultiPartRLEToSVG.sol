@@ -85,11 +85,11 @@ library MultiPartRLEToSVG {
         string memory rects;
         string[5] memory shape;
         string memory part;
+        string[] storage palette;
         for (uint8 p = 0; p < params.parts.length; p++) {
-            DecodedImage memory image = _decodeRLEImage(params.parts[p]);
-            string[] storage palette = palettes[image.paletteIndex];
             if (p == 3) {
                 DecodedGlasses memory glasses = _decodeRLEGlasses(params.parts[p]);
+                palette = palettes[glasses.paletteIndex];
                 for (uint256 i = 0; i < glasses.shapes.length; i++) {
                     shape[0] = palette[glasses.shapes[i][0]];   // colorIdx
                     shape[1] = lookup[glasses.shapes[i][1]];    // svg shape param 1
@@ -111,6 +111,8 @@ library MultiPartRLEToSVG {
                 rects = string(abi.encodePacked(rects, part));
                 return rects;
             }
+            DecodedImage memory image = _decodeRLEImage(params.parts[p]);
+            palette = palettes[image.paletteIndex];
             uint256 currentX = image.bounds.left;
             uint256 currentY = image.bounds.top;
             uint256 cursor;
