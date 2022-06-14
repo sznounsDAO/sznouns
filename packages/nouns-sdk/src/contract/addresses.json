@@ -15,9 +15,11 @@
   },
   "4": {
     "nounsToken": "0x6f482fA2514aCacfEeFe6AECFD0f96A1be9d8A77",
+    "SZNounsToken": "0x6f482fA2514aCacfEeFe6AECFD0f96A1be9d8A77",
     "nounsDescriptor": "0x43C9C81226167C08b54674901866BC04FcC0b7F3",
     "nftDescriptor": "0x2541d92251e6bbba4FF15d2d643472dff0596Cec",
     "nounsAuctionHouse": "0x778dbA175BD170119A296b415e7cE2B1a4f8E7e0",
+    "SZNounsAuctionHouse": "0x778dbA175BD170119A296b415e7cE2B1a4f8E7e0",
     "nounsAuctionHouseProxy": "0x819BC23004A95E08F2403371e7c50744D1D81D02",
     "nounsAuctionHouseProxyAdmin": "0xE0705AD9aC4619754a080F8D766a93bcEcc665f4",
     "nounsDaoExecutor": "0xadff8BEEb8Ed3Bf33c45B4b31a26d8163FbE5B30",
