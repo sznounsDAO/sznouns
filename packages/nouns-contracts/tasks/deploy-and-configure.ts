@@ -53,6 +53,9 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
     await contracts.NounsDescriptor.instance.transferOwnership(executorAddress);
     await contracts.SZNounsToken.instance.transferOwnership(executorAddress);
     await contracts.NounsAuctionHouseProxyAdmin.instance.transferOwnership(executorAddress);
+
+    await sleep(5000); // try waiting 5 seconds
+
     console.log(
       'Transferred ownership of the descriptor, token, and proxy admin contracts to the executor.',
     );
@@ -97,7 +100,7 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
   });
 
 function sleep(ms: any) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     setTimeout(resolve, ms);
   });
 }
