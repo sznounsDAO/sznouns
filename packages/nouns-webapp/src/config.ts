@@ -55,7 +55,7 @@ const app: Record<SupportedChains, AppConfig> = {
   [ChainId.Rinkeby]: {
     jsonRpcUri: createNetworkHttpUrl('rinkeby'),
     wsRpcUri: createNetworkWsUrl('rinkeby'),
-    subgraphApiUri: 'https://api.thegraph.com/subgraphs/name/0xgoretex/sznouns-omni2', // new subgraph URI
+    subgraphApiUri: 'https://api.thegraph.com/subgraphs/name/iamminci/nounsfork2', // new subgraph URI
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
   },
   [ChainId.Mainnet]: {
