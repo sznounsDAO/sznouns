@@ -77,7 +77,7 @@ const traitKeyToLocalizedTraitKeyFirstLetterCapitalized = (s: string): ReactNode
     ['body', 'Body'],
     ['accessory', 'Accessory'],
     ['head', 'Head'],
-    ['glasses', 'glasses'],
+    ['glasses', 'Glasses'],
   ]);
 
   return traitMap.get(s);
