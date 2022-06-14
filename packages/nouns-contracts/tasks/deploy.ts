@@ -131,7 +131,10 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
 
     // Use references to existing contracts
     // Mainnet and Rinkeby contracts respectively
-    const NounsSeederAddress = network.chainId == 1 ? '0xCC8a0FB5ab3C7132c1b2A0109142Fb112c4Ce515' : '0x8D88a3DA5A4837b41e154BA7ed1E754d53E85b11';
+    const NounsSeederAddress =
+      network.chainId == 1
+        ? '0xCC8a0FB5ab3C7132c1b2A0109142Fb112c4Ce515'
+        : '0x8D88a3DA5A4837b41e154BA7ed1E754d53E85b11';
 
     const contracts: Record<ContractName, ContractDeployment> = {
       NFTDescriptor: {},
@@ -150,7 +153,6 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
           () => NounsSeederAddress, // seeder
           proxyRegistryAddress, // proxyRegistry
           args.noundersdao, // nounsdao
-          args.noundersdao, // sznsdao
         ],
       },
       SZNounsAuctionHouse: {
@@ -167,7 +169,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
               deployment.SZNounsToken.address, // nouns token address
               args.weth, // weth token address
               args.auctionTimeBuffer, // timeBuffer
-              args.auctionReservePrice, // reservePrice 
+              args.auctionReservePrice, // reservePrice
               args.auctionMinIncrementBidPercentage, // minBidIncrementPercentage
               args.auctionDuration, // duration
             ]),

@@ -69,7 +69,6 @@ task('deploy-local', 'Deploy contracts to hardhat')
           () => contracts.NounsSeeder.instance?.address,
           proxyRegistryAddress,
           args.noundersdao || deployer.address,
-          args.noundersdao || deployer.address,
         ],
       },
       SZNounsAuctionHouse: {
