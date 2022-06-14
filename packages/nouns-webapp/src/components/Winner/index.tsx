@@ -9,10 +9,11 @@ import { useActiveLocale } from '../../hooks/useActivateLocale';
 interface WinnerProps {
   winner: string;
   isNounders?: boolean;
+  isNounsDAO?: boolean;
 }
 
 const Winner: React.FC<WinnerProps> = props => {
-  const { winner, isNounders } = props;
+  const { winner, isNounders, isNounsDAO } = props;
   const activeAccount = useAppSelector(state => state.account.activeAccount);
 
   const isCool = useAppSelector(state => state.application.isCoolBackground);
@@ -41,6 +42,15 @@ const Winner: React.FC<WinnerProps> = props => {
 
   const nounderNounContent = 'sznounders.eth';
 
+  const nounsDAONounContent = (
+    <a
+      href="https://etherscan.io/tokenholdings?a=0x0BC3807Ec262cB779b38D65b38158acC3bfedE10"
+      style={{ color: 'inherit', textDecoration: 'none', whiteSpace: 'nowrap' }}
+    >
+      Nouns DAO
+    </a>
+  );
+
   return (
     <>
       <Row className={clsx(classes.wrapper, classes.section)}>
@@ -61,7 +71,11 @@ const Winner: React.FC<WinnerProps> = props => {
               color: isCool ? 'var(--brand-cool-dark-text)' : 'var(--brand-warm-dark-text)',
             }}
           >
-            {isNounders ? nounderNounContent : nonNounderNounContent}
+            {isNounders
+              ? nounderNounContent
+              : isNounsDAO
+              ? nounsDAONounContent
+              : nonNounderNounContent}
           </h2>
         </Col>
       </Row>

@@ -1,6 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber';
 import { useAppSelector } from '../hooks';
 import { generateEmptyNounderAuction, isNounderNoun } from '../utils/nounderNoun';
+import { generateEmptyNounsDAOAuction, isNounsDAONoun } from '../utils/nounsDAONoun';
 import { Bid, BidEvent } from '../utils/types';
 import { Auction } from './nounsAuction';
 
@@ -62,6 +63,16 @@ const useOnDisplayAuction = (): Auction | undefined => {
     );
 
     return deserializeAuction(emptyNounderAuction);
+  }
+
+  // nouns DAO auction
+  if (isNounsDAONoun(BigNumber.from(onDisplayAuctionNounId))) {
+    const emptyNounsDAOAuction = generateEmptyNounsDAOAuction(
+      BigNumber.from(onDisplayAuctionNounId),
+      pastAuctions,
+    );
+
+    return deserializeAuction(emptyNounsDAOAuction);
   }
 
   // past auction
