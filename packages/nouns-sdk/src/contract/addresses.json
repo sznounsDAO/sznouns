@@ -15,6 +15,7 @@
   },
   "4": {
     "nounsToken": "0x6f482fA2514aCacfEeFe6AECFD0f96A1be9d8A77",
+    "nounsSeeder": "0xA98A1b1Cc4f5746A753167BAf8e0C26AcBe42F2E",
     "SZNounsToken": "0x6f482fA2514aCacfEeFe6AECFD0f96A1be9d8A77",
     "nounsDescriptor": "0x43C9C81226167C08b54674901866BC04FcC0b7F3",
     "nftDescriptor": "0x2541d92251e6bbba4FF15d2d643472dff0596Cec",

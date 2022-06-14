@@ -10,6 +10,8 @@ task('update-configs', 'Write the deployed addresses to the SDK and subgraph con
     async ({ contracts }: { contracts: Record<ContractName, DeployedContract> }, { ethers }) => {
       const { name: network, chainId } = await ethers.provider.getNetwork();
 
+      const nounsSeederAddress = '0xA98A1b1Cc4f5746A753167BAf8e0C26AcBe42F2E';
+
       // Update SDK addresses
       const sdkPath = join(__dirname, '../../nouns-sdk');
       const addressesPath = join(sdkPath, 'src/contract/addresses.json');
@@ -17,7 +19,7 @@ task('update-configs', 'Write the deployed addresses to the SDK and subgraph con
       addresses[chainId] = {
         nounsToken: contracts.SZNounsToken.address,
         SZNounsToken: contracts.SZNounsToken.address,
-        // nounsSeeder: contracts.NounsSeeder.address,
+        nounsSeeder: nounsSeederAddress,
         nounsDescriptor: contracts.NounsDescriptor.address,
         nftDescriptor: contracts.NFTDescriptor.address,
         nounsAuctionHouse: contracts.SZNounsAuctionHouse.address,
