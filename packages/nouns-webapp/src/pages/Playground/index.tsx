@@ -61,9 +61,9 @@ const encoder = new PNGCollectionEncoder(ImageData.palette);
 
 const traitKeyToTitle: Record<string, string> = {
   heads: 'head',
-  glasses: 'glasses',
   bodies: 'body',
   accessories: 'accessory',
+  glasses: 'glasses',
 };
 
 const parseTraitName = (partName: string): string =>
@@ -212,10 +212,11 @@ const Playground: React.FC = () => {
             };
           },
         });
+        const isGlasses = filename.startsWith('glasses');
         setPendingTrait({
           data,
           filename,
-          type: DEFAULT_TRAIT_TYPE,
+          type: isGlasses ? 'glasses' : DEFAULT_TRAIT_TYPE,
         });
         setPendingTraitValid(true);
       } catch (error) {
@@ -347,17 +348,24 @@ const Playground: React.FC = () => {
             />
             {pendingTrait && (
               <>
-                <FloatingLabel label="Custom Trait Type" className={classes.floatingLabel}>
-                  <Form.Select
-                    aria-label="Custom Trait Type"
-                    className={classes.traitFormBtn}
-                    onChange={e => setPendingTrait({ ...pendingTrait, type: e.target.value })}
-                  >
-                    {Object.entries(traitKeyToTitle).map(([key, title]) => (
-                      <option value={key}>{capitalizeFirstLetter(title)}</option>
-                    ))}
-                  </Form.Select>
-                </FloatingLabel>
+                {pendingTrait.type !== 'glasses' ? (
+                  <FloatingLabel label="Custom Trait Type" className={classes.floatingLabel}>
+                    <Form.Select
+                      aria-label="Custom Trait Type"
+                      className={classes.traitFormBtn}
+                      onChange={e => setPendingTrait({ ...pendingTrait, type: e.target.value })}
+                    >
+                      {Object.entries(traitKeyToTitle)
+                        .slice(0, -1)
+                        .map(([key, title]) => (
+                          <option value={key}>{capitalizeFirstLetter(title)}</option>
+                        ))}
+                    </Form.Select>
+                  </FloatingLabel>
+                ) : (
+                  <div style={{ height: '1rem' }}></div>
+                )}
+
                 <Button onClick={() => uploadCustomTrait()} className={classes.primaryBtn}>
                   Upload
                 </Button>
