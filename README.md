@@ -61,3 +61,10 @@ yarn lint
 ```sh
 yarn format
 ```
+
+### Making changes
+TLDR:
+- Make changes to contracts/webapp/subgraph
+- Perform `yarn build` 
+- Make deployment in `packages/nouns-contracts` via `yarn deploy:rinkeby` (see the appropriate `package.json` file to see all flags that are being used during deployment)
+  - Note: automatic update within the `update-config` step may fail. In this case, it's important to manually update the contract addresses is `nouns-sdk` to ensure accuracy. See https://github.com/NFTree/sznouns/commit/098da850ba61d471329aba88dd96a26ff5bd803d for an example.
