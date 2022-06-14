@@ -53,59 +53,59 @@ describe('SZNounsToken', () => {
       await assertBalances(0, 0);
       await (await nounsToken.mint()).wait();
       await assertBalances(1, 1);
-      // Up through szNoun 20 minted, these balances stay the same.
-      for (let i = 4; i < 21; i++) {
+      // Up through szNoun 19 minted, these balances stay the same.
+      for (let i = 3; i < 20; i++) {
         await (await nounsToken.mint()).wait();
       }
       await assertBalances(1, 1);
-      // Minting szNoun 21 triggers some rewards.
+      // Minting szNoun 20 triggers some rewards.
       await (await nounsToken.mint()).wait();
-      await assertBalances(1, 2);
+      await assertBalances(2, 2);
 
-      // Up through szNoun 40 minted, these balances stay the same.
-      for (let i = 24; i < 41; i++) {
+      // Up through szNoun 39 minted, these balances stay the same.
+      for (let i = 23; i < 40; i++) {
         await (await nounsToken.mint()).wait();
       }
-      await assertBalances(1, 2);
-      // Minting szNoun 41 triggers some rewards.
+      await assertBalances(2, 2);
+      // Minting szNoun 40 triggers some rewards.
       await (await nounsToken.mint()).wait();
-      await assertBalances(1, 3);
+      await assertBalances(3, 3);
 
       // Up through szNoun 49 minted, these balances stay the same.
-      for (let i = 44; i < 50; i++) {
+      for (let i = 43; i < 50; i++) {
         await (await nounsToken.mint()).wait();
       }
-      await assertBalances(1, 3);
-      // Minting szNoun 50 triggers some rewards.
+      await assertBalances(3, 3);
+      // Minting szNoun 50 does not trigger rewards.
       await (await nounsToken.mint()).wait();
-      await assertBalances(2, 3);
+      await assertBalances(3, 3);
 
-      // Up through szNoun 60 minted, these balances stay the same.
-      for (let i = 52; i < 61; i++) {
+      // Up through szNoun 59 minted, these balances stay the same.
+      for (let i = 51; i < 60; i++) {
         await (await nounsToken.mint()).wait();
       }
-      await assertBalances(2, 3);
-      // Minting szNoun 61 triggers some rewards.
+      await assertBalances(3, 3);
+      // Minting szNoun 60 triggers some rewards.
       await (await nounsToken.mint()).wait();
-      await assertBalances(2, 4);
+      await assertBalances(4, 4);
 
-      // Up through szNoun 80 minted, these balances stay the same.
-      for (let i = 64; i < 81; i++) {
+      // Up through szNoun 79 minted, these balances stay the same.
+      for (let i = 63; i < 80; i++) {
         await (await nounsToken.mint()).wait();
       }
-      await assertBalances(2, 4);
-      // Minting szNoun 81 triggers some rewards.
+      await assertBalances(4, 4);
+      // Minting szNoun 80 triggers some rewards.
       await (await nounsToken.mint()).wait();
-      await assertBalances(2, 5);
+      await assertBalances(5, 5);
 
       // Up through szNoun 99 minted, these balances stay the same.
-      for (let i = 84; i < 100; i++) {
+      for (let i = 83; i < 100; i++) {
         await (await nounsToken.mint()).wait();
       }
-      await assertBalances(2, 5);
+      await assertBalances(5, 5);
       // Minting szNoun 100 triggers some rewards.
       await (await nounsToken.mint()).wait();
-      await assertBalances(3, 6);
+      await assertBalances(6, 6);
     });
   });
 
@@ -129,7 +129,7 @@ describe('SZNounsToken', () => {
       expect(await nounsToken.ownerOf(2)).to.eq(deployer.address);
       expect(ownersNounCreated?.event).to.eq('NounCreated');
       expect(ownersNounCreated?.args?.tokenId).to.eq(2);
-      expect(ownersNounCreated?.args?.seed.length).to.equal(2);
+      expect(ownersNounCreated?.args?.seed.length).to.equal(5);
 
       noundersNounCreated?.args?.seed.forEach((item: EthersBN | number) => {
         const value = typeof item !== 'number' ? item?.toNumber() : item;
@@ -152,7 +152,7 @@ describe('SZNounsToken', () => {
     });
 
     it('should set name', async () => {
-      expect(await nounsToken.name()).to.eq('szNouns');
+      expect(await nounsToken.name()).to.eq('SZNouns');
     });
 
     it('should allow minter to mint a noun to itself', async () => {
@@ -162,9 +162,9 @@ describe('SZNounsToken', () => {
       const receipt = await (await nounsToken.mint()).wait();
       const nounCreated = receipt.events?.[3];
 
-      expect(await nounsToken.ownerOf(4)).to.eq(deployer.address);
+      expect(await nounsToken.ownerOf(3)).to.eq(deployer.address);
       expect(nounCreated?.event).to.eq('NounCreated');
-      expect(nounCreated?.args?.tokenId).to.eq(4);
+      expect(nounCreated?.args?.tokenId).to.eq(3);
       expect(nounCreated?.args?.seed.length).to.equal(5);
 
       nounCreated?.args?.seed.forEach((item: EthersBN | number) => {
@@ -185,8 +185,8 @@ describe('SZNounsToken', () => {
 
       await expect(tx)
         .to.emit(nounsToken, 'Transfer')
-        .withArgs(constants.AddressZero, creator.address, 4);
-      await expect(tx).to.emit(nounsToken, 'Transfer').withArgs(creator.address, minter.address, 4);
+        .withArgs(constants.AddressZero, creator.address, 3);
+      await expect(tx).to.emit(nounsToken, 'Transfer').withArgs(creator.address, minter.address, 3);
     });
 
     it('should allow minter to burn a noun', async () => {
