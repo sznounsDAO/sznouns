@@ -30,11 +30,6 @@
         "internalType": "address",
         "name": "_nounsDAO",
         "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_sznsDAO",
-        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -324,19 +319,6 @@
       }
     ],
     "name": "Transfer",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "sznsDAO",
-        "type": "address"
-      }
-    ],
-    "name": "sznsDAOUpdated",
     "type": "event"
   },
   {
@@ -1075,19 +1057,6 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_sznsDAO",
-        "type": "address"
-      }
-    ],
-    "name": "setSznsDAO",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "bytes4",
         "name": "interfaceId",
         "type": "bytes4"
@@ -1120,19 +1089,6 @@
   {
     "inputs": [],
     "name": "sznoundersDAO",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "sznsDAO",
     "outputs": [
       {
         "internalType": "address",

@@ -80,7 +80,6 @@ export const deploySZNounsToken = async (
   noundersDAO?: string,
   minter?: string,
   nounsDAO?: string,
-  sznsDAO?: string,
   descriptor?: string,
   seeder?: string,
   proxyRegistryAddress?: string,
@@ -95,7 +94,6 @@ export const deploySZNounsToken = async (
     seeder || (await deployNounsSeeder(signer)).address,
     proxyRegistryAddress || address(0),
     nounsDAO || signer.address,
-    sznsDAO || signer.address,
   );
 };
 
