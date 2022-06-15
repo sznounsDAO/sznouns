@@ -63,3 +63,28 @@ yarn task:deploy-and-configure --network [network] --update-configs --start-auct
 ### Automated Testnet Deployments
 
 The contracts are deployed to Rinkeby on each push to master and each PR using the account `0x387d301d92AE0a87fD450975e8Aef66b72fBD718`. This account's mnemonic is stored in GitHub Actions as a secret and is injected as the environment variable `MNEMONIC`. This mnemonic _shouldn't be considered safe for mainnet use_.
+
+### Fresh builds/deployments
+- `npx hardhat clean` - this is a preventative/cautionary measure that will help prevent any issues with builds (particularly during the contract verification step)
+- `yarn build`
+- `yarn generate-abi` if contracts have been updated
+- Make deployment in `packages/nouns-contracts` via `yarn deploy:rinkeby` (see the appropriate `package.json` file to see all flags that are being used during deployment)
+  - Note: automatic update within the `update-config` step may fail. In this case, it's important to manually verify/update the contract addresses is `nouns-sdk` to ensure accuracy. See https://github.com/NFTree/sznouns/commit/098da850ba61d471329aba88dd96a26ff5bd803d for an example.
+  - Example: `yarn deploy:rinkeby`
+- Save output from console (good practice would be to include in the PR description)
+- Proceed to update subgraphs (see `nouns-subgraph/README.md`)
+
+Sample console output upon completion:
+┌─────────────────────────────┬──────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────┐
+│           (index)           │                   Address                    │                           Deployment Hash                            │
+├─────────────────────────────┼──────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┤
+│        NFTDescriptor        │ '0xdcb5595CfA4291156bA3a616004DbcE96168EE6C' │ '0xb2e1b9d8ef9f2e88a6e966b725a7b720db6d018c5fbe4d88a2e48ad2edd745b0' │
+│       NounsDescriptor       │ '0x11e66c4E8359Cd39708420058E6990444501492C' │ '0xa8158554f8310a169d3471dfd1f6e0ba4357ee7f05803f81ce77fd8de81216d6' │
+│        SZNounsToken         │ '0x63f9e083A76e396C45B5F6FCE41E6a91Ea0A1400' │ '0x8e7dd8d10755129ad57a4bcf1774cd623bfad5dcd3da5fecac3abbc90a72cfa1' │
+│     SZNounsAuctionHouse     │ '0x5578e209ABD1e1A2Bdd3F364f881854E0445fcf0' │ '0x6fc7fcb06eae82c2681be832a7255bcee1eb0ad70a608989d19ddb65f99bf3ec' │
+│ NounsAuctionHouseProxyAdmin │ '0x10D8A2ebF9Fb35B31BA754B795b61B81df364160' │ '0xef8776e9316f0375b5ab849b929486a4b94b31d6aea164d75dac5b1e4a39873b' │
+│   NounsAuctionHouseProxy    │ '0x1FeB0f65cA8b13a3ba037169d6581a663655feFD' │ '0x73d0234746dad3703947f28be05dd06d511cd8c0ddd4955a5f534ceaacaf78b6' │
+│      NounsDAOExecutor       │ '0x341EF007b4abaaadff203a5aedaf98184E32ABdA' │ '0xc8822048496a56ea6a70ef672389d078eafa8a6890c650719c2cf59500b6c022' │
+│       NounsDAOLogicV1       │ '0xBCb7B3d0C4Ef9A8C9676b6e9335Be7Fe75F1DF90' │ '0xcc39b814954b7f205a43289ab5056b6edf52027e200b6dc0f5c32e175673fa35' │
+│        NounsDAOProxy        │ '0x3BeF1eCd2347A19afB3335B39a74085bb8CEAe5c' │ '0xd74ac18225d50bc4f4011f6837acbf0fbaf9b32e4764ee8b3bbdb049e2c21f55' │
+└─────────────────────────────┴──────────────────────────────────────────────┴──────────────────────────────────────────────────────────────────────┘
