@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../hooks';
 import classes from './NavBar.module.css';
-import logo from '../../assets/logo.svg';
+import sznlogo from '../../assets/sznouns_logo.svg';
 import { useEtherBalance } from '@usedapp/core';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -57,7 +57,7 @@ const NavBar = () => {
         <Container style={{ maxWidth: 'unset' }}>
           <div className={classes.brandAndTreasuryWrapper}>
             <Navbar.Brand as={Link} to="/" className={classes.navBarBrand}>
-              <img src={logo} className={classes.navBarLogo} alt="Nouns DAO logo" />
+              <img src={sznlogo} className={classes.navBarLogo} alt="Nouns DAO logo" />
             </Navbar.Brand>
             {Number(CHAIN_ID) !== 1 && (
               <Nav.Item>
