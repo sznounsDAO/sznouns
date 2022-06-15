@@ -1,6 +1,5 @@
 import { useAppSelector } from '../../hooks';
 import classes from './NavBar.module.css';
-import logo from '../../assets/logo.svg';
 import sznlogo from '../../assets/sznouns_logo.svg';
 import { useEtherBalance } from '@usedapp/core';
 import { useHistory } from 'react-router';
