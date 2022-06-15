@@ -49,4 +49,11 @@ E.g. <github username>/<name of created subgraph on Hosted Service>
 yarn deploy [organization]/[subgraph-name]
 ```
 
-Once the subgraph is deployed, be sure to update `subgraphApiUri` in `nouns-webapp/src/config.ts`
+### Fresh deployments
+Assuming contracts have been changed and/or updated...
+- `rm subgraph.yaml` (this file has to get overwritten)
+- Update `rinkeby-fork.json` with block numbers from the contract creations
+- `yarn --silent mustache config/rinkeby-fork.json subgraph.yaml.mustache > subgraph.yaml`
+- `yarn codegen`
+- `yarn deploy [organization/subgraph-name]`
+If the subgraph URI has changed (access via The Graph Hosted Service dashboard), once it's deployed, be sure to update `subgraphApiUri` in `nouns-webapp/src/config.ts`
