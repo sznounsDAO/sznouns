@@ -140,7 +140,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     const SZNoundersAddress =
       network.chainId == 1
         ? ''
-        : '0x4B99065BE4bD7744bd0127652AaDA019153BAe22';
+        : '0x87cF07E625ffDE6Bb51F7695ef92ef7Aa095F23C';
 
     const NounsDAOAddress = '0x0BC3807Ec262cB779b38D65b38158acC3bfedE10';
 
