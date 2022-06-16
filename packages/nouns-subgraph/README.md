@@ -52,7 +52,7 @@ yarn deploy [organization]/[subgraph-name]
 ### Fresh deployments
 Assuming contracts have been changed and/or updated...
 - `rm subgraph.yaml` (this file has to get overwritten)
-- Update `rinkeby-fork.json` with block numbers from the contract creations
+- Update `rinkeby-fork.json` with block numbers from the contract creations (round down by a few just to be careful not to miss any indexing)
 - `yarn --silent mustache config/rinkeby-fork.json subgraph.yaml.mustache > subgraph.yaml`
 - `yarn codegen`
 - `yarn deploy [organization/subgraph-name]`

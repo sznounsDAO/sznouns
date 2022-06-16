@@ -25,10 +25,10 @@ const GovernancePage = () => {
       <Col lg={10} className={classes.wrapper}>
         <Row className={classes.headerRow}>
           <span>Governance</span>
-          <h1>Nouns DAO</h1>
+          <h1>SZNouns DAO</h1>
         </Row>
         <p className={classes.subheading}>
-          Nouns govern <span className={classes.boldText}>Nouns DAO</span>. Nouns can vote on
+          Nouns govern <span className={classes.boldText}>SZNouns DAO</span>. SZNouns can vote on
           proposals or delegate their vote to a third party. A minimum of{' '}
           <span className={classes.boldText}>
             {nounsRequired} {threshold === 0 ? nounSingular : nounPlural}

@@ -8,9 +8,9 @@ dataSources:
     name: NounsAuctionHouse
     network: rinkeby
     source:
-      address: '0x1FeB0f65cA8b13a3ba037169d6581a663655feFD'
+      address: '0x3F37CC9FcFF69Af9Fc636DB0b05fb49Ce0390162'
       abi: NounsAuctionHouse
-      startBlock: 10853700
+      startBlock: 10859900
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -37,9 +37,9 @@ dataSources:
     name: NounsToken
     network: rinkeby
     source:
-      address: '0x63f9e083A76e396C45B5F6FCE41E6a91Ea0A1400'
+      address: '0xc3A949D2798e13cE845bDd21Bf639A28548faf30'
       abi: NounsToken
-      startBlock: 10853700
+      startBlock: 10859900
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -67,9 +67,9 @@ dataSources:
     name: NounsDAO
     network: rinkeby
     source:
-      address: '0x3BeF1eCd2347A19afB3335B39a74085bb8CEAe5c'
+      address: '0x15542279208229D8958200e23eb30aF2fdB40727'
       abi: NounsDAO
-      startBlock: 10853700
+      startBlock: 10859900
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
