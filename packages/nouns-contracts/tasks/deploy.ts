@@ -101,7 +101,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
       console.log(
         `Nounders DAO address not provided. Setting to deployer (${deployer.address})...`,
       );
-      args.noundersdao = deployer.address;
+      args.noundersdao = deployer.address; // TODO(szns): update this messaging and/or use this flag
     }
     if (!args.weth) {
       const deployedWETHContract = wethContracts[network.chainId];
@@ -136,6 +136,14 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
         ? '0xCC8a0FB5ab3C7132c1b2A0109142Fb112c4Ce515'
         : '0x8D88a3DA5A4837b41e154BA7ed1E754d53E85b11';
 
+    // Mainnet vs Rinkeby contracts
+    const SZNoundersAddress =
+      network.chainId == 1
+        ? ''
+        : '0x4B99065BE4bD7744bd0127652AaDA019153BAe22';
+
+    const NounsDAOAddress = '0x0BC3807Ec262cB779b38D65b38158acC3bfedE10';
+
     const contracts: Record<ContractName, ContractDeployment> = {
       NFTDescriptor: {},
       NounsDescriptor: {
@@ -147,12 +155,12 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
       // NounsSeeder: {},
       SZNounsToken: {
         args: [
-          args.noundersdao, // sznoundersdao; defaults to deployer address
+          SZNoundersAddress, // sznoundersdao; defaults to deployer address
           expectedAuctionHouseProxyAddress, // minter
           () => deployment.NounsDescriptor.address, // descriptor
           () => NounsSeederAddress, // seeder
           proxyRegistryAddress, // proxyRegistry
-          args.noundersdao, // nounsdao
+          NounsDAOAddress, // nounsdao
         ],
       },
       SZNounsAuctionHouse: {
@@ -195,7 +203,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
         args: [
           () => deployment.NounsDAOExecutor.address, // timelock address
           () => deployment.SZNounsToken.address, // nouns address
-          args.noundersdao, // vetoer address
+          SZNoundersAddress, // vetoer address, should be sznounders
           () => deployment.NounsDAOExecutor.address, // admin address
           () => deployment.NounsDAOLogicV1.address, // implementation address
           args.votingPeriod, // votingPeriod
