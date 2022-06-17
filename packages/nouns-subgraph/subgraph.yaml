@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: NounsAuctionHouse
-    network: rinkeby
+    network: mainnet
     source:
-      address: '0x1D3e839B046E5BcBAa4Dd209923BcBde6c290eB7'
+      address: '0xBDAe19BcA243eb440D900f10e310b8d69C736364'
       abi: NounsAuctionHouse
-      startBlock: 10863400
+      startBlock: 14980800
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -35,11 +35,11 @@ dataSources:
           handler: handleAuctionSettled
   - kind: ethereum/contract
     name: NounsToken
-    network: rinkeby
+    network: mainnet
     source:
-      address: '0xBb7A2237c080a6bc6F7Dd2A66dB87a304Fcda9dC'
+      address: '0xD6c4cB5A3e040abC8bE977dC10B658Ec9072a1F4'
       abi: NounsToken
-      startBlock: 10863400
+      startBlock: 14980800
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -65,11 +65,11 @@ dataSources:
           handler: handleTransfer
   - kind: ethereum/contract
     name: NounsDAO
-    network: rinkeby
+    network: mainnet
     source:
-      address: '0x5054488fB27853c5C4DAee65425aDdaC4ee75406'
+      address: '0x67CeD26a6435A2F12b52B7216E26BA43af02eCFF'
       abi: NounsDAO
-      startBlock: 10863400
+      startBlock: 14980800
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4

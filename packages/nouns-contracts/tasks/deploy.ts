@@ -93,6 +93,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     const [deployer] = await ethers.getSigners();
 
     console.log('Current network:', network.name);
+    console.log('Chain ID:', network.chainId);
     const pendingCount = await deployer.getTransactionCount('pending');
     console.log('Pending tx count:', pendingCount);
 
