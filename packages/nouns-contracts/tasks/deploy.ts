@@ -4,6 +4,7 @@ import { ChainId, ContractDeployment, ContractName, DeployedContract } from './t
 import { Interface } from 'ethers/lib/utils';
 import { task, types } from 'hardhat/config';
 import promptjs from 'prompt';
+import { BigNumber } from 'ethers';
 
 promptjs.colors = false;
 promptjs.message = '> ';
@@ -248,7 +249,11 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
             },
           },
         ]);
-        gasPrice = ethers.utils.parseUnits(result.gasPrice.toString(), 'gwei');
+
+        console.log('Original gas price:', ethers.utils.parseUnits(result.gasPrice.toString(), 'gwei'));
+        let buffer = BigNumber.from(10);
+        gasPrice = ethers.utils.parseUnits(result.gasPrice.toString(), 'gwei').add(buffer);
+        console.log('Gas price with buffer:', gasPrice);
       }
 
       const factory = await ethers.getContractFactory(name, {
