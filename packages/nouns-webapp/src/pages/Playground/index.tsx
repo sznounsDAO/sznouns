@@ -33,8 +33,8 @@ interface PendingCustomTrait {
 
 const nounsProtocolLink = (
   <Link
-    text={'Nouns Protocol'}
-    url="https://www.notion.so/Noun-Protocol-32e4f0bf74fe433e927e2ea35e52a507"
+    text={'SZNouns Protocol'}
+    url="https://sznouns.notion.site/SZNoun-Protocol-forked-from-NounsDAO-with-amendments-8ecaf798a22048808e85727a60cfb02a"
     leavesPage={true}
   />
 );
@@ -42,7 +42,7 @@ const nounsProtocolLink = (
 const nounsAssetsLink = (
   <Link
     text="nouns-assets"
-    url="https://github.com/nounsDAO/nouns-monorepo/tree/master/packages/nouns-assets"
+    url="https://github.com/NFTree/sznouns/tree/main/packages/nouns-assets"
     leavesPage={true}
   />
 );
@@ -50,7 +50,7 @@ const nounsAssetsLink = (
 const nounsSDKLink = (
   <Link
     text="nouns-sdk"
-    url="https://github.com/nounsDAO/nouns-monorepo/tree/master/packages/nouns-sdk"
+    url="https://github.com/NFTree/sznouns/tree/main/packages/nouns-sdk"
     leavesPage={true}
   />
 );
@@ -265,7 +265,7 @@ const Playground: React.FC = () => {
             <span>Explore</span>
             <h1>Playground</h1>
             <p>
-              The playground was built using the {nounsProtocolLink}. Noun's traits are determined
+              The playground was built using the {nounsProtocolLink}. SZNoun's traits are determined
               by the Noun Seed. The seed was generated using {nounsAssetsLink} and rendered using
               the {nounsSDKLink}.
             </p>
@@ -280,7 +280,7 @@ const Playground: React.FC = () => {
                 }}
                 className={classes.primaryBtn}
               >
-                Generate Nouns
+                Generate SZNouns
               </Button>
             </Col>
             <Row>
