@@ -211,33 +211,42 @@ const Documentation = () => {
             </Accordion.Header>
             <Accordion.Body>
               <p>
-                'SZNounders' are the group of builders that initiated SZNouns. Here are the
-                SZNounders:
+                ‘SZNounders’ are group of builders that initiated SZNouns. Here are the SZNounders:
               </p>
+              <p>The SZNS team, with a special shoutout to:</p>
               <ul>
                 <li>
-                  <Link text="The SZNS team" url="https://twitter.com/" leavesPage={true} />
+                  <Link text="@jl2fa" url="https://twitter.com/" leavesPage={true} />
                 </li>
                 <li>
-                  <Link text="0xd" url="https://twitter.com/" leavesPage={true} />
+                  <Link text="@persn_eth" url="https://twitter.com/" leavesPage={true} />
                 </li>
                 <li>
-                  <Link text="minci" url="https://twitter.com/" leavesPage={true} />
+                  <Link text="@jack_dille" url="https://twitter.com/" leavesPage={true} />
                 </li>
                 <li>
-                  <Link text="0xgoretex" url="https://twitter.com/" leavesPage={true} />
+                  <Link text="@kloo_eth" url="https://twitter.com/" leavesPage={true} />
+                </li>
+              </ul>
+              <p>... and some big brain friends 🧠</p>
+              <ul>
+                <li>
+                  <Link text="@iamminci" url="https://twitter.com/" leavesPage={true} />
                 </li>
                 <li>
-                  <Link text="Brent" url="https://twitter.com/" leavesPage={true} />
+                  <Link text="@0xgoretex" url="https://twitter.com/" leavesPage={true} />
                 </li>
                 <li>
-                  <Link text="XX" url="https://twitter.com/" leavesPage={true} />
+                  <Link text="@sina_eth" url="https://twitter.com/" leavesPage={true} />
                 </li>
                 <li>
-                  <Link text="XX" url="https://twitter.com/" leavesPage={true} />
+                  <Link text="@brentsketit" url="https://twitter.com/" leavesPage={true} />
                 </li>
                 <li>
-                  <Link text="XX" url="https://twitter.com/" leavesPage={true} />
+                  <Link text="@gabrielayuso" url="https://twitter.com/" leavesPage={true} />
+                </li>
+                <li>
+                  <Link text="@blownedeth" url="https://twitter.com/" leavesPage={true} />
                 </li>
               </ul>
               <p>
