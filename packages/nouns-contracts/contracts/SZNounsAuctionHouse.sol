@@ -40,32 +40,32 @@ contract SZNounsAuctionHouse is NounsAuctionHouse {
         FALL
     }
 
-    uint256 constant DEFAULT_WINTER_DURATION = 3 minutes;
-    uint256 constant DEFAULT_FALL_SPRING_DURATION = 2 minutes;
-    uint256 constant DEFAULT_SUMMER_DURATION = 1 minutes;
+    uint256 constant DEFAULT_WINTER_DURATION = 48 hours;
+    uint256 constant DEFAULT_FALL_SPRING_DURATION = 24 hours;
+    uint256 constant DEFAULT_SUMMER_DURATION = 12 hours;
 
     // Length of 4, indices corresponding to int cast of enum value.
     uint256[4] durations;
 
     function getSzn() public view returns (SZN) {
-        uint256 minute = BokkyPooBahsDateTimeLibrary.getMinute(block.timestamp);
-        // Before March is winter.
-        if (minute % 8 < 2) {
-           return SZN.WINTER;
-       }
-       // After March and before May is Spring.
-       if (minute % 8 < 4) {
-           return SZN.SPRING;
-       }
-       // After May and before August is Summer.
-       if (minute % 8 < 6) {
-           return SZN.SUMMER;
-       }
-       // After August and before December is Fall.
-       // TODO(szns) fall is currently 4 minutes, should one of those minutes be SPRING?
-       if (minute % 8 < 8) {
-           return SZN.FALL;
-       }
+        uint256 month = BokkyPooBahsDateTimeLibrary.getMonth(block.timestamp);
+
+        if (month < 3) {
+            return SZN.WINTER;
+        }
+        // After March and before May is Spring.
+        if (month < 5) {
+            return SZN.SPRING;
+        }
+        // Afer May and before August is Summer.
+        if (month < 8) {
+            return SZN.SUMMER;
+        }
+        // After August and before December is Fall.
+        // TODO(szns) fall is currently 4 months, should one of those months be SPRING?
+        if (month < 12) {
+            return SZN.FALL;
+        }
         // December is winter.
         return SZN.WINTER;
     }
