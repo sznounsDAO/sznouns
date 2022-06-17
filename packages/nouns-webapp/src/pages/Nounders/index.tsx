@@ -10,7 +10,7 @@ import pfpJack_dille from '../../assets/nounder-pfps/jack_dille.png';
 import pfpMinci from '../../assets/nounder-pfps/iamminci.png';
 import pfp0xgoretex from '../../assets/nounder-pfps/0xgoretex.png';
 import pfpSina_eth from '../../assets/nounder-pfps/sina_eth.png';
-import pfpBlownedeth from '../../assets/nounder-pfps/andrew.png';
+import pfpBlownedeth from '../../assets/nounder-pfps/blownedeth.png';
 import pfpGabrielayuso from '../../assets/nounder-pfps/gabrielayuso.png';
 import pfpBrentsketit from '../../assets/nounder-pfps/brentsketit.png';
 
