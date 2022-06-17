@@ -1,7 +1,7 @@
 {
   "name": "SZNouns",
-  "description": "One SZNoun, every day, forever.\r\n\r\nsznouns.wtf",
-  "image": "ipfs://QmNdUibRHNqX2byJLtCD3ofn65cfCtvXdQnV87wRjqWf96",
+  "description": "SZNouns, every day, forever.\r\n\r\nsznouns.wtf",
+  "image": "https://gateway.pinata.cloud/ipfs/QmULHxrsyqffXfLw2Ta5ZvNdUTbNUeQK1daduMkmfZRPtd",
   "external_link": "https://sznouns.wtf",
   "seller_fee_basis_points": 0,
   "fee_recipient": "0x0000000000000000000000000000000000000000"

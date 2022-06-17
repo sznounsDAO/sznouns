@@ -62,9 +62,22 @@ yarn lint
 yarn format
 ```
 
-### Making changes
+### Making changes/fresh deployments
+Refer to respective `README` and `package.json` files for additional details.
+
 TLDR:
 - Make changes to contracts/webapp/subgraph
 - Perform `yarn build` 
-- Make deployment in `packages/nouns-contracts` via `yarn deploy:rinkeby` (see the appropriate `package.json` file to see all flags that are being used during deployment)
-  - Note: automatic update within the `update-config` step may fail. In this case, it's important to manually update the contract addresses is `nouns-sdk` to ensure accuracy. See https://github.com/NFTree/sznouns/commit/098da850ba61d471329aba88dd96a26ff5bd803d for an example.
+- Take followup step (e.g. deploy)
+
+### Participating in governance (e.g. voting on existing proposals) via Gnosis Safe
+1. Set up Gnosis safe
+2. Create new transaction:
+   1. "Destination" contract address should be the proxy contract address (e.g. https://rinkeby.etherscan.io/address/0x15542279208229D8958200e23eb30aF2fdB40727#code)
+   2. Don't use the built-in ABI; instead, use the ABI from the logic contract (e.g. https://rinkeby.etherscan.io/address/0x939e9b344A4F26f2545D3f5a4b3eF72CB0a0af4F#code)
+   3. Select a function to call, e.g. `castVote`
+3. Approve transaction/reach quorum
+   1. Note: make sure to do this while the vote is in session, otherwise the Gnosis UI may warn that the tx may fail
+4. Execute transaction
+
+From here, after votes have been cast, the proposal is subject to the rest of the governance process: queuing and execution.

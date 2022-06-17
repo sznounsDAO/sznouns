@@ -3,7 +3,7 @@ import { AuctionState } from '../state/slices/auction';
 import { BigNumber } from '@ethersproject/bignumber';
 
 export const isNounsDAONoun = (nounId: BigNumber) => {
-  return nounId.mod(20).eq(1) || nounId.eq(1);
+  return nounId.mod(5).eq(1) || nounId.eq(1); // TODO(szns): change back to 20
 };
 
 const emptyNounsDAOAuction = (onDisplayAuctionId: number): Auction => {
