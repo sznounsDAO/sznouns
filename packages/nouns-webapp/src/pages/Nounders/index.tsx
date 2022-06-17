@@ -10,7 +10,7 @@ import pfpJack_dille from '../../assets/nounder-pfps/jack_dille.png';
 import pfpMinci from '../../assets/nounder-pfps/iamminci.png';
 import pfp0xgoretex from '../../assets/nounder-pfps/0xgoretex.png';
 import pfpSina_eth from '../../assets/nounder-pfps/sina_eth.png';
-import pfpAndrew from '../../assets/nounder-pfps/andrew.png';
+import pfpBlownedeth from '../../assets/nounder-pfps/andrew.png';
 import pfpGabrielayuso from '../../assets/nounder-pfps/gabrielayuso.png';
 import pfpBrentsketit from '../../assets/nounder-pfps/brentsketit.png';
 
@@ -66,8 +66,8 @@ const bigBrainBios = [
     handle: 'sina_eth',
   },
   {
-    name: 'Andrew',
-    image: pfpAndrew,
+    name: 'blownedeth',
+    image: pfpBlownedeth,
     description: undefined,
     handle: 'blownedeth',
   },
