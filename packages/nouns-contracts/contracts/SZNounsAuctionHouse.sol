@@ -40,9 +40,9 @@ contract SZNounsAuctionHouse is NounsAuctionHouse {
         FALL
     }
 
-    uint256 constant DEFAULT_WINTER_DURATION = 48 hours;
-    uint256 constant DEFAULT_FALL_SPRING_DURATION = 24 hours;
-    uint256 constant DEFAULT_SUMMER_DURATION = 12 hours;
+    uint256 constant DEFAULT_WINTER_DURATION = 24 hours;
+    uint256 constant DEFAULT_FALL_SPRING_DURATION = 12 hours;
+    uint256 constant DEFAULT_SUMMER_DURATION = 6 hours;
 
     // Length of 4, indices corresponding to int cast of enum value.
     uint256[4] durations;
