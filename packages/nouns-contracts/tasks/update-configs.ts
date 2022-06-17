@@ -17,18 +17,18 @@ task('update-configs', 'Write the deployed addresses to the SDK and subgraph con
       const addressesPath = join(sdkPath, 'src/contract/addresses.json');
       const addresses = JSON.parse(readFileSync(addressesPath, 'utf8'));
       addresses[chainId] = {
-        nounsToken: contracts.SZNounsToken.address,
-        SZNounsToken: contracts.SZNounsToken.address,
+        nounsToken: '0xFEe27Be8AfefDb557B3ace73C30d6F42e2A254c6',
+        SZNounsToken: '0xFEe27Be8AfefDb557B3ace73C30d6F42e2A254c6',
         nounsSeeder: nounsSeederAddress,
-        nounsDescriptor: contracts.NounsDescriptor.address,
-        nftDescriptor: contracts.NFTDescriptor.address,
-        nounsAuctionHouse: contracts.SZNounsAuctionHouse.address,
-        SZNounsAuctionHouse: contracts.SZNounsAuctionHouse.address,
-        nounsAuctionHouseProxy: contracts.NounsAuctionHouseProxy.address,
-        nounsAuctionHouseProxyAdmin: contracts.NounsAuctionHouseProxyAdmin.address,
-        nounsDaoExecutor: contracts.NounsDAOExecutor.address,
-        nounsDAOProxy: contracts.NounsDAOProxy.address,
-        nounsDAOLogicV1: contracts.NounsDAOLogicV1.address,
+        nounsDescriptor: '0x34a5a82EC82890026358a9b16EE10da62f29Ac13',
+        nftDescriptor: '0xabDC58A429F07ed2eE940113A4709214AB069043',
+        nounsAuctionHouse: '0x46717397132a679fCc6b54084e8Ac7237802b067',
+        SZNounsAuctionHouse: '0x46717397132a679fCc6b54084e8Ac7237802b067',
+        nounsAuctionHouseProxy: '0x839e0c5Ae6bE8c4eC4DD23C2d55f703c2873D9Ed',
+        nounsAuctionHouseProxyAdmin: '0x89aee60b6dDbA003B879ACEd185101A466082769',
+        nounsDaoExecutor: '0xB18ec0bBa5457cafDA0e08aBf77f6cfb49b18b0e',
+        nounsDAOProxy: '0x55F102413f0Bf95f8d404036226db2A24963053A',
+        nounsDAOLogicV1: '0xBE10813E4a7F656b1A67b488FD91274dF68F03FB',
       };
       writeFileSync(addressesPath, JSON.stringify(addresses, null, 2));
       try {
@@ -46,19 +46,20 @@ task('update-configs', 'Write the deployed addresses to the SDK and subgraph con
       const subgraphConfig = {
         network,
         nounsToken: {
-          address: contracts.SZNounsToken.address,
-          startBlock: contracts.SZNounsToken.instance.deployTransaction.blockNumber,
+          address: '0xFEe27Be8AfefDb557B3ace73C30d6F42e2A254c6',
+          startBlock: 14981572,
         },
         nounsAuctionHouse: {
-          address: contracts.NounsAuctionHouseProxy.address,
-          startBlock: contracts.NounsAuctionHouseProxy.instance.deployTransaction.blockNumber,
+          address: '0x839e0c5Ae6bE8c4eC4DD23C2d55f703c2873D9Ed',
+          startBlock: 14981573,
         },
         nounsDAO: {
-          address: contracts.NounsDAOProxy.address,
-          startBlock: contracts.NounsDAOProxy.instance.deployTransaction.blockNumber,
+          address: '0x55F102413f0Bf95f8d404036226db2A24963053A',
+          startBlock: 14981576,
         },
       };
       writeFileSync(subgraphConfigPath, JSON.stringify(subgraphConfig, null, 2));
       console.log('Subgraph config has been generated.');
     },
   );
+  

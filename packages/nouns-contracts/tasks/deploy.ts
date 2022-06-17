@@ -118,7 +118,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
           `Can not auto-detect WETH contract on chain ${network.name}. Provide it with the --weth arg.`,
         );
       }
-      args.weth = deployedWETHContract || 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+      args.weth = deployedWETHContract || '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2';
     }
 
     const nonce = await deployer.getTransactionCount();
@@ -232,10 +232,10 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
 
     for (const [name, contract] of Object.entries(contracts)) {
       let gasPrice = await ethers.provider.getGasPrice();
+      console.log('Original gas price (wei):', gasPrice.toString(), '(gwei):', ethers.utils.parseUnits(gasPrice.toString(), 'wei').toString());
       let buffer = BigNumber.from(10000000000); // 10 gwei
       gasPrice = gasPrice.add(buffer);
-      console.log('Original gas price (wei):', gasPrice, '(gwei):', ethers.utils.parseUnits(gasPrice.toString(), 'gwei'));
-      console.log('Gas price with buffer (wei):', gasPrice, '(gwei):', ethers.utils.parseUnits(gasPrice.toString()));
+      console.log('Gas price with buffer (wei):', gasPrice.toString(), '(gwei):', ethers.utils.parseUnits(gasPrice.toString(), 'wei').toString());
 
       sleep(5000); // 5 seconds
 

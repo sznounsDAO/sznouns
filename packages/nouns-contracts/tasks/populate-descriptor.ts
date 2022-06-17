@@ -6,13 +6,13 @@ task('populate-descriptor', 'Populates the descriptor with color palettes and No
   .addOptionalParam(
     'nftDescriptor',
     'The `NFTDescriptor` contract address',
-    '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+    '0xabDC58A429F07ed2eE940113A4709214AB069043',
     types.string,
   )
   .addOptionalParam(
     'nounsDescriptor',
     'The `NounsDescriptor` contract address',
-    '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+    '0x34a5a82EC82890026358a9b16EE10da62f29Ac13',
     types.string,
   )
   .setAction(async ({ nftDescriptor, nounsDescriptor }, { ethers }) => {
@@ -31,20 +31,26 @@ task('populate-descriptor', 'Populates the descriptor with color palettes and No
     console.log('Pending tx count before adding many features:', pendingCount);
 
     // Chunk head and accessory population due to high gas usage
-    await descriptorContract.addManyBackgrounds(bgcolors);
-    await descriptorContract.addManyColorsToPalette(0, palette);
-    await descriptorContract.addManyBodies(bodies.map(({ data }) => data));
+    // await descriptorContract.addManyBackgrounds(bgcolors);
+    // await sleep(10000);
 
-    const accessoryChunk = chunkArray(accessories, 10);
-    for (const chunk of accessoryChunk) {
-      await descriptorContract.addManyAccessories(chunk.map(({ data }) => data));
-      await sleep(500);
-    }
+    // await descriptorContract.addManyColorsToPalette(0, palette);
+    // await sleep(10000);
+    
+    // await descriptorContract.addManyBodies(bodies.map(({ data }) => data));
+    // await sleep(10000);
+
+    // const accessoryChunk = chunkArray(accessories, 10);
+    // for (const chunk of accessoryChunk) {
+    //   await descriptorContract.addManyAccessories(chunk.map(({ data }) => data));
+    //   await sleep(10000);
+    // }
 
     const headChunk = chunkArray(heads, 10);
-    for (const chunk of headChunk) {
+    for (let i = 1; i < headChunk.length; i++) {
+      let chunk = headChunk[i];
       await descriptorContract.addManyHeads(chunk.map(({ data }) => data));
-      await sleep(500);
+      await sleep(10000);
     }
 
     await descriptorContract.addManyGlasses(glasses.map(({ data }) => data));
