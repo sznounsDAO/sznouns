@@ -11,7 +11,7 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
   .addFlag('autoDeploy', 'Deploy all contracts without user interaction')
   .addFlag('updateConfigs', 'Write the deployed addresses to the SDK and subgraph configs')
   .addOptionalParam('weth', 'The WETH contract address')
-  .addOptionalParam('noundersdao', 'The nounders DAO contract address')
+  .addOptionalParam('sznoundersdao', 'The SZNounders DAO contract address')
   .addOptionalParam('auctionTimeBuffer', 'The auction time buffer (seconds)')
   .addOptionalParam('auctionReservePrice', 'The auction reserve price (wei)')
   .addOptionalParam(

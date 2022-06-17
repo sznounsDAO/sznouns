@@ -42,12 +42,12 @@ export const ETHERSCAN_API_KEY = process.env.REACT_APP_ETHERSCAN_API_KEY ?? '';
 const INFURA_PROJECT_ID = process.env.REACT_APP_INFURA_PROJECT_ID;
 
 export const createNetworkHttpUrl = (network: string): string => {
-  const custom = process.env[`REACT_APP_${network.toUpperCase()}_JSONRPC`];
+  const custom = process.env[`REACT_APP_${network.toUpperCase()}_JSONRPC`]; // feed via netlify env vars
   return custom || `https://${network}.infura.io/v3/${INFURA_PROJECT_ID}`;
 };
 
 export const createNetworkWsUrl = (network: string): string => {
-  const custom = process.env[`REACT_APP_${network.toUpperCase()}_WSRPC`];
+  const custom = process.env[`REACT_APP_${network.toUpperCase()}_WSRPC`]; // feed via netlify env vars
   return custom || `wss://${network}.infura.io/ws/v3/${INFURA_PROJECT_ID}`;
 };
 
@@ -61,7 +61,7 @@ const app: Record<SupportedChains, AppConfig> = {
   [ChainId.Mainnet]: {
     jsonRpcUri: createNetworkHttpUrl('mainnet'),
     wsRpcUri: createNetworkWsUrl('mainnet'),
-    subgraphApiUri: 'https://api.thegraph.com/subgraphs/name/nounsdao/nouns-subgraph',
+    subgraphApiUri: 'https://thegraph.com/hosted-service/subgraph/0xgoretex/sznouns', // for prod
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
   },
   [ChainId.Hardhat]: {
