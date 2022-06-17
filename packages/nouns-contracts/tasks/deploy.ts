@@ -30,14 +30,14 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
   .addOptionalParam(
     'auctionTimeBuffer',
     'The auction time buffer (seconds)',
-    5 * 60 /* 5 minutes */,
+    5 * 60 /* 5 minutes */, // confirmed
     // 30 /* 30 sec temp for testing*/,
     types.int,
   )
   .addOptionalParam(
     'auctionReservePrice',
     'The auction reserve price (wei)',
-    1 /* 1 wei */,
+    1 /* 1 wei */, // confirmed
     types.int,
   )
   .addOptionalParam(
@@ -49,41 +49,43 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
   .addOptionalParam(
     'auctionDuration', // this is going to be subject to enforcement at the auction house contract level anyways
     'The auction duration (seconds)',
-    60 * 5 /* 5 minutes */,
+    60 * 5 /* 5 minutes */, // confirmed
     // 60 * 1 /* 1 minute */,
     types.int,
   )
   .addOptionalParam(
     'timelockDelay',
     'The timelock delay (seconds)',
-    60 * 60 * 24 * 2 /* 2 days */,
+    60 * 60 * 24 * 2 /* 2 days */, // confirmed
     // 60 * 5 /* 5 minutes temp for testing */,
     types.int,
   )
   .addOptionalParam(
     'votingPeriod',
     'The voting period (blocks)',
-    Math.round(4 * 60 * 24 * (60 / 13)) /* 4 days (13s blocks) */,
+    // Math.round(4 * 60 * 24 * (60 / 13)) /* 4 days (13s blocks) */, // the default, not used
+    Math.round(3 * 60 * 24 * (60 / 13)) /* 3 days (13s blocks) */, // confirmed
     // Math.round(5 * (60 / 13)) /* 5 minutes temp for testing */,
     types.int,
   )
   .addOptionalParam(
     'votingDelay',
     'The voting delay (blocks)',
-    // Math.round(3 * 60 * 24 * (60 / 13)) /* 3 days (13s blocks) */,
-    Math.round(5 * (60 / 13)) /* 5 minutes temp for testing */,
+    // Math.round(3 * 60 * 24 * (60 / 13)) /* 3 days (13s blocks) */, // the default, not used
+    Math.round(2 * 60 * 24 * (60 / 13)) /* 2 days (13s blocks) */, // confirmed
+    // Math.round(5 * (60 / 13)) /* 5 minutes temp for testing */,
     types.int,
   )
   .addOptionalParam(
     'proposalThresholdBps',
     'The proposal threshold (basis points)',
-    100 /* 1% */,
+    100 /* 1% */, // confirmed
     types.int,
   )
   .addOptionalParam(
     'quorumVotesBps',
     'Votes required for quorum (basis points)',
-    1_000 /* 10% */,
+    1_000 /* 10% */, // confirmed
     types.int,
   )
   .setAction(async (args, { ethers }) => {
@@ -101,7 +103,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
       console.log(
         `SZNounders DAO address not provided. Setting to deployer (${deployer.address})...`,
       );
-      args.sznoundersdao = deployer.address; // TODO(szns): update this messaging and/or use this flag
+      args.sznoundersdao = deployer.address; // TODO(szns): update this address and/or use this flag
     }
     if (!args.weth) {
       const deployedWETHContract = wethContracts[network.chainId];
