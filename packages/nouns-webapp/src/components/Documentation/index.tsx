@@ -153,8 +153,8 @@ const Documentation = () => {
               </p>
               <ul>
                 <li>backgrounds (2)</li>
-                <li>bodies (30)</li>
-                <li>accessories (137)</li>
+                <li>bodies (34)</li>
+                <li>accessories (149)</li>
                 <li>heads (234)</li>
                 <li>glasses (21)</li>
               </ul>
