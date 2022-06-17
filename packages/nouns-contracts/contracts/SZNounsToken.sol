@@ -76,7 +76,7 @@ contract SZNounsToken is NounsToken {
      */
     function mint() public override onlyMinter returns (uint256) {
         // 4121 is the total number of sznouns minted across first 5 years
-        if (_currentNounId <= 4121 && _currentNounId % 20 == 0) {
+        if (_currentNounId <= 4121 && _currentNounId % 20 == 0 && _currentNounId != 0) {
             _mintTo(sznoundersDAO, _currentNounId++);
             _mintTo(nounsDAO, _currentNounId++);
         }

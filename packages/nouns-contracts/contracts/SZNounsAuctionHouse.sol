@@ -53,20 +53,15 @@ contract SZNounsAuctionHouse is NounsAuctionHouse {
         if (month < 3) {
             return SZN.WINTER;
         }
-        // After March and before May is Spring.
-        if (month < 5) {
+        if (month < 6) {
             return SZN.SPRING;
         }
-        // Afer May and before August is Summer.
-        if (month < 8) {
+        if (month < 9) {
             return SZN.SUMMER;
         }
-        // After August and before December is Fall.
-        // TODO(szns) fall is currently 4 months, should one of those months be SPRING?
         if (month < 12) {
             return SZN.FALL;
         }
-        // December is winter.
         return SZN.WINTER;
     }
 
@@ -89,7 +84,6 @@ contract SZNounsAuctionHouse is NounsAuctionHouse {
         if (szn == SZN.SUMMER) {
             return DEFAULT_SUMMER_DURATION;
         }
-        // szn is SZN.FALL or SZN.SPRING
         return DEFAULT_FALL_SPRING_DURATION;
     }
 
