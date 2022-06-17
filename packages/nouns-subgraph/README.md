@@ -57,3 +57,13 @@ Assuming contracts have been changed and/or updated...
 - `yarn codegen`
 - `yarn deploy [organization/subgraph-name]`
 If the subgraph URI has changed (access via The Graph Hosted Service dashboard), once it's deployed, be sure to update `subgraphApiUri` in `nouns-webapp/src/config.ts`
+
+### Prod deployments
+Assuming contracts have been changed and/or updated...
+- `rm subgraph.yaml` (this file has to get overwritten)
+- Update `mainnet.json` with block numbers from the contract creations (round down by a few just to be careful not to miss any indexing)
+- `yarn --silent mustache config/mainnet.json subgraph.yaml.mustache > subgraph.yaml`
+- `yarn codegen`
+- `yarn deploy [organization/subgraph-name]`
+If the subgraph URI has changed (access via The Graph Hosted Service dashboard), once it's deployed, be sure to update `subgraphApiUri` in `nouns-webapp/src/config.ts`
+

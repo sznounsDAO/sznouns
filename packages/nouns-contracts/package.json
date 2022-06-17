@@ -14,6 +14,7 @@
     "build:sol": "npx hardhat compile",
     "build:declarations": "shx cp typechain/*.d.ts dist/typechain",
     "deploy:rinkeby": "yarn task:deploy-and-configure --network rinkeby --update-configs --start-auction --auto-deploy",
+    "deploy:mainnet": "yarn task:deploy-and-configure --network mainnet --weth 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 --sznoundersdao <multisig here> --update-configs --start-auction --auto-deploy",
     "generate-abi": "yarn run hardhat export-abi",
     "hardhat": "npx hardhat",
     "task:accounts": "npx hardhat accounts",

@@ -10,13 +10,13 @@ promptjs.message = '> ';
 promptjs.delimiter = '';
 
 const proxyRegistries: Record<number, string> = {
-  [ChainId.Mainnet]: '0xa5409ec958c83c3f309868babaca7c86dcb077c1',
-  [ChainId.Rinkeby]: '0xf57b2c51ded3a29e6891aba85459d600256cf317',
+  [ChainId.Mainnet]: '0xa5409ec958c83c3f309868babaca7c86dcb077c1', // verified
+  [ChainId.Rinkeby]: '0xf57b2c51ded3a29e6891aba85459d600256cf317', // verified
 };
 const wethContracts: Record<number, string> = {
-  [ChainId.Mainnet]: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+  [ChainId.Mainnet]: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2', // verified
   [ChainId.Ropsten]: '0xc778417e063141139fce010982780140aa0cd5ab',
-  [ChainId.Rinkeby]: '0xc778417e063141139fce010982780140aa0cd5ab',
+  [ChainId.Rinkeby]: '0xc778417e063141139fce010982780140aa0cd5ab', // verified
   [ChainId.Kovan]: '0xd0a1e359811322d97991e03f863a0c30c2cf029c',
 };
 
@@ -25,13 +25,13 @@ const GOVERNOR_N_DELEGATOR_NONCE_OFFSET = 8; // 9 - 1
 
 task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsToken')
   .addFlag('autoDeploy', 'Deploy all contracts without user interaction')
-  .addOptionalParam('weth', 'The WETH contract address', undefined, types.string)
-  .addOptionalParam('noundersdao', 'The nounders DAO contract address', undefined, types.string)
+  .addOptionalParam('weth', 'The WETH contract address', "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", types.string)
+  .addOptionalParam('sznoundersdao', 'The sznounders DAO contract address', undefined, types.string)
   .addOptionalParam(
     'auctionTimeBuffer',
     'The auction time buffer (seconds)',
-    // 5 * 60 /* 5 minutes */,
-    30 /* 30 sec temp for testing*/,
+    5 * 60 /* 5 minutes */,
+    // 30 /* 30 sec temp for testing*/,
     types.int,
   )
   .addOptionalParam(
@@ -47,24 +47,24 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     types.int,
   )
   .addOptionalParam(
-    'auctionDuration',
+    'auctionDuration', // this is going to be subject to enforcement at the auction house contract level anyways
     'The auction duration (seconds)',
-    // 60 * 5 /* 5 minutes */,
-    60 * 1 /* 1 minute */,
+    60 * 5 /* 5 minutes */,
+    // 60 * 1 /* 1 minute */,
     types.int,
   )
   .addOptionalParam(
     'timelockDelay',
     'The timelock delay (seconds)',
-    // 60 * 60 * 24 * 2 /* 2 days */,
-    60 * 5 /* 5 minutes temp for testing */,
+    60 * 60 * 24 * 2 /* 2 days */,
+    // 60 * 5 /* 5 minutes temp for testing */,
     types.int,
   )
   .addOptionalParam(
     'votingPeriod',
     'The voting period (blocks)',
-    // Math.round(4 * 60 * 24 * (60 / 13)) /* 4 days (13s blocks) */,
-    Math.round(5 * (60 / 13)) /* 5 minutes temp for testing */,
+    Math.round(4 * 60 * 24 * (60 / 13)) /* 4 days (13s blocks) */,
+    // Math.round(5 * (60 / 13)) /* 5 minutes temp for testing */,
     types.int,
   )
   .addOptionalParam(
@@ -97,11 +97,11 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     // prettier-ignore
     const proxyRegistryAddress = proxyRegistries[network.chainId] ?? proxyRegistries[ChainId.Rinkeby];
 
-    if (!args.noundersdao) {
+    if (!args.sznoundersdao) {
       console.log(
-        `Nounders DAO address not provided. Setting to deployer (${deployer.address})...`,
+        `SZNounders DAO address not provided. Setting to deployer (${deployer.address})...`,
       );
-      args.noundersdao = deployer.address; // TODO(szns): update this messaging and/or use this flag
+      args.sznoundersdao = deployer.address; // TODO(szns): update this messaging and/or use this flag
     }
     if (!args.weth) {
       const deployedWETHContract = wethContracts[network.chainId];
@@ -139,10 +139,10 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     // Mainnet vs Rinkeby contracts
     const SZNoundersAddress =
       network.chainId == 1
-        ? ''
+        ? '' // TODO(szns): replace with sznounders multisig
         : '0x87cF07E625ffDE6Bb51F7695ef92ef7Aa095F23C';
 
-    const NounsDAOAddress = '0x0BC3807Ec262cB779b38D65b38158acC3bfedE10';
+    const NounsDAOAddress = '0x0BC3807Ec262cB779b38D65b38158acC3bfedE10'; // TODO(szns): replace with shared multisig
 
     const contracts: Record<ContractName, ContractDeployment> = {
       NFTDescriptor: {},
