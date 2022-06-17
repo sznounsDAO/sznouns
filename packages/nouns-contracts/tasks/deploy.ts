@@ -232,6 +232,13 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
 
     for (const [name, contract] of Object.entries(contracts)) {
       let gasPrice = await ethers.provider.getGasPrice();
+      let buffer = BigNumber.from(10000000000); // 10 gwei
+      gasPrice = gasPrice.add(buffer);
+      console.log('Original gas price (wei):', gasPrice, '(gwei):', ethers.utils.parseUnits(gasPrice.toString(), 'gwei'));
+      console.log('Gas price with buffer (wei):', gasPrice, '(gwei):', ethers.utils.parseUnits(gasPrice.toString()));
+
+      sleep(5000); // 5 seconds
+
       if (!args.autoDeploy) {
         const gasInGwei = Math.round(Number(ethers.utils.formatUnits(gasPrice, 'gwei')));
 
@@ -249,11 +256,6 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
             },
           },
         ]);
-
-        console.log('Original gas price:', ethers.utils.parseUnits(result.gasPrice.toString(), 'gwei'));
-        let buffer = BigNumber.from(10);
-        gasPrice = ethers.utils.parseUnits(result.gasPrice.toString(), 'gwei').add(buffer);
-        console.log('Gas price with buffer:', gasPrice);
       }
 
       const factory = await ethers.getContractFactory(name, {
@@ -326,3 +328,9 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
 
     return deployment;
   });
+
+function sleep(ms: any) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
