@@ -96,8 +96,8 @@ const Documentation = () => {
               <ul>
                 <li>Winter, beginning 12/1: once a day auctions</li>
                 <li>Spring, beginning 3/1: twice a day, every 12 hours</li>
-                <li>Summer, beginning 5/1: four times a day, every 6 hours</li>
-                <li>Fall, beginning 8/1: twice a day, every 12 hours</li>
+                <li>Summer, beginning 6/1: four times a day, every 6 hours</li>
+                <li>Fall, beginning 9/1: twice a day, every 12 hours</li>
               </ul>
               <p className={classes.aboutText}>
                 100% of auction proceeds (ETH) are automatically deposited in the SZNouns DAO
@@ -105,7 +105,7 @@ const Documentation = () => {
               </p>
               <p className={classes.aboutText}>
                 Each time an auction is settled, the settlement transaction will also cause a new
-                SZNoun to be minted and a new 24 hour auction to begin.
+                SZNoun to be minted and a new auction to begin.
               </p>
               <p className={classes.aboutText}>
                 While settlement is most heavily incentivized for the winning bidder, it can be
