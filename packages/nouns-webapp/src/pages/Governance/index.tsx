@@ -17,8 +17,8 @@ const GovernancePage = () => {
   const treasuryBalanceUSD = useTreasuryUSDValue();
 
   // Note: We have to extract this copy out of the <span> otherwise the Lingui macro gets confused
-  const nounSingular = 'Noun';
-  const nounPlural = 'Nouns';
+  const nounSingular = 'SZNoun';
+  const nounPlural = 'SZNouns';
 
   return (
     <Section fullWidth={false} className={classes.section}>
