@@ -263,15 +263,20 @@ const Documentation = () => {
               <p>
                 As we aspire to become the most premier subDAO for the Nouns ecosystem, SZNounders
                 have chosen to compensate the Nouns DAO with SZNouns, for being selfless stewards of
-                cc0 and open-source. The second SZNoun at every 20th for the first 5 years of the
-                project (SZNoun ids #1, #21, #41, #61, and so on) will be automatically sent to the
-                Nouns DAO to be vested and shared among members of the project. This is equivalent
-                to approximately 5% of total supply in the first five years.
+                cc0 and open-source. Every SZNoun following the SZNounder’s Reward (SZNoun ids #21,
+                #41, #61, #81, and so on) will be automatically sent to a 1-of-2 multisig wallet
+                shared between the SZNouns DAO and Nouns DAO. This is equivalent to approximately 5%
+                of total supply in the first five years.
+              </p>
+              <p>
+                We want to be respectful of Nouns DAO and reserve this allocation for their taking
+                only if they decide to do so, rather than airdropping it automatically to the Nouns
+                DAO address.
               </p>
               <p>
                 Nouns DAO distributions don't interfere with the cadence of auctions. SZNouns are
-                sent directly to the Nouns DAO Treasury, and auctions continue on schedule with the
-                next available SZNoun ID.
+                sent directly to the multisig wallet mentioned above, and auctions continue on
+                schedule with the next available SZNoun ID.
               </p>
             </Accordion.Body>
           </Accordion.Item>
