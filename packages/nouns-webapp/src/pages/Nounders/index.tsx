@@ -2,77 +2,86 @@ import React from 'react';
 import classes from './NoundersPage.module.css';
 import Section from '../../layout/Section';
 import { Col, Row, Card } from 'react-bootstrap';
-import pfp4156 from '../../assets/nounder-pfps/4156.png';
-import pfp9999 from '../../assets/nounder-pfps/9999.png';
-import pfpCryptoseneca from '../../assets/nounder-pfps/cryptoseneca.png';
-import pfpDevcarrot from '../../assets/nounder-pfps/devcarrot.png';
-import pfpDom from '../../assets/nounder-pfps/dom.png';
-import pfpKai from '../../assets/nounder-pfps/kai.png';
-import pfpSolimander from '../../assets/nounder-pfps/solimander.png';
-import pfpGremplin from '../../assets/nounder-pfps/gremplin.png';
-import pfpTimpers from '../../assets/nounder-pfps/timpers.png';
-import pfpVapeape from '../../assets/nounder-pfps/vapeape.png';
+import pfpSznsNFT from '../../assets/nounder-pfps/sznsNFT.png';
+import pfpJl2fa from '../../assets/nounder-pfps/jl2fa.png';
+import pfpPersn_eth from '../../assets/nounder-pfps/persn_eth.png';
+import pfpKloo_eth from '../../assets/nounder-pfps/kloo_eth.png';
+import pfpJack_dille from '../../assets/nounder-pfps/jack_dille.png';
+import pfpMinci from '../../assets/nounder-pfps/iamminci.png';
+import pfp0xgoretex from '../../assets/nounder-pfps/0xgoretex.png';
+import pfpSina_eth from '../../assets/nounder-pfps/sina_eth.png';
+import pfpBlownedeth from '../../assets/nounder-pfps/blownedeth.png';
+import pfpGabrielayuso from '../../assets/nounder-pfps/gabrielayuso.png';
+import pfpBrentsketit from '../../assets/nounder-pfps/brentsketit.png';
 
-const bios = [
+const sznBios = [
   {
-    name: '4156',
-    image: pfp4156,
+    name: 'sznsNFT',
+    image: pfpSznsNFT,
     description: undefined,
-    handle: 'punk4156',
+    handle: 'sznsNFT',
   },
   {
-    name: 'cryptoseneca',
-    image: pfpCryptoseneca,
+    name: 'jl2fa',
+    image: pfpJl2fa,
     description: undefined,
-    handle: 'cryptoseneca',
+    handle: 'jl2fa',
   },
   {
-    name: 'Kai@eboy',
-    image: pfpKai,
+    name: 'persn_eth',
+    image: pfpPersn_eth,
     description: undefined,
-    handle: 'eBoyArts',
+    handle: 'persn_eth',
   },
   {
-    name: 'dom',
-    image: pfpDom,
+    name: 'kloo_eth',
+    image: pfpKloo_eth,
     description: undefined,
-    handle: 'dhof',
+    handle: 'kloo_eth',
   },
   {
-    name: 'vapeape',
-    image: pfpVapeape,
+    name: 'jack_dille',
+    image: pfpJack_dille,
     description: undefined,
-    handle: 'punk4464',
+    handle: 'jack_dille',
+  },
+];
+const bigBrainBios = [
+  {
+    name: 'iamminci',
+    image: pfpMinci,
+    description: undefined,
+    handle: 'iamminci',
   },
   {
-    name: 'gremplin',
-    image: pfpGremplin,
+    name: '0xgoretex',
+    image: pfp0xgoretex,
     description: undefined,
-    handle: 'supergremplin',
+    handle: '0xgoretex',
   },
   {
-    name: 'solimander',
-    image: pfpSolimander,
+    name: 'sina_eth',
+    image: pfpSina_eth,
     description: undefined,
-    handle: '_solimander_',
+    handle: 'sina_eth',
   },
   {
-    name: 'devcarrot',
-    image: pfpDevcarrot,
+    name: 'blownedeth',
+    image: pfpBlownedeth,
     description: undefined,
-    handle: 'carrot_init',
+    handle: 'blownedeth',
   },
   {
-    name: 'timpers',
-    image: pfpTimpers,
+    name: 'gabrielayuso',
+    image: pfpGabrielayuso,
     description: undefined,
-    handle: 'TimpersHD',
+    handle: 'gabrielayuso',
   },
   {
-    name: '9999',
-    image: pfp9999,
+    name: 'brentsketit',
+    image: pfpBrentsketit,
     description: undefined,
-    handle: 'lastpunk9999',
+    handle: 'brentsketit',
   },
 ];
 
@@ -112,11 +121,12 @@ const BioCard: React.FC<{
   );
 };
 
-const BioCards: React.FC<{ min: number; max: number }> = props => {
-  const { min, max } = props;
+const BioCards: React.FC<{ isSzns?: boolean }> = props => {
+  const { isSzns } = props;
+  const bios = isSzns ? sznBios : bigBrainBios;
   return (
     <>
-      {bios.slice(min, max).map(bio => (
+      {bios.map(bio => (
         <Col xs={6} md={3} lg={3} className={classes.bioGroup}>
           <BioCard {...bio} />
         </Col>
@@ -129,29 +139,28 @@ const NoundersPage = () => {
   return (
     <Section fullWidth={true} className={classes.noundersPage}>
       <Col lg={{ span: 6, offset: 3 }}>
-        <h2 style={{ marginBottom: '2rem' }}>The SZNounders</h2>
-        <h3 style={{ marginBottom: '2rem' }}>3.5 artists, 6.5 technologists</h3>
+        <h2>The SZNounders</h2>
+        <h3 style={{ marginBottom: '2rem' }}>The SZNS team, with special shoutout to:</h3>
         <Row style={{ marginBottom: '0rem' }}>
-          <BioCards min={0} max={5} />
-          <BioCards min={5} max={10} />
+          <BioCards isSzns />
+        </Row>
+        <h3 style={{ marginBottom: '2rem' }}>... and some big brain friends 🧠</h3>
+        <Row style={{ marginBottom: '0rem' }}>
+          <BioCards />
         </Row>
         <h3>SZNounders' Reward</h3>
+
         <p style={{ textAlign: 'justify' }}>
           All SZNoun auction proceeds are sent to the SZNouns DAO. For this reason, we, the
-          project's founders ('SZNounders') have chosen to compensate ourselves with SZNouns. Every
-          20th SZNoun for the first 5 years of the project will be sent to our multisig, where it
-          will be vested and distributed to individual SZNounders.
+          project's founders (‘SZNounders’) have chosen to compensate ourselves with SZNouns. Every
+          20th noun for the first 5 years of the project (around 5% of total supply over 5 years)
+          will be sent to our multisig, where it will be vested and distributed to individual
+          SZNounders.
         </p>
         <p style={{ textAlign: 'justify', paddingBottom: '2rem' }}>
           The SZNounders reward is intended as compensation for our pre and post-launch
           contributions to the project, and to help us participate meaningfully in governance as the
-          project matures. After 5 years, the SZNounders could receive up to 5% of the SZNouns
-          supply.
-        </p>
-        <h3>Noun DAO's Reward</h3>
-        <p style={{ textAlign: 'justify' }}>
-          The same amount is rewarded to the original Nouns DAO (also every 20th SZNoun) as gratitude for
-          being selfless pioneers and encouraging derivative ecosystems.
+          project matures.
         </p>
       </Col>
     </Section>
