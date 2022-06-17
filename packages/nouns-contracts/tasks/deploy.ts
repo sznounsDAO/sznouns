@@ -99,11 +99,15 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     // prettier-ignore
     const proxyRegistryAddress = proxyRegistries[network.chainId] ?? proxyRegistries[ChainId.Rinkeby];
 
+    const sznoundersDAO = '0x7d28539fa2aC9D5D0Be29FE6C01d431718d2709a';
+    const sznoundersNounsDAOSharedSafe = '0xc0F84e21b3CfB7cA13c926F383BB6bf96bca758e';
+
     if (!args.sznoundersdao) {
       console.log(
         `SZNounders DAO address not provided. Setting to deployer (${deployer.address})...`,
       );
-      args.sznoundersdao = deployer.address; // TODO(szns): update this address and/or use this flag
+      // args.sznoundersdao = deployer.address;
+      args.sznoundersdao = sznoundersDAO;
     }
     if (!args.weth) {
       const deployedWETHContract = wethContracts[network.chainId];
@@ -112,7 +116,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
           `Can not auto-detect WETH contract on chain ${network.name}. Provide it with the --weth arg.`,
         );
       }
-      args.weth = deployedWETHContract;
+      args.weth = deployedWETHContract || 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
     }
 
     const nonce = await deployer.getTransactionCount();
@@ -141,10 +145,8 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
     // Mainnet vs Rinkeby contracts
     const SZNoundersAddress =
       network.chainId == 1
-        ? '' // TODO(szns): replace with sznounders multisig
+        ? '0x7d28539fa2aC9D5D0Be29FE6C01d431718d2709a'
         : '0x87cF07E625ffDE6Bb51F7695ef92ef7Aa095F23C';
-
-    const NounsDAOAddress = '0x0BC3807Ec262cB779b38D65b38158acC3bfedE10'; // TODO(szns): replace with shared multisig
 
     const contracts: Record<ContractName, ContractDeployment> = {
       NFTDescriptor: {},
@@ -162,7 +164,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
           () => deployment.NounsDescriptor.address, // descriptor
           () => NounsSeederAddress, // seeder
           proxyRegistryAddress, // proxyRegistry
-          NounsDAOAddress, // nounsdao
+          sznoundersNounsDAOSharedSafe, // nounsdao shared safe
         ],
       },
       SZNounsAuctionHouse: {
