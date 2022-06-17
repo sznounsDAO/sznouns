@@ -150,7 +150,7 @@ const NoundersPage = () => {
         </p>
         <h3>Noun DAO's Reward</h3>
         <p style={{ textAlign: 'justify' }}>
-          The same amount is rewarded to the original Nouns DAO (every 21th SZNoun) as gratitude for
+          The same amount is rewarded to the original Nouns DAO (also every 20th SZNoun) as gratitude for
           being selfless pioneers and encouraging derivative ecosystems.
         </p>
       </Col>
