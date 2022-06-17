@@ -50,19 +50,16 @@ contract SZNounsAuctionHouse is NounsAuctionHouse {
     function getSzn() public view returns (SZN) {
         uint256 month = BokkyPooBahsDateTimeLibrary.getMonth(block.timestamp);
 
+        // evenly distributing seasons throughout the calendar year
         if (month < 3) {
             return SZN.WINTER;
         }
-        // After March and before May is Spring.
-        if (month < 5) {
+        if (month < 6) {
             return SZN.SPRING;
         }
-        // Afer May and before August is Summer.
         if (month < 9) {
             return SZN.SUMMER;
         }
-        // After August and before December is Fall.
-        // TODO(szns) fall is currently 4 months, should one of those months be SPRING?
         if (month < 12) {
             return SZN.FALL;
         }
