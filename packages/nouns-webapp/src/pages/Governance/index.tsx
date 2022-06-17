@@ -61,7 +61,7 @@ const GovernancePage = () => {
             </Row>
           </Col>
           <Col className={classes.treasuryInfoText}>
-            This treasury exists for <span className={classes.boldText}>Nouns DAO</span>{' '}
+            This treasury exists for <span className={classes.boldText}>SZNouns DAO</span>{' '}
             participants to allocate resources for the long-term growth and prosperity of the Nouns
             project.
           </Col>
