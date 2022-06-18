@@ -61,7 +61,7 @@ const app: Record<SupportedChains, AppConfig> = {
   [ChainId.Mainnet]: {
     jsonRpcUri: createNetworkHttpUrl('mainnet'),
     wsRpcUri: createNetworkWsUrl('mainnet'),
-    subgraphApiUri: 'https://thegraph.com/hosted-service/subgraph/0xgoretex/sznouns', // for prod
+    subgraphApiUri: 'https://api.thegraph.com/subgraphs/name/0xgoretex/sznouns', // for prod
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
   },
   [ChainId.Hardhat]: {
