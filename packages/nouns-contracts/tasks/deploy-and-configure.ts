@@ -45,7 +45,8 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
 
     await sleep(2500); // try waiting 2.5 seconds
 
-    const [deployer] = await ethers.getSigners();
+    // start comment
+    /**const [deployer] = await ethers.getSigners();
     const pendingCount = await deployer.getTransactionCount('pending');
     console.log('Pending tx count before transferring ownership:', pendingCount);
 
@@ -82,6 +83,8 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
     await auctionHouseContract.unpause({
       gasLimit: 1_000_000,
     });
+    await sleep(2500); // try waiting 2.5 seconds
+
     await auctionHouseContract.transferOwnership(executorAddress);
     console.log(
       'Started the first auction and transferred ownership of the auction house to the executor.',
@@ -90,6 +93,8 @@ task('deploy-and-configure', 'Deploy and configure all contracts')
     console.log(
       'Transferred ownership of the descriptor, token, and proxy admin contracts to the executor.',
     );
+    **/
+   // end comment
 
     // Optionally kick off the first auction and transfer ownership of the auction house
     // to the Nouns DAO executor.
