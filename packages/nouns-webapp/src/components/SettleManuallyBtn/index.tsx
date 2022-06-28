@@ -4,6 +4,7 @@ import classes from './SettleManuallyBtn.module.css';
 import dayjs from 'dayjs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { Button } from 'react-bootstrap';
 import { CHAIN_ID } from '../../config';
 
 const SettleManuallyBtn: React.FC<{
@@ -50,25 +51,21 @@ const SettleManuallyBtn: React.FC<{
   }, [auction, auctionTimer]);
 
   const mins = timerDuration.minutes();
+  const minsContent = () => `${mins + 1} minute${mins !== 0 ? 's' : ''}`;
 
   return (
     <p className={classes.emergencySettleWrapper}>
-      <button
+      <Button
+        className={classes.bidBtnAuctionEnded}
         onClick={settleAuctionHandler}
-        className={classes.emergencySettleButton}
         disabled={!settleEnabled}
       >
         {settleEnabled ? (
-          <>Settle manually</>
+          <>{` Settle auction`}</>
         ) : (
-          <>
-            <FontAwesomeIcon icon={faInfoCircle} />
-            {mins !== 0
-              ? `You can settle manually in ${mins + 1} minutes`
-              : 'You can settle manually in 1 minute'}
-          </>
+          <>{`You can settle manually in ${minsContent()}`}</>
         )}
-      </button>
+      </Button>
     </p>
   );
 };
