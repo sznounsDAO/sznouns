@@ -20,7 +20,6 @@ const Noun: React.FC<{
   parts?: { filename: string }[];
 }> = props => {
   const { imgPath, alt, className, parts, wrapperClassName } = props;
-  console.log('parts: ', parts);
   return (
     <div className={`${classes.imgWrapper} ${wrapperClassName}`} data-tip data-for="noun-traits">
       <Image

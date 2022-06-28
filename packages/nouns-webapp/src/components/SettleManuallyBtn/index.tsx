@@ -2,8 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { Auction } from '../../wrappers/nounsAuction';
 import classes from './SettleManuallyBtn.module.css';
 import dayjs from 'dayjs';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'react-bootstrap';
 import { CHAIN_ID } from '../../config';
 
