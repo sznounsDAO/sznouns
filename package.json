@@ -41,5 +41,8 @@
       "yarn lint",
       "yarn format"
     ]
+  },
+  "dependencies": {
+    "shell-quote": "1.7.3"
   }
 }
