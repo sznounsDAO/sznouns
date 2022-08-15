@@ -27,27 +27,31 @@ task('populate-descriptor', 'Populates the descriptor with color palettes and No
     const { bodies, accessories, heads, glasses } = images;
 
     const [deployer] = await ethers.getSigners();
+    const currentCount = await deployer.getTransactionCount();
+    console.log('Current tx count:', currentCount);
     const pendingCount = await deployer.getTransactionCount('pending');
     console.log('Pending tx count before adding many features:', pendingCount);
 
+    let nonceToUse = currentCount + pendingCount;
+
     // Chunk head and accessory population due to high gas usage
-    await descriptorContract.addManyBackgrounds(bgcolors);
-    await descriptorContract.addManyColorsToPalette(0, palette);
-    await descriptorContract.addManyBodies(bodies.map(({ data }) => data));
+    await descriptorContract.addManyBackgrounds(bgcolors, { nonce: nonceToUse++ });
+    await descriptorContract.addManyColorsToPalette(0, palette, { nonce: nonceToUse++ });
+    await descriptorContract.addManyBodies(bodies.map(({ data }) => data), { nonce: nonceToUse++ });
 
     const accessoryChunk = chunkArray(accessories, 10);
     for (const chunk of accessoryChunk) {
-      await descriptorContract.addManyAccessories(chunk.map(({ data }) => data));
+      await descriptorContract.addManyAccessories(chunk.map(({ data }) => data), { nonce: nonceToUse++ });
       await sleep(500);
     }
 
     const headChunk = chunkArray(heads, 10);
     for (const chunk of headChunk) {
-      await descriptorContract.addManyHeads(chunk.map(({ data }) => data));
+      await descriptorContract.addManyHeads(chunk.map(({ data }) => data), { nonce: nonceToUse++ });
       await sleep(500);
     }
 
-    await descriptorContract.addManyGlasses(glasses.map(({ data }) => data));
+    await descriptorContract.addManyGlasses(glasses.map(({ data }) => data), { nonce: nonceToUse++ });
 
     console.log('Descriptor populated with palettes and parts.');
   });
