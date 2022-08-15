@@ -82,6 +82,13 @@ task('deploy-and-populate-descriptor', 'Deploys NFTDescriptor and NounsDescripto
           NFTDescriptor: deployment.NFTDescriptor.address,
         }),
       },
+      SZNounsToken: {},
+      SZNounsAuctionHouse: {},
+      NounsAuctionHouseProxyAdmin: {},
+      NounsAuctionHouseProxy: {},
+      NounsDAOExecutor: {},
+      NounsDAOLogicV1: {},
+      NounsDAOProxy: {}
     };
 
     for (const [name, contract] of Object.entries(contracts)) {

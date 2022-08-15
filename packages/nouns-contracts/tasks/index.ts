@@ -9,3 +9,4 @@ export * from './populate-descriptor';
 export * from './run-local';
 export * from './verify-etherscan';
 export * from './update-configs';
+export * from './deploy-and-populate-descriptor';
