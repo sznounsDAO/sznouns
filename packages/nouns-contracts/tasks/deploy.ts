@@ -25,7 +25,12 @@ const GOVERNOR_N_DELEGATOR_NONCE_OFFSET = 8; // 9 - 1
 
 task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsToken')
   .addFlag('autoDeploy', 'Deploy all contracts without user interaction')
-  .addOptionalParam('weth', 'The WETH contract address', "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", types.string)
+  .addOptionalParam(
+    'weth',
+    'The WETH contract address',
+    '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+    types.string,
+  )
   .addOptionalParam('sznoundersdao', 'The sznounders DAO contract address', undefined, types.string)
   .addOptionalParam(
     'auctionTimeBuffer',
@@ -117,7 +122,7 @@ task('deploy', 'Deploys NFTDescriptor, NounsDescriptor, NounsSeeder, and NounsTo
           `Can not auto-detect WETH contract on chain ${network.name}. Provide it with the --weth arg.`,
         );
       }
-      args.weth = deployedWETHContract || 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+      args.weth = deployedWETHContract || 0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2;
     }
 
     const nonce = await deployer.getTransactionCount();
